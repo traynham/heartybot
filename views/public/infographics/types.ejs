@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Type Effectiveness in Battle</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<style>
+		body {
+			background: #343a40;
+		}
+		th {
+			vertical-align: middle;
+			text-align: center;
+		}
+		td {
+			vertical-align: middle;
+			text-align: center;
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+	<table class="table table-sm table-dark table-striped table-borderless table-hover">
+
+		<tr>
+			<th colspan="5">Weak To</th>
+			<th><br></th>
+			<th colspan="5">Strong Against</th>
+		</tr>
+
+		<% types.forEach(function(type){ %>
+		<tr>
+			
+			<% type.weak.forEach(function(item){ %>
+			<td class="align-middle">
+				<% if (item) { %>
+					<a href="/infographics/types/<%= item.toLowerCase() %>">
+					<img src="https://images.weserv.nl/?h=20&il&url=<%= type_images[item] %>">
+					</a>
+				<% } else { %>
+					<br>
+				<% } %>
+			</td>
+			<% }); %>
+		
+		
+			<th style="background: #333;">
+				<a href="/infographics/types/<%= type.name.toLowerCase() %>">
+					<img src="https://images.weserv.nl/?h=30&il&url=<%= type_images[type.name] %>">	
+				</a>
+			</th>
+		
+			<% type.strong.forEach(function(item){ %>
+			<td class="align-middle">
+				<% if (item && item != '~') { %>
+					<a href="/infographics/types/<%= item.toLowerCase() %>">
+						<img src="https://images.weserv.nl/?h=20&il&url=<%= type_images[item] %>">
+					</a>
+				<% } else { %>
+					<br>
+				<% } %>
+			</td>
+			<% }); %>
+		
+		</tr>
+		<% }); %>
+
+	</table>
+</body>
+</html>

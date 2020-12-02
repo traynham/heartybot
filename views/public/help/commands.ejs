@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Help - Commands</title>
+	<%- include("../../includes/head") %>
+</head>
+<body>
+<%- include("../../includes/header") %>
+<br>
+<div class="container">
+
+	<h1>Commands</h1>
+
+	<% commands.forEach(function(command){ %>
+		<h2><a href="/help/commands/<%= command.name %>"><%= command.name %></a></h2>
+		<code><%= command.syntax %></code>
+		<p><%= command.description %></p>
+		<hr>
+	<% }); %>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+	"prefix": "!!",
+	"syntax_required": ["[", "]"],
+	"syntax_optional": ["{", "}"],
+	"domain": "https://beta.heartyjessman.com",
+	"colors": {
+		"error": "#ff0000",
+		"primary": "#0099ff"
+	}
+}

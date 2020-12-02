@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Help - Commands</title>
+	<%- include("../../includes/head") %>
+</head>
+<body>
+<%- include("../../includes/header") %>
+
+<div class="jumbotron bg-dark text-white rounded-0 border-light " style="margin: 0; padding: 2em;">
+	<img class="float-left" style="margin-right: 20px;" src="/images/icons/hearty.png">
+	<h1 class="display-5" style="margin: 0;"> Hearty Bot</h1>
+	<p class="lead" style="margin-bottom: 0; padding: 0; xborder: 1px solid red;">Hearty Bot Reference</p>
+</div>
+
+<h4 class="card-header bg-info text-white rounded-0 border-0">
+	<%= prefix %><%= command.name %><br>
+	<small><%= command.description_short %></small>
+</h4>
+
+<!-- DESCRIPTION -->
+<div class="card-body"><%= command.description %></div>
+
+<!-- META TABLE -->
+<table class="table">
+	<tr>
+		<th>Syntax</th>
+		<td><code><%= command.syntax %></code></td>
+	</tr>
+	<tr>
+		<th>Alias</th>
+		<td><%= command.alias.join(', ') %></td>
+	</tr>
+	<tr>
+		<th>Direct Message</th>
+		<td><%= command.dm %></td>
+	</tr>
+	<tr>
+		<th>Availability</th>
+		<td><%= command.availability.join(', ') %></td>
+	</tr>
+	<tr>
+		<th>Revision</th>
+		<td><%= command.revision %></td>
+	</tr>
+	<tr>
+		<th>Default Action</th>
+		<td><%= command.default.description_short %></td>
+	</tr>
+	<tr>
+		<th>Actions</th>
+		<td><%= Object.keys(command.actions).join(', ') %></td>
+	</tr>
+</table>
+
+<!-- ACTIONS HEADER -->
+<h5 class="card-header bg-warning rounded-0 border-0">Actions</h5>
+
+
+<!-- DEFAULT ACTION -->
+<div class="card-body bg-secondary text-white">
+	<h5>default</h5>
+	<small>The "default" action of a command refers to how the command behaves when no action has been specified.</small>
+	<hr>
+	<p><%= command.default.description %></p>
+	<blockquote class="rounded text-secondary" style="background-color: #ddd; padding: 15px;">
+		<h5>Examples</h5>
+		<% command.default.examples.forEach(function(example){ %>
+			<code><%= example.code %></code><br>
+		<% }); %>
+	</blockquote>
+</div>
+
+<!-- ACTIONS -->
+<% Object.keys(command.actions).forEach(function(element){ %>
+	
+	<% let action = command.actions[element] %>
+	
+	<div class="card" style="margin: 10px; margin-bottom: 25px">
+
+		<a name="<%= action.name %>"></a>
+
+		 <div class="card-header">
+			<%= action.name %><br>
+			<small><%= action.synopsis %></small>
+		 </div>
+		 
+		<div class="card-body"><%= action.description %></div>
+
+
+		<% if (action.syntax) { %>
+			<div class="card-body">
+				<h5 class="card-title">Syntax</h5>
+				<code><%= action.syntax %></code>
+			</div>
+		<% } %>
+		
+		<% if (action.values) { %>
+			<div class="card-body">
+				<h5 class="card-title">Values</h5>
+				<code><%= action.values %></code>
+			</div>
+		<% } %>
+
+		<% if (action.tip) { %>
+			<div class="alert alert-primary">
+				<i class="fa fa-info-circle"></i> <%= action.tip %>
+			</div>
+		<% } %>
+
+		<div class="card-body">
+			<h5 class="text-dark">Examples</h5>
+		</div>	
+
+		<% action.examples.forEach(function(example){ %>
+
+		<% }); %>
+		
+		<table class="table table-striped xtable-bordered table-sm" style="margin: 0;">
+			<tr>
+				<th class="font-weight-light" style="font-size: .7em">Code</th>
+				<th class="font-weight-light" style="font-size: .7em">Result</th>
+			</tr>
+			<% action.examples.forEach(function(example){ %>
+			<tr>
+				<td><code><%= example.code %></code></td>
+				<td><%= example.description %></td>
+			</tr>
+			<% }); %>
+		</table>
+	
+	</div>
+	
+	
+
+<% }); %>
+
+
+
+<div class="xxtext-white" style="padding: 20px; margin: 0;"><p><strong>Note:</strong><br>
+[] = Items in square brackets are required.<br>
+{} = Items in curly brackets are optional.<br>
+Default action = The behavior of a command when no action is used.<br>
+Direct message = If true, you can use this command in a direct message with the bot.</p>
+</div>
+
+
+
+</body>
+</html>

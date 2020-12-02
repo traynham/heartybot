@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Type Effectiveness in Battle</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<style>
+		body {
+			background: #343a40;
+		}
+		th {
+			vertical-align: middle;
+			text-align: center;
+		}
+		td {
+			vertical-align: middle;
+			text-align: center;
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<a href="/infographics/types/">Back</a>
+	<table class="table table-sm table-dark table-striped table-borderless">
+
+		<tr>
+			<th>
+				<img src="https://images.weserv.nl/?h=96&il&url=<%= type_images[type.value.name] %>">
+				<br>
+				<h1 class="text-capitalize"><%= type.value.name %></h1>
+			</th>
+		</tr>
+		
+		<tr>
+			<td>
+			
+				<% const items = ['super_effective', 'not_effective', 'resistant_to', 'weak_to'] %>
+			
+				<div style="margin: 15px;">		
+					<% items.forEach(function(item){ %>
+				
+						<h3 class="text-capitalize"><%= item.replace('_', ' ') %></h3>
+						<% type.value[item].split(', ').forEach(function(type){ %>
+							<a href="/infographics/types/<%= type.toLowerCase() %>">
+							<img src="https://images.weserv.nl/?h=50&il&url=<%= type_images[type.toLowerCase()] %>">
+							</a>
+						<% }); %>
+
+						<hr>
+
+					<% }); %>
+				</div>
+
+			</td>
+		</tr>
+
+	</table>
+</body>
+</html>

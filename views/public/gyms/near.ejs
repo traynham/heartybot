@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gyms &rsaquo; Near</title>
+	<%- include("../../includes/head") %>
+	<script>
+	
+		var place = {}
+
+		if('geolocation' in navigator) {
+			console.log('yay, we can get coords.')
+			
+			navigator.geolocation.getCurrentPosition((position) => {
+				place = position				
+				console.log(position)
+				document.getElementById('out').innerHTML = `${position.coords.latitude},${position.coords.longitude}`
+			});
+
+		} else {
+			console.log('nope. that go boomty.')
+		}
+	
+	</script>
+</head>
+<body>
+<%- include("../../includes/header") %>
+<h1>Gyms (Near)</h1>
+
+<div id="out"></div>
+
+</body>
+</html>
+

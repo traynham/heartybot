@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gyms &rsaquo; List</title>
+	<%- include("../../includes/head") %>
+</head>
+<body>
+<%- include("../../includes/header") %>
+
+<div class="container">
+
+	<h1>Gyms &rsaquo; List</h1>
+
+	<% areas.forEach(function(area){ %>
+		<div>
+			<a href="/gyms/<%= area.area_encoded %>"><%= area.area %> <%= area.count %></a>
+		</div>
+	
+	<% }); %>
+
+</div>
+
+</body>
+</html>

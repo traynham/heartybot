@@ -1,0 +1,13 @@
+.DS_Store
+.eslintrc.js
+.nova
+.env
+.env_dev
+/data
+/jest
+/jsdoc
+/node_modules
+/public
+/temp
+/testing.js
+/todo.taskpaper

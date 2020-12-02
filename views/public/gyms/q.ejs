@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gyms &rsaquo; List</title>
+	<%- include("../../includes/head") %>
+</head>
+<body>
+<%- include("../../includes/header") %>
+
+<div class="container">
+
+	<h1>Gyms &rsaquo; List</h1>
+
+
+	<% if (search_type == 'area') { %>
+		<h2>Gyms in <%= area.area %> (<%= area.count %>)</h2>
+	<% } %>
+
+	<hr>
+
+	<% if (response.rows.length == 0) { %>
+		<h2>Nothing was found!</h2>
+	<% } %>
+
+	<% if (gym) { %>
+		<h2>Show gym detail</h2>
+		<img src="/images/gyms/<%= gym.gymid %>.jpeg"><br>
+		<%= gym.name %><br>
+		<%= gym.coordinates %>
+	
+	<% } %>
+
+	<% if (response.rows.length > 1) { %>
+
+		<h2>Found <%= response.rows.length %> gyms for "<%= q %>"</h2>
+
+		<% response.rows.forEach(function(row){ %>
+			<div>
+				<a href='/gyms/<%= row.name_encoded %>'><%= row.name %></a>
+			</div>
+	
+		<% }); %>
+	
+	<% } %>
+
+</div>
+
+</body>
+</html>
