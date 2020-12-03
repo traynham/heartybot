@@ -3,6 +3,7 @@
 .nova
 .env
 .env_dev
+.jest_config.js
 /data
 /jest
 /jsdoc

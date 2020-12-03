@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "_test": "jest --coverage",
-    "test": "jest --verbose --coverage",
+    "test": "jest --verbose --coverage --config=.jest.config.js",
     "start_old": "nodemon index.js --ignore '*.json'",
     "start": "nodemon -r dotenv/config index.js --ignore '*.json' dotenv_config_path=config/.env",
     "dev": "nodemon -r dotenv/config index.js --ignore '*.json' dotenv_config_path=config/.env_dev",
@@ -57,22 +57,6 @@
     "@root": ".",
     "@models": "models",
     "@models_lowdb": "models_lowdb"
-  },
-  "jest": {
-    "coverageDirectory": "./jest/coverage",
-    "coveragePathIgnorePatterns": [
-      "./models",
-      "/node_modules/",
-      "update_bosses.js"
-    ],
-    "moduleNameMapper": {
-      "@config(.*)": "<rootDir>/config$1",
-      "@core(.*)": "<rootDir>/core$1",
-      "@data/(.*)": "<rootDir>/data/$1",
-      "@models/(.*)": "<rootDir>/models/$1",
-      "@models_lowdb/(.*)": "<rootDir>/models_lowdb/$1"
-    },
-    "testEnvironment": "node"
   },
   "devDependencies": {
     "better-docs": "^2.3.2",
