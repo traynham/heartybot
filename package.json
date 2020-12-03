@@ -62,7 +62,8 @@
     "coverageDirectory": "./jest/coverage",
     "coveragePathIgnorePatterns": [
       "./models",
-      "/node_modules/"
+      "/node_modules/",
+      "update_bosses.js"
     ],
     "moduleNameMapper": {
       "@config(.*)": "<rootDir>/config$1",

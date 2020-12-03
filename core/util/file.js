@@ -27,18 +27,14 @@ const payload_obj = require('@core/util/payload')
 const createDir = dirPath => {
 
 	let payload = payload_obj()
+	let fullPath = Path.join(process.cwd(), dirPath)
+
+	fs.mkdirSync(fullPath, { recursive: true })
 	
-	fs.mkdirSync(Path.join(process.cwd(), dirPath), { recursive: true }, (error) => {
-	
-		if (error) {
-			console.log('An error occourred: ', error)
-			payload.error = true
-			payload.error_message = `Unable to create directory ${error}`
-		} else {
-			console.log('Directory made.')
-		}
-		
-	})
+	if(!fs.existsSync(fullPath)) {
+		payload.error = true
+		payload.error_message = "mkdirSync error."
+	}
 
 	return payload
 
@@ -58,12 +54,12 @@ const createDir = dirPath => {
 const createFile = (path, data) => {
 	
 	let payload = payload_obj()
-	
+
 	// CREATE DIR IF NEEDED
 	if(!fs.existsSync(Path.join(process.cwd() + Path.dirname(path)))){
 		createDir(Path.dirname(path))
 	}
-	
+
 	// STRINGIFY TO JSON IF OBJECT
 	if(typeof data === "object") {
 		data = JSON.stringify(data, null, 2)

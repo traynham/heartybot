@@ -8,6 +8,9 @@
 
 const emoji = require('./emoji_img')
 const file = require('./file')
+const obj2QueryString = require('./obj2QueryString')
+const payload = require('./payload')
+const trainerCodeFormat = require('./trainerCodeFormat')
 
 describe('Core › Util', () => {
 
@@ -33,19 +36,44 @@ describe('Core › Util', () => {
 
 	
 	// FILE
-	test('File: Create "test" folder', async () => {
-		let result = file.createDir('test')
+	test('File: Create "../test" folder', () => {
+		let result = file.createDir('../test')
+		expect(result).toHaveProperty('error', false)
+	})
+
+	test('File: Create file "test.json" in "test" folder', () => {
+		let result = file.createFile('../test/test.json', {'test':'testing'})
 		expect(result).toHaveProperty('error', false)
 	})
 	
-	test('File: Create file "test.json" in "test" folder', async () => {
-		let result = file.createFile('test/test.json', {'test':'testing'})
+	test('File: Create file "another_test.json" in "test/blah" folder', () => {
+		let result = file.createFile('../test/blah/another_test.json', {test:'blah'})
 		expect(result).toHaveProperty('error', false)
 	})
 	
-	test('File: Create file "another_test.json" in "test/blah" folder', async () => {
-		let result = file.createFile('test/blah/another_test.json', {test:'blah'})
-		expect(result).toHaveProperty('error', false)
+	//obj2QueryString
+	test('obj2QueryString: Convert object to query string.', async () => {
+		let result = obj2QueryString({test:'blah', one: 'two', three: 'four'})
+		expect(result).toBe('test=blah&one=two&three=four')
 	})
 	
+	//Payload
+	test('Payload: Create payload object.', async () => {
+		let result = payload()
+		expect(result).toHaveProperty('value', null)
+		expect(result).toHaveProperty('error', false)
+		expect(result).toHaveProperty('error_message','')
+	})
+	
+	//trainerCodeFormat
+	test('trainerCodeFormat: Format "123456789201" code.', async () => {
+		let result = trainerCodeFormat('123456789201')
+		expect(result).toBe('1234 5678 9201')
+	})
+	
+	test('trainerCodeFormat: Format empty code.', async () => {
+		let result = trainerCodeFormat('')
+		expect(result).toBe('•••• •••• ••••')
+	})
+
 })
