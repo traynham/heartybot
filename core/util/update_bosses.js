@@ -53,7 +53,8 @@ module.exports = async () => {
 			let asset = ''
 
 			try {
-				asset = detect_pokemon.value[0].icon
+				//asset = detect_pokemon.value[0].icon
+				asset = detect_pokemon.value.icon
 			} catch (error){
 				console.error(`Could not find icon for ${mon}`)
 				// SET ASSET TO GENRIC POKEMON???????

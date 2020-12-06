@@ -4,6 +4,7 @@
  * @name _pokedex_tests
  * @category Core
  * @subcategory Pokédex
+ * @todo make vars for pokemon since they will change often.
 */
 
 const find = require('./find')
@@ -17,11 +18,19 @@ describe('Pokédex', () => {
 // ==========
 
 
+
 	test('Find: Find "Foongus"', () => {
 		let result = find('Foongus')
 		expect(result).toHaveProperty('error', false)
 		expect(result).toHaveProperty('count', 1)
 		expect(result).toHaveProperty('value.name', 'FOONGUS')
+	})
+	
+	test('Find: Find "Litleo"', () => {
+		let result = find('litleo')
+		expect(result).toHaveProperty('error', false)
+		expect(result).toHaveProperty('count', 1)
+		expect(result).toHaveProperty('value.name', 'LITLEO')
 	})
 	
 	test('Find: Find "Charizard X"', () => {

@@ -1,6 +1,7 @@
 /*
 	TODO:
 	* Clean up and refactor and then clean up again.
+	* BACKUP the pgm.json file so they can be DIFFed easily.	
 */
 
 const fetch = require('node-fetch')
@@ -29,7 +30,10 @@ module.exports = async () => {
 	var out = []
 
 
-	let records = pokeTrie.get('V0')
+//	let records = pokeTrie.get('V0')
+	
+	// NO NEED TO USE POKETRIE, JUST USE ARRAY.FILTER
+	let records = pgm.filter(item => item.templateId.startsWith('V0'))
 
 
 	records.forEach(function(record) {
@@ -39,7 +43,7 @@ module.exports = async () => {
 	
 			if(type == 'POKEMON'){
 			
-				let data = record.data.pokemonSettings
+				let data = record.data.pokemonSettings || {}
 			
 				let name = pokemon
 				if(form) name += ` ${form}`
@@ -66,32 +70,31 @@ module.exports = async () => {
 				data.icon = `raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon/pokemon_icon_${data.id}_${data.assetBundleValue}.png`
 		
 				out.push(data)
-		
-		
+
+
 				// IF MEGA
 		
-				if(data.obTemporaryEvolutions && !data.name.includes(' ')){
-				
-					data.obTemporaryEvolutions.forEach(function(evol) {
+				if(data.tempEvoOverrides && data.form == `${pokemon}_NORMAL`){
+
+					data.tempEvoOverrides.forEach(function(evol) {
 					
 						let mega = {...data}
-			
-						mega.name = `${pokemon}${evol.obTemporaryEvolution.replace(/TEMP_EVOLUTION/, '').replace(/_/g, ' ')}`
-						mega.type = evol.type
-						mega.type2 = evol.type2
+
+						mega.name = `${pokemon}${evol.tempEvoId.replace(/TEMP_EVOLUTION/, '').replace(/_/g, ' ')}`
+						mega.type = evol.typeOverride1.replace(/POKEMON_TYPE_/, '')
+						mega.type2 = evol.typeOverride1.replace(/POKEMON_TYPE_/, '')
 						
 						mega.stats = evol.stats
 						
 						mega.camera = evol.camera
 						mega.modelScaleV2 = evol.modelScaleV2
 						mega.modelHeight = evol.modelHeight
-						mega.buddyOffsetMale = evol.buddyOffsetMale
-						mega.buddyOffsetFemale = evol.buddyOffsetFemale
 						
 						let mega_info = pokeTrie.get(`TEMPORARY_EVOLUTION_${id}_POKEMON_${pokemon}`)[0]
-						mega_info.data.temporaryEvolutionSettings.obTemporaryEvolutions.forEach(function(info) {
+
+						mega_info.data.temporaryEvolutionSettings.temporaryEvolutions.forEach(function(info) {
 		
-							if(evol.obTemporaryEvolution == info.obTemporaryEvolution){
+							if(evol.TemporaryEvolution == info.TemporaryEvolution){
 						
 								mega.assetBundleValue = info.assetBundleValue
 						
@@ -100,6 +103,8 @@ module.exports = async () => {
 						})
 					
 						out.push(mega)
+						
+						console.log(mega)
 					
 					})
 				

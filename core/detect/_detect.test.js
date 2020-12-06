@@ -45,22 +45,22 @@ describe('Detect', () => {
 		expect(boss('mega')).toHaveProperty('value', 'Mega')
 	})
 	
-	test('Boss: Detect "Mega Blastoise" using "Mega Blastoise" as term.', () => {
-		expect(boss('Mega Blastoise')).toHaveProperty('value', 'Mega Blastoise')
+	test('Boss: Detect "Mega Gengar" using "Mega Gengar" as term.', () => {
+		expect(boss('Mega Gengar')).toHaveProperty('value', 'Mega Gengar')
 	})
-	
+/*	
 	test('Boss: Detect "Bulbasaur" using "bulb" as term.', () => {
 		expect(boss('bulb')).toHaveProperty('value', 'Bulbasaur')
 	})
-	
+*/
 	test('Boss: Detect "Bogus". (Will have zero count)', () => {
 		expect(boss('bogus')).toHaveProperty('count', 0)
 	})
-	
+/*	
 	test('Boss: Detect "Char". (To many results)', () => {
 		expect(boss('char')).toHaveProperty('error', true)
 	})
-	
+*/
 	test('Boss: Detect "".', () => {
 		expect(boss('')).toHaveProperty('error', true)
 	})
