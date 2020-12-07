@@ -11,6 +11,9 @@
     "dev": "nodemon -r dotenv/config index.js --ignore '*.json' dotenv_config_path=config/.env_dev",
     "doc": "nodemon -e js --ignore jsdoc/ --exec jsdoc -c ./jsdoc/jsdoc.json"
   },
+  "bin": {
+    "hearty": "./bin/hearty.js"
+  },
   "keywords": [
     "pokemon",
     "discord",
