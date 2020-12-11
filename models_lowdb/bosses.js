@@ -18,8 +18,6 @@ const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 
 //const payload_obj = require('../core/util/payload')
-//const storeData = require('../core/util/storeData')
-//const file = require('../core/util/file')
 
 const adapter = new FileSync('./data/pokemongo/bosses.json')
 const db = low(adapter)
@@ -39,6 +37,7 @@ module.exports = {
 	/**
 	 * Return full boss object.
 	 * @returns {object}
+	 * @todo rename to list?
 	 */
 	bosses: () => {
 		return db.value()
@@ -98,9 +97,7 @@ module.exports = {
 	 * @todo ADD PAYLOAD STUFF
 	 */
 	remove: (pokemon) => {
-		
-		// ADD PAYLOAD STUFF?
-		
+
 		const titleCase = require('../core/util/titlecase')
 		
 		let name = titleCase(pokemon)
