@@ -25,7 +25,7 @@
 //module.exports = (embed, q, show = null) => {
 module.exports = (embed, q, show = ['charge', 'fast', 'perfect', 'type']) => {
 
-	//if(!show) show = ['charge', 'fast', 'perfect', 'type']
+	if(!show) show = ['charge', 'fast', 'perfect', 'type'] // Show breaks without?
 
 	const {pokedex, util} = require(`@core`)
 	const {emoji} = require(`@config`).discord
