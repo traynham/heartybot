@@ -20,9 +20,7 @@
  * @todo Clean up code.
  */
 
-//const Discord = require('discord.js');
 
-//module.exports = (embed, q, show = null) => {
 module.exports = (embed, q, show = ['charge', 'fast', 'perfect', 'type']) => {
 
 	if(!show) show = ['charge', 'fast', 'perfect', 'type'] // Show breaks without?
@@ -49,13 +47,11 @@ module.exports = (embed, q, show = ['charge', 'fast', 'perfect', 'type']) => {
 	let pokemon = pokedex.find(q)
 
 	if(pokemon.error) {
-		//console.log(pokemon.error_message)
 		payload.error = true
 		payload.error_message = pokemon.error_message
 		return payload
 	}
 	
-	//let mon = pokemon.value[0]
 	let mon = pokemon.value
 	
 	let type1 = mon.type.replace(/POKEMON_TYPE_/g, '')
