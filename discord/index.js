@@ -5,7 +5,8 @@ const lowdb_raids = require('@models_lowdb/raids.js')
 
 const Discord = require('discord.js')
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
-const {prefix, token} = require(`@config`).discord
+//const {prefix, token} = require(`@config`).discord
+const {prefix} = require(`@config`).discord
 
 client.config = { prefix: prefix }
 
@@ -68,44 +69,35 @@ process.on('unhandledRejection', error => {
 // ON MESSAGE
 client.on('message', message => {
 
-//console.log(message.channel.id)
-//console.log(message.channel.name)
+	// SET CONTENT TO LOWERCASE.
+	message.content = message.content.toLowerCase()
 
-/*
-	if(message.channel.id == 743605545059090503 && !message.author.bot){
-		console.log('garbage channel - in on "message"')
-	}
-*/
-	// TESTING WITH JUST DM FOR NOW...
-//	if(!(message.channel.type === 'dm')) return;
+	let isRaidChannel = false
+	let isRaidTrain = false
 
-	// THESE TWO VARS TBD ONCE DB STRUCTURE IS IN PLACE
-	//var isRaidChannel = true
-	var isRaidChannel = false
-	var isRaidTrain = false
-
-
-
-//	console.log('HERE\'S MY CHANNEL ID, DERP: ', message.channel.id)
-	
-//	console.log('IS RAID CHANNEL? ', lowdb_raids.findRaid(message.channel.id))
-	
-	//if(lowdb_raids.findRaid(message.channel.id)){
 	if(lowdb_raids.raids_find(message.channel.id)){
 		isRaidChannel = true
 	}
-	
 
 	if(isRaidChannel) {
 		raid_commands(client, message)
-		//return
+		return
 	}
 
-	// EXIT EARLY IF NOT A BOT COMMAND OR IF AUTHOR IS BOT
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	commands_general(client, message)
+	if (message.author.bot) return;
 	
+	if(message.content.startsWith(prefix)) {
+		message.content = message.content.slice(prefix.length)
+		commands_general(client, message)
+		return
+	}
+	
+	if(message.content.startsWith('?')) {
+		message.content = `help ${message.content.slice(1)}`
+		commands_general(client, message)
+		return
+	}
+
 })
 
 
@@ -147,4 +139,6 @@ client.on('messageReactionAdd', async (reaction, user) => {
 });
 */
 
-client.login(token)
+//client.login(token)
+
+module.exports = client

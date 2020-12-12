@@ -9,6 +9,28 @@ const eggs = require(`@data/pokemongo/eggs.json`)
 module.exports = {
 	name: 'boss',
 	aliases: ['b', 'bos'],
+	actions: [
+		{
+		name: 'add',
+		aliases: [],
+		synopsis: 'Add a boss to the bosses list.'
+		},
+		{
+		name: 'list',
+		aliases: ['ls'],
+		synopsis: 'List current bosses.'
+		},
+		{
+		name: 'remove',
+		aliases: ['rem', 'rm'],
+		synopsis: 'Remove a boss from the bosses list.'
+		},
+		{
+		name: 'update',
+		aliases: [],
+		synopsis: 'Update the bosses list.'
+		},
+	],
 	actions_admin: ['add', 'remove', 'update'],
 	actions_list: ['add', 'perfect', 'remove', 'type', 'update'],
 	synopsis: 'Show bosses.',

@@ -7,8 +7,8 @@ const {domain} = require('@config')
 
 
 module.exports = {
-	name: 'help',
-	aliases: ['h', 'commands', 'com', 'comm'],
+	name: 'help_bogus',
+	aliases: ['h_bogus', 'commands_bogus', 'com_bogus', 'comm_bogus'],
 	description: 'Help',
 	cooldown: 5,
 //	execute(message, args) {

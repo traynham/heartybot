@@ -23,9 +23,10 @@ sequelize
 // INITIALIZE BOSSES JSON.
 const lowdb_bosses = require('@models_lowdb/bosses.js')
 
-
+// DISCORD CLIENT
+const {token} = require(`@config`).discord
 const discord = require('./discord')
-
+discord.login(token)
 
 var app = require('./app');
 var http = require('http');

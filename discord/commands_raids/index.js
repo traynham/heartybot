@@ -7,7 +7,7 @@ module.exports = (client, message) => {
 	// ALLOW ? prefixed help requests.
 	commandString = commandString.replace(/^\? ?/g, 'help ')
 	
-		// CHECK FOR FULL COMMAND REPLACEMENTS. (SINGLE COMMANDS WITH SPACES)
+	// CHECK FOR FULL COMMAND REPLACEMENTS. (SINGLE COMMANDS WITH SPACES)
 	let replacement = trainer_states_replacements.find(cmd => cmd.command == commandString)
 
 	if(replacement) commandString = replacement.replace

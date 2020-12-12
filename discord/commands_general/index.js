@@ -1,15 +1,16 @@
 module.exports = (client, message) => {
 	
 	const { prefix } = client.config
-	
-	let commandString = message.content.slice(prefix.length).toLowerCase() // Command string without prefix.
 
-	var argv = require('yargs-parser')(commandString, {
-		boolean: ['d', 's', 'v', 'debug'],
+	var argv = require('yargs-parser')(message.content, {
+		boolean: ['d', 'h', 's', 'v', 'debug', 'help'],
 		configuration: {
 			'short-option-groups': true
 		}
 	})
+
+	// CHECK FOR HELP ARGUMENT
+	if(argv.h || argv.help) argv._.unshift('help')
 	
 	const commandName = argv._.shift()
 	const args = argv._
