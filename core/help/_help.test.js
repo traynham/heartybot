@@ -6,6 +6,10 @@
  * @subcategory Help
 */
 
+const dotenv = require('dotenv');
+dotenv.config({ path: 'config/.env' });
+
+
 const get = require('./get')
 
 describe('Help', () => {
@@ -25,7 +29,7 @@ describe('Help', () => {
 	
 	test('Get: Command_set param', () => {
 		let result = get('commands_general', 'boss')
-		//console.log(result)
+		console.log(result)
 		expect(result).toHaveProperty('error', false)
 	})
 	

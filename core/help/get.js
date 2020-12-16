@@ -40,9 +40,6 @@ module.exports = (command_set, command) => {
 		return payload
 	}
 	
-	// Problem: prefix and other things are not getting populated properly.
-	console.log(help_document)
-	
 	payload.value = help_document
 	
 	return payload
