@@ -1,7 +1,7 @@
 /**
  * Get a help document
- * @module get
- * @@name get
+ * @module list
+ * @@name list
  * @category Core
  * @subcategory Help
 */
@@ -10,15 +10,14 @@ const help = require(`@data/help`)
 const payload_obj = require('@core/util/payload')
 
 /**
- * @name get
+ * @name list
  * @param {string} command_set Name of command set.
- * @param {string} command Name of command.
  * @function
  * @returns {payload}
  * @example
- * get('commands_general', 'boss')
+ * list('commands_general')
  */
-module.exports = (command_set, command) => {
+module.exports = (command_set) => {
 	
 	let payload = payload_obj()
 	
@@ -30,16 +29,23 @@ module.exports = (command_set, command) => {
 		return payload
 	}
 	
-	let help_document = set[command]
+	payload.values = []
 	
-	if(!help_document){
-		payload.error = true
-		payload.error_message = 'Help command not found.'
-		return payload
-	}
-	
-	payload.value = help_document
-	
+	Object.keys(set).forEach(function(key) {
+
+		let command = set[key]
+
+		payload.values.push(
+			{
+				name: command.name,
+				synopsis: command.synopsis,
+				description: command.description,
+				syntax: command.syntax
+			}
+		)
+		
+	})
+
 	return payload
 
 }
