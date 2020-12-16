@@ -28,9 +28,11 @@ module.exports = {
 	},
 	
 	help: {
-		command: require('./help/command'),
-		command_action: require('./help/command_action'),
-		commands: require('./help/commands')
+		get: require('./help/get'),
+		list: require('./help/list'),
+		//command: require('./help/command'),
+		//command_action: require('./help/command_action'),
+		//commands: require('./help/commands')
 	},
 	
 	me: {
