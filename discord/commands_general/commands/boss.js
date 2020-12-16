@@ -11,6 +11,11 @@ module.exports = {
 	aliases: ['b', 'bos'],
 	actions: [
 		{
+			name: 'DEFAULT',
+			//aliases: [],
+			synopsis: 'Show current bosses.'
+		},
+		{
 		name: 'add',
 		aliases: [],
 		synopsis: 'Add a boss to the bosses list.'

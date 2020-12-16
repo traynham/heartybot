@@ -34,10 +34,20 @@ module.exports = {
 
 			const command = commands_general.get(commandName) || commands_general.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
 
+			//embed.setTitle(`**${command.name} (Raid Command)**`)
 			embed.setTitle(`**${command.name} (Raid Command)**`)
 			embed.setDescription(`${command.description}\n${emoji.spacer}`)
 			
 			if(command.aliases.length > 0) embed.addField('**Aliases**', command.aliases.join(', ') + `\n${emoji.spacer}\n`)
+			
+			if(command.actions.length > 0) {
+				let actions = command.actions.map(action => {
+					if(action.name !== 'DEFAULT') return action.name
+					//return	action.name
+				})	
+				embed.addField('**Actions**', actions.join(', '))
+			}
+			
 			
 			if(command.syntax) embed.addField('**Syntax**', command.syntax.join('\n') + `\n${emoji.spacer}`)
 			
