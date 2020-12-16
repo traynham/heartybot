@@ -40,7 +40,11 @@ for (const file of raid_command_files) {
 
 // ON READY (FIRST TIME)
 client.once('ready', () => {
-	console.log(`I am ready! ${name} ${version} by ${author}\n${new Date()}`)
+	console.log('===============================================================')
+	console.log(`   I am ready! ${name} ${version} by ${author}`)
+	console.log(`   ${new Date()}`)
+	console.log(`   Prefix is "${prefix}"`)
+	console.log('===============================================================')
 	client.user.setActivity('...type !h for help.');
 })
 
