@@ -1,7 +1,7 @@
 const dateFormat = require('dateformat')
 const Discord = require('discord.js');
 const bosses = require('@models_lowdb/bosses.js').bosses()
-const {detect, discord} = require(`@core`)
+const {detect, discord, help} = require(`@core`)
 
 const {colors} = require(`@config`).discord
 const eggs = require(`@data/pokemongo/eggs.json`)
@@ -9,6 +9,7 @@ const eggs = require(`@data/pokemongo/eggs.json`)
 module.exports = {
 	name: 'boss',
 	aliases: ['b', 'bos'],
+	help: help.get('commands_general', 'boss').value,
 	actions: [
 		{
 			name: 'DEFAULT',
@@ -51,6 +52,8 @@ module.exports = {
 	
 		console.log('ENTERING MAIN !!BOSS COMMAND!!!')
 		console.log('ARGV: ', argv)
+		console.log('HELP?????', this.help)
+		
 		let args = argv._
 		let action = null
 	

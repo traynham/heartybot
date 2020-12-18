@@ -10,13 +10,18 @@ module.exports = {
 	cooldown: 5,
 	execute(message, argv) {
 		
+		console.log('ENTERING COMMANDS COMMAND')
+		
 		let args = argv._
-		//let action = argv.command
-		//let author = message.author
 
-		//const { raid_commands } = message.client
-		const { commands: commands_general } = message.client
-//console.log(commands_general)
+		let command_set = 'commands'
+		let commands = message.client[command_set]
+		
+		let user_roles = Array.from(message.member.roles.cache.values()).map(role => role.name.toLowerCase())
+		
+		console.log(user_roles)
+
+
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
 		embed.setThumbnail(util.emoji_img('book', {h: 25}).value)
@@ -25,55 +30,67 @@ module.exports = {
 							'Items in [square brackets] are required.\n' +
 							'Items in {curly brackets} are optional.'
 
+		// IF ACTION REQUEST
+		if(args.length > 1){
+			console.log('ARGS::', args)		
+			return
+		}
+		
 		// COMMAND DETAIL
 		if(args.length > 0){
 
 			const commandName = args.join(' ')
 			
-			//const command = raid_commands.get(commandName) || raid_commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
+			const command = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
 
-			const command = commands_general.get(commandName) || commands_general.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
 
-			//embed.setTitle(`**${command.name} (Raid Command)**`)
-			embed.setTitle(`**${command.name} (Raid Command)**`)
-			embed.setDescription(`${command.description}\n${emoji.spacer}`)
+			if(!command){
+				console.log('NO COMMAND FOUND!!!! Prepare embed!!!')
+				return
+			}
+
+			const help = command.help
+
+			embed.setTitle(`HELP › **${help.name}**`)
+			embed.setDescription(`${help.description}\n${emoji.spacer}`)
 			
-			if(command.aliases.length > 0) embed.addField('**Aliases**', command.aliases.join(', ') + `\n${emoji.spacer}\n`)
-			
-			if(command.actions.length > 0) {
-				let actions = command.actions.map(action => {
-					if(action.name !== 'DEFAULT') return action.name
-					//return	action.name
-				})	
+			if(help.aliases.length > 0) embed.addField('**Aliases**', help.aliases.join(', ') + `\n${emoji.spacer}\n`)
+
+			if(help.actions.length > 0) {
+				
+				let actions = []
+				
+				help.actions.forEach(action => {
+					if(action.roles && !user_roles.includes(action.roles[0])) { return }
+					actions.push(action.name)
+				})
+				
 				embed.addField('**Actions**', actions.join(', '))
 			}
 			
-			
-			if(command.syntax) embed.addField('**Syntax**', command.syntax.join('\n') + `\n${emoji.spacer}`)
-			
-			if(command.usage){
-				let usage = Object.entries(command.usage).map(entry => {
+			if(help.syntax) embed.addField('**Syntax**', help.syntax.join('\n') + `\n${emoji.spacer}`)
+
+			if(help.usage){
+				let usage = Object.entries(help.usage).map(entry => {
 					return	`_${entry[0]}_\n` + emoji.blank + '`' + entry[1] + '`' + `\n${emoji.spacer}`
 				})	
 				embed.addField('**Usage**', usage)
 			}
 
-			if(command.show_help_footer){embed.setFooter(help_footer)}
+			if(help.show_help_footer){embed.setFooter(help_footer)}
 
 			return message.channel.send(embed)
 
 		}
 
 		// COMMAND LIST
-		embed.setTitle('**Raid Command List**')
+		embed.setTitle('**Command List**')
 		
 		const data = []
 		
-		//data.push('Use `help [command name]` for more details, for example, `command boss`.\n');
 		data.push('Use `?[command name]` for more details, for example, `?boss`.\n');
 
-		//raid_commands.map(command => {
-		commands_general.map(command => {
+		commands.map(command => {
 			data.push(`**${command.name}**: ${command.synopsis}`)
 		})
 
