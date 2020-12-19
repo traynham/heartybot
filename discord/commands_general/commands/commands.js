@@ -10,7 +10,11 @@ module.exports = {
 	cooldown: 5,
 	execute(message, argv) {
 		
-		console.log('ENTERING COMMANDS COMMAND')
+		/*
+			TODO:
+			* IF ACTION, ADD HELP FOR GETTING ACTION HELP.
+			* ALSO: Move to core/discord as a function so it can be used from raid commands too.
+		*/
 		
 		let args = argv._
 
@@ -19,42 +23,66 @@ module.exports = {
 		
 		let user_roles = Array.from(message.member.roles.cache.values()).map(role => role.name.toLowerCase())
 		
-		console.log(user_roles)
-
-
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
 		embed.setThumbnail(util.emoji_img('book', {h: 25}).value)
 
 		const help_footer =	'__________\n' +
-							'Items in [square brackets] are required.\n' +
-							'Items in {curly brackets} are optional.'
+									'Items in [square brackets] are required.\n' +
+									'Items in {curly brackets} are optional.'
+
+		const commandName = args[0]
+		
+		const command = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
+	
+		const help = command.help
+		
+		// IF COMMAND IS NOT FOUND, BUT REQUESTED.
+		if(args.length > 0 && !command){
+			embed.setTitle(`**HELP ERROR**`)
+			embed.setColor(colors.error)
+			embed.setDescription('Sorry. There is no help for that command.  Perhaps there was a mispeeling.')
+			return message.channel.send(embed)
+		}
 
 		// IF ACTION REQUEST
 		if(args.length > 1){
-			console.log('ARGS::', args)		
+
+			let requested_action = args[1]
+			
+			let action = help.actions.find(action =>
+					action.name == requested_action || 
+					(action.aliases && action.aliases.includes(requested_action))
+			)
+			
+			embed.setTitle(`**HELP › ${help.name} › ${action.name}**`)
+			embed.setDescription(`${action.description}\n${emoji.spacer}`)
+			
+			if(action.aliases.length) {
+				embed.addField('**Aliases**', action.aliases.join(', '))
+			}
+
+			if(action.examples){
+				let examples = Object.entries(action.examples).map(entry => {
+					return	`_${entry[0]}_\n` + emoji.blank + '`' + entry[1] + '`' + `\n${emoji.spacer}`
+				})	
+				console.log('HERE::', examples)
+				embed.addField('**Examples**', examples)
+			}
+
+			message.channel.send(embed)
 			return
 		}
 		
 		// COMMAND DETAIL
 		if(args.length > 0){
 
-			const commandName = args.join(' ')
-			
-			const command = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
-
-
-			if(!command){
-				console.log('NO COMMAND FOUND!!!! Prepare embed!!!')
-				return
-			}
-
-			const help = command.help
-
 			embed.setTitle(`HELP › **${help.name}**`)
 			embed.setDescription(`${help.description}\n${emoji.spacer}`)
 			
 			if(help.aliases.length > 0) embed.addField('**Aliases**', help.aliases.join(', ') + `\n${emoji.spacer}\n`)
+
+			embed.addField('**Default**', help.default.description + `\n${emoji.spacer}`)
 
 			if(help.actions.length > 0) {
 				
@@ -65,7 +93,7 @@ module.exports = {
 					actions.push(action.name)
 				})
 				
-				embed.addField('**Actions**', actions.join(', '))
+				embed.addField('**Actions**', actions.join(', ') + `\n${emoji.spacer}`)
 			}
 			
 			if(help.syntax) embed.addField('**Syntax**', help.syntax.join('\n') + `\n${emoji.spacer}`)
