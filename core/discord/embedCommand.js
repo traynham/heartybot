@@ -1,39 +1,44 @@
-//const Discord = require('discord.js');
+/**
+ * Create a help discord embed given a message, argv, and command_set string.
+ *
+ * -----
+ * @module Embed Command (help)
+ * @author Jesse Traynham
+ * @category Core
+ * @subcategory Discord
+ */
+ 
+/**
+ * @param {object} message A discord message object.
+ * @param {array} argv Arguments array.
+ * @param {string} command_set Name of command set to pull help document from.
+ * @function
+ * @name embedCommand
+ */
+const Discord = require('discord.js');
 
-//const {colors, emoji} = require(`@config`).discord
-//const {util, discord} = require(`@core`)
-const {discord} = require(`@core`)
+const {colors, emoji} = require(`@config`).discord
 
-module.exports = {
-	name: 'commands',
-	aliases: ['?', 'c', 'com', 'comm', 'command', 'h', 'help', 'man', 'opt', 'options'],
-	description: 'View information about raid commands.',
-	cooldown: 5,
-	execute(message, argv) {
-		
-		//let theEmbed = discord.embedCommand(message, argv, 'commands')
-		let theEmbed = discord.embedCommand(message, argv._, 'commands')
-		
-		//console.log(theEmbed)
-		
-		message.channel.send(theEmbed.value)
-		
-		/*
-			TODO:
-			* IF ACTION, ADD HELP FOR GETTING ACTION HELP.
-			* ALSO: Move to core/discord as a function so it can be used from raid commands too.
-		*/
-/*	
-		let args = argv._
+const payload_obj = require('@core/util/payload')
 
-		let command_set = 'commands'
+module.exports = (message, args, command_set) => {
+
+console.log(args)
+
+	const {util} = require(`@core`)
+		
+		let payload = payload_obj()
+
 		let commands = message.client[command_set]
+		let help = {}
 		
 		let user_roles = Array.from(message.member.roles.cache.values()).map(role => role.name.toLowerCase())
 		
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
 		embed.setThumbnail(util.emoji_img('book', {h: 25}).value)
+		
+		payload.value = embed
 
 		const help_footer =	'__________\n' +
 									'Items in [square brackets] are required.\n' +
@@ -43,18 +48,20 @@ module.exports = {
 		
 		const command = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
 	
-		const help = command.help
+		if(command) help = command.help
 		
 		// IF COMMAND IS NOT FOUND, BUT REQUESTED.
 		if(args.length > 0 && !command){
+			payload.error = true
+			payload.error_message = 'Sorry. There is no help for that command.'
 			embed.setTitle(`**HELP ERROR**`)
 			embed.setColor(colors.error)
-			embed.setDescription('Sorry. There is no help for that command.  Perhaps there was a mispeeling.')
-			return message.channel.send(embed)
+			embed.setDescription(payload.error_message)
+			return payload
 		}
 
 		// IF ACTION REQUEST
-		if(args.length > 1){
+		if(args.length > 1 && help){
 
 			let requested_action = args[1]
 			
@@ -62,6 +69,15 @@ module.exports = {
 					action.name == requested_action || 
 					(action.aliases && action.aliases.includes(requested_action))
 			)
+			
+			if(!action){
+				payload.error = true
+				payload.error_message = `Sorry. That action was not found.`
+				embed.setTitle(`**HELP ERROR**`)
+				embed.setColor(colors.error)
+				embed.setDescription(payload.error_message)
+				return payload
+			}
 			
 			embed.setTitle(`**HELP › ${help.name} › ${action.name}**`)
 			embed.setDescription(`${action.description}\n${emoji.spacer}`)
@@ -74,16 +90,14 @@ module.exports = {
 				let examples = Object.entries(action.examples).map(entry => {
 					return	`_${entry[0]}_\n` + emoji.blank + '`' + entry[1] + '`' + `\n${emoji.spacer}`
 				})	
-				console.log('HERE::', examples)
 				embed.addField('**Examples**', examples)
 			}
 
-			message.channel.send(embed)
-			return
+			return payload
 		}
 		
 		// COMMAND DETAIL
-		if(args.length > 0){
+		if(args.length > 0 && help){
 
 			embed.setTitle(`HELP › **${help.name}**`)
 			embed.setDescription(`${help.description}\n${emoji.spacer}`)
@@ -101,10 +115,15 @@ module.exports = {
 					actions.push(action.name)
 				})
 				
-				embed.addField('**Actions**', actions.join(', ') + `\n${emoji.spacer}`)
+				embed.addField(
+					'**Actions**', 
+					actions.join(', ') + '\n\nUse `?' + help.name + ' [action]` for addtional help.\n' + emoji.spacer
+				)
+
 			}
 			
-			if(help.syntax) embed.addField('**Syntax**', help.syntax.join('\n') + `\n${emoji.spacer}`)
+			//if(help.syntax) embed.addField('**Syntax**', help.syntax.join('\n') + `\n${emoji.spacer}`)
+			if(help.syntax) embed.addField('**Syntax**', '`' + help.syntax + '`' + `\n${emoji.spacer}`)
 
 			if(help.usage){
 				let usage = Object.entries(help.usage).map(entry => {
@@ -115,7 +134,7 @@ module.exports = {
 
 			if(help.show_help_footer){embed.setFooter(help_footer)}
 
-			return message.channel.send(embed)
+			return payload
 
 		}
 
@@ -133,8 +152,6 @@ module.exports = {
 		embed.setDescription(data)
 		embed.setFooter(help_footer)
 		
-		return message.channel.send(embed)
-		
-*/	
-	} // EXECUTE
+		return payload
+	
 }

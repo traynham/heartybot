@@ -13,6 +13,7 @@ module.exports = {
 	},
 	
 	discord: {
+		embedCommand: require('./discord/embedCommand'),
 		embedPokemon: require('./discord/embedPokemon'),
 		hasRole: require('./discord/hasRole'),
 		isAdmin: require('./discord/isAdmin'),
