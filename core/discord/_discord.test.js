@@ -8,6 +8,7 @@
 
 const Discord = require('discord.js')
 
+const embedCommand = require('./embedCommand')
 const embedPokemon = require('./embedPokemon')
 const hasRole = require('./hasRole')
 const isAdmin = require('./isAdmin')
@@ -15,11 +16,76 @@ const parseRaid = require('./parseRaid')
 const setImage = require('./setImage')
 const setThumbnail = require('./setThumbnail')
 
+// MOCK MESSAGE OBJECT
+const message = {
+	client: {},
+	member: {
+
+		roles: {
+			cache: [
+				{name: 'admin'},
+				{name: 'su'},
+				{name: 'admin'},
+				{name: 'everyone'}
+			]
+		}
+	}
+}
+
+message.client.commands = new Discord.Collection()
+message.client.commands.set('boss', require('../../discord/commands_general/commands/boss.js'));
+console.log(message.client.commands)
+
 describe('Discord', () => {
+
+
+	// EMBED COMMAND (Help)
+	test('embedCommand: Test bogus command.', () => {
+		let args = ['bogus']
+		let result = embedCommand(message, args, 'commands')
+		console.log(result)
+		expect(result).toHaveProperty('error', true)
+	})	
 	
-//	beforeAll(() => {
-//	})
+	test('embedCommand: Test boss command.', () => {
+		let args = ['boss']
+		let result = embedCommand(message, args, 'commands')
+		console.log('HERE??', result)
+		expect(result).toHaveProperty('error', false)
+	})	
 	
+	test('embedCommand: Test boss add action.', () => {
+		let args = ['boss', 'add']
+		let result = embedCommand(message, args, 'commands')
+		console.log('ADD??', result)
+		expect(result).toHaveProperty('error', false)
+	})	
+	
+	test('embedCommand: Test boss remove action.', () => {
+		let args = ['boss', 'rm']
+		let result = embedCommand(message, args, 'commands')
+		console.log('REMOVE??', result)
+		expect(result).toHaveProperty('error', false)
+	})	
+	
+	
+	test('embedCommand: Test boss bogus action.', () => {
+		let args = ['boss', 'bogus']
+		let result = embedCommand(message, args, 'commands')
+		console.log('Bogus action??', result)
+		expect(result).toHaveProperty('error', true)
+	})	
+	
+	test('embedCommand: Test list commands.', () => {
+		let args = []
+		let result = embedCommand(message, args, 'commands')
+		console.log('THERE??', result)
+		expect(result).toHaveProperty('error', false)
+	})	
+
+
+
+
 	// EMBEDPOKEMON
 	test('embedPokemon: Test using "Tier 1" egg search.', () => {
 		const embed = new Discord.MessageEmbed()
@@ -48,7 +114,7 @@ describe('Discord', () => {
 	
 	
 	// HASROLE
-	
+/*	
 	// MOCK MESSAGE OBJECT
 	let message = {
 		member: {
@@ -62,6 +128,7 @@ describe('Discord', () => {
 			}
 		}
 	}
+*/
 
 	test('hasRole: Has "admin" role', () => {
 		expect(hasRole(message, 'admin')).toBe(true)
