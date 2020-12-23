@@ -25,7 +25,8 @@ const {me} = require(`@core`)
 const payload_obj = require('@core/util/payload')
 const file = require('@core/util/file')
 
-const adapter = new FileSync('./data/raids.json')
+//const adapter = new FileSync('./data/raids.json')
+const adapter = new FileSync('./data/cache/raids.json')
 const db = low(adapter)
 
 db.defaults({
@@ -107,7 +108,8 @@ module.exports = {
 		
 		let date = new Date(raid_value.time)
 
-		let date_path = '/data/raids/' + dateFormat(date, 'yyyy/mm/dd/') + `${date.getTime()} ${raid_value.name}.json`
+		//let date_path = '/data/raids/' + dateFormat(date, 'yyyy/mm/dd/') + `${date.getTime()} ${raid_value.name}.json`
+		let date_path = '/data/cache/raids/' + dateFormat(date, 'yyyy/mm/dd/') + `${date.getTime()} ${raid_value.name}.json`
 
 		file.createFile(date_path, raid_value)
 		
