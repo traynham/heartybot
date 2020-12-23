@@ -34,7 +34,7 @@ const message = {
 
 message.client.commands = new Discord.Collection()
 message.client.commands.set('boss', require('../../discord/commands_general/commands/boss.js'));
-console.log(message.client.commands)
+//console.log(message.client.commands)
 
 describe('Discord', () => {
 
