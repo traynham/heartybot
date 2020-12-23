@@ -23,7 +23,7 @@ const payload_obj = require('@core/util/payload')
 
 module.exports = (message, args, command_set) => {
 
-console.log(args)
+//console.log(args)
 
 	const {util} = require(`@core`)
 		

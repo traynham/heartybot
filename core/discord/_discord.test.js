@@ -43,28 +43,24 @@ describe('Discord', () => {
 	test('embedCommand: Test bogus command.', () => {
 		let args = ['bogus']
 		let result = embedCommand(message, args, 'commands')
-		console.log(result)
 		expect(result).toHaveProperty('error', true)
 	})	
 	
 	test('embedCommand: Test boss command.', () => {
 		let args = ['boss']
 		let result = embedCommand(message, args, 'commands')
-		console.log('HERE??', result)
 		expect(result).toHaveProperty('error', false)
 	})	
 	
 	test('embedCommand: Test boss add action.', () => {
 		let args = ['boss', 'add']
 		let result = embedCommand(message, args, 'commands')
-		console.log('ADD??', result)
 		expect(result).toHaveProperty('error', false)
 	})	
 	
 	test('embedCommand: Test boss remove action.', () => {
 		let args = ['boss', 'rm']
 		let result = embedCommand(message, args, 'commands')
-		console.log('REMOVE??', result)
 		expect(result).toHaveProperty('error', false)
 	})	
 	
@@ -72,14 +68,12 @@ describe('Discord', () => {
 	test('embedCommand: Test boss bogus action.', () => {
 		let args = ['boss', 'bogus']
 		let result = embedCommand(message, args, 'commands')
-		console.log('Bogus action??', result)
 		expect(result).toHaveProperty('error', true)
 	})	
 	
 	test('embedCommand: Test list commands.', () => {
 		let args = []
 		let result = embedCommand(message, args, 'commands')
-		console.log('THERE??', result)
 		expect(result).toHaveProperty('error', false)
 	})	
 

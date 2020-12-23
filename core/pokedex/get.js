@@ -1,6 +1,7 @@
 const TrieSearch = require('trie-search')
 
-const pokedex = require('@data/pokemongo/pokedex.json')
+//const pokedex = require('@data/pokemongo/pokedex.json')
+const pokedex = require('@data/cache/pokemongo/pokedex.json')
 
 /**
 	# Get
