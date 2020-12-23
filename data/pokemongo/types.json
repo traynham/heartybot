@@ -1,0 +1,167 @@
+{
+	"types": [
+		{
+			"name":				"bug",
+			"color":			"#a8b820",
+			"emoji":			"<:type_bug:748260745791143956>",
+			"super_effective":	"Dark, Grass, Psychic",
+			"not_effective":	"Fighting, Fire, Flying, Fairy, Ghost, Poison",
+			"resistant_to":		"Fighting, Grass, Ground",
+			"weak_to":			"Fire, Flying, Rock"
+		},
+		{
+			"name":				"dark",
+			"color":			"#735a4a",
+			"emoji":			"<:type_dark:748261371401076866>",
+			"super_effective":	"Ghost, Psychic",
+			"not_effective":	"Dark, Fighting, Fairy",
+			"resistant_to":		"Dark, Ghost, Psychic",
+			"weak_to":			"Bug, Fighting, Fairy"
+		},
+		{
+			"name":				"dragon",
+			"color":			"#7038f8",
+			"emoji":			"<:type_dragon:748262969195888780>",
+			"super_effective":	"Dragon",
+			"not_effective":	"Steel, Fairy",
+			"resistant_to":		"Electric, Fire, Grass, Water",
+			"weak_to":			"Dragon, Fairy, Ice"
+		},
+		{
+			"name":				"electric",
+			"color":			"#f8d030",
+			"emoji":			"<:type_electric:748263001156616304>",
+			"super_effective":	"Flying, Water",
+			"not_effective":	"Dragon, Electric, Grass, Ground",
+			"resistant_to":		"Electric, Flying, Steel",
+			"weak_to":			"Ground"
+		},
+		{
+			"name":				"fairy",
+			"color":			"#ee99ac",
+			"emoji":			"<:type_fairy:748263049462546703>",
+			"super_effective":	"Dark, Dragon, Fighting",
+			"not_effective":	"Fire, Poison, Steel",
+			"resistant_to":		"Bug, Dark, Fighting",
+			"weak_to":			"Dragon"
+		},
+		{
+			"name":				"fighting",
+			"color":			"#c03028",
+			"emoji":			"<:type_fighting:748263079032258692>",
+			"super_effective":	"Dark, Ice, Normal, Rock, Steel",
+			"not_effective":	"Bug, Fairy, Flying, Poison, Psychic, Ghost",
+			"resistant_to":		"Bug, Dark, Rock",
+			"weak_to":			"Fairy, Flying, Psychic"
+		},
+		{
+			"name":				"fire",
+			"color":			"#f08030",
+			"emoji":			"<:type_fire:748263141800018151>",
+			"super_effective":	"Bug, Grass, Ice, Steel",
+			"not_effective":	"Dragon, Fire, Rock, Water",
+			"resistant_to":		"Bug, Fire, Fairy, Grass, Ice, Steel",
+			"weak_to":			"Ground, Rock, Water"
+		},
+		{
+			"name":				"flying",
+			"color":			"#a890f0",
+			"emoji":			"<:type_flying:748263184242311188>",
+			"super_effective":	"Bug, Fighting, Grass",
+			"not_effective":	"Electric, Rock, Steel",
+			"resistant_to":		"Bug, Fighting, Grass, Ground",
+			"weak_to":			"Electric, Ice, Rock"
+		},
+		{
+			"name":				"ghost",
+			"color":			"#6363b5",
+			"emoji":			"<:type_ghost:748263248125493370>",
+			"super_effective":	"Ghost, Psychic",
+			"not_effective":	"Dark, Normal",
+			"resistant_to":		"Bug, Poison, Fighting, Normal",
+			"weak_to":			"Dark, Ghost"
+		},
+		{
+			"name":				"grass",
+			"color":			"#78c850",
+			"emoji":			"<:type_grass:748263271655538698>",
+			"super_effective":	"Ground, Rock, Water",
+			"not_effective":	"Bug, Dragon, Fire, Flying, Grass, Poison, Steel",
+			"resistant_to":		"Electric, Grass, Ground, Water",
+			"weak_to":			"Bug, Fire, Flying, Ice, Poison"
+		},
+		{
+			"name":				"ground",
+			"color":			"#e0c068",
+			"emoji":			"<:type_ground:748263299203858583>",
+			"super_effective":	"Electric, Fire, Poison, Rock, Steel",
+			"not_effective":	"Bug, Grass, Flying",
+			"resistant_to":		"Poison, Rock, Electric",
+			"weak_to":			"Grass, Ice, Water"
+		},
+		{
+			"name":				"ice",
+			"color":			"#98d8d8",
+			"emoji":			"<:type_ice:748263319059824720>",
+			"super_effective":	"Dragon, Flying, Grass, Ground",
+			"not_effective":	"Fire, Ice, Steel, Water",
+			"resistant_to":		"Ice",
+			"weak_to":			"Fighting, Fire, Rock, Steel"
+		},
+		{
+			"name":				"normal",
+			"color":			"#a8a878",
+			"emoji":			"<:type_normal:748263347052609736>",
+			"super_effective":	"~",
+			"not_effective":	"Rock, Steel, Ghost",
+			"resistant_to":		"Ghost",
+			"weak_to":			"Fighting"
+		},
+		{
+			"name":				"poison",
+			"color":			"#b55aa5",
+			"emoji":			"<:type_poison:748263373908738220>",
+			"super_effective":	"Grass, Fairy",
+			"not_effective":	"Ghost, Ground, Poison, Rock, Steel",
+			"resistant_to":		"Bug, Fighting, Fairy, Grass, Poison",
+			"weak_to":			"Ground, Psychic"
+		},
+		{
+			"name":				"psychic",
+			"color":			"#f85888",
+			"emoji":			"<:type_psychic:748263405684785253>",
+			"super_effective":	"Fighting, Poison",
+			"not_effective":	"Psychic, Steel, Dark",
+			"resistant_to":		"Fighting, Psychic",
+			"weak_to":			"Bug, Dark, Ghost"
+		},
+		{
+			"name":				"rock",
+			"color":			"#bda55a",
+			"emoji":			"<:type_rock:748263430569459843>",
+			"super_effective":	"Bug, Fire, Flying, Ice",
+			"not_effective":	"Fighting, Ground, Steel",
+			"resistant_to":		"Fire, Flying, Normal, Poison",
+			"weak_to":			"Fighting, Grass, Ground, Steel, Water"
+		},
+		{
+			"name":				"steel",
+			"color":			"#b8b8d0",
+			"emoji":			"<:type_steel:748263470536982699>",
+			"super_effective":	"Fairy, Ice, Rock",
+			"not_effective":	"Electric, Fire, Steel, Water",
+			"resistant_to":		"Bug, Dragon, Flying, Fairy, Grass, Ice, Normal, Psychic, Rock, Steel, Poison",
+			"weak_to":			"Fighting, Fire, Ground"
+		},
+		{
+			"name":				"water",
+			"color":			"#6890f0",
+			"emoji":			"<:type_water:748263490502000782>",
+			"super_effective":	"Fire, Ground, Rock",
+			"not_effective":	"Dragon, Grass, Water",
+			"resistant_to":		"Fire, Ice, Steel, Water",
+			"weak_to":			"Electric, Grass"
+		}
+	
+	]
+}

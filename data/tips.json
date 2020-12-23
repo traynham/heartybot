@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Get Help!",
+        "category": "Raid Channel",
+        "content": "Use `command -h` or `?command` to get help card. For example, use ?type to find out about the \"type\" command."
+    },
+    {
+        "title": "Keep it Simple!",
+        "category": "General",
+        "content": "Most raid commands can be accessed by their first three letters. Some can even be access by their first letter. For example, why type out `!raid` when you can just use `!r`?"
+    },
+    {
+        "title": "Don't play and drive!",
+        "category": "Raid Channel",
+        "content": "Simply type \"d\" in a raid channel to indicate you are driving."
+    },
+    {
+        "title": "Codes and Privacy",
+        "category": "General",
+        "content": "Your code will not show if you have it set to hide in your privacy settings except for when you invoke a command to show it. In other words, you can show your code using `code`, but other's cannot see your code using `code yourname`."
+    },
+    {
+        "title": "What's that command again?",
+        "category": "Raid Channel",
+        "content": "Forgot that command for the bajillionth time?  Simply enter a question mark in a raid channel and hit return to get a list."
+    }
+]

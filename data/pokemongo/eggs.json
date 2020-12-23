@@ -1,0 +1,26 @@
+{
+	"tier 1": {
+		"name": "Tier 1",
+		"asset": "raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Raids/raid_egg_0_icon_notification.png"
+	},
+	"tier 3": {
+		"name": "Tier 3",
+		"asset": "raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Raids/raid_egg_1_icon_notification.png"
+	},
+	"tier 5": {
+		"name": "Tier 5",
+		"asset": "raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Raids/raid_egg_2_icon_notification.png"
+	},
+	"tier 6": {
+		"name": "Mega",
+		"asset": "raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Raids/raid_egg_3_icon_notification.png"
+	},
+	"mega": {
+		"name": "Mega",
+		"asset": "raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Raids/raid_egg_3_icon_notification.png"
+	},
+	"ex": {
+		"name": "Ex",
+		"asset": "raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Raids/raid_egg_2_icon_notification.png"
+	}
+}
