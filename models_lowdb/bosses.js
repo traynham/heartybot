@@ -19,7 +19,7 @@ const FileSync = require('lowdb/adapters/FileSync')
 
 //const payload_obj = require('../core/util/payload')
 
-const adapter = new FileSync('./data/pokemongo/bosses.json')
+const adapter = new FileSync('./data/cache/pokemongo/bosses.json')
 const db = low(adapter)
 
 /* WILL I NEED THIS? */

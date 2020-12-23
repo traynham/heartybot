@@ -4,10 +4,12 @@
  * @name pokédex › find
  * @category Core
  * @subcategory Pokédex
+ * @todo Fix initial run error.
 */
 
 const TrieSearch = require('trie-search')
-const pokedex = require('@data/pokemongo/pokedex.json')
+//const pokedex = require('@data/pokemongo/pokedex.json')
+const pokedex = require('@data/cache/pokemongo/pokedex.json') // causes error on initial run!
 const payload_obj = require('@core/util/payload')
 
 /**

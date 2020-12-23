@@ -19,7 +19,7 @@ module.exports = async () => {
 	
 	console.log('done downloading')
 	
-	util.file.createFile('/data/pokemongo/pgm.json', pgm)
+	util.file.createFile('/data/cache/pokemongo/pgm.json', pgm)
 	
 	console.log('done saving pgm2')
 
@@ -114,6 +114,6 @@ module.exports = async () => {
 		
 		}) // FOR EACH
 
-		util.file.createFile('/data/pokemongo/pokedex.json', out)
+		util.file.createFile('/data/cache/pokemongo/pokedex.json', out)
 
 }
