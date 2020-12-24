@@ -1,4 +1,19 @@
-const dateFormat = require('dateformat')
+/**
+ * @module Boss
+ * @author Jesse Traynham
+ * @category Discord Commands
+ * @subcategory General
+ */
+
+/**
+ * @param {object} message Discord message
+ * @param {array} argv Arguments array from yargs.
+ * @function
+ * @name boss
+ */
+
+
+//const dateFormat = require('dateformat')
 const Discord = require('discord.js');
 const bosses = require('@models_lowdb/bosses.js').bosses()
 const {detect, discord, help} = require(`@core`)
@@ -10,6 +25,7 @@ module.exports = {
 	name: 'boss',
 	aliases: ['b', 'bos'],
 	help: help.get('commands_general', 'boss').value,
+	/*
 	actions: [
 		{
 			name: 'DEFAULT',
@@ -37,16 +53,19 @@ module.exports = {
 		synopsis: 'Update the bosses list.'
 		},
 	],
+	*/
 	actions_admin: ['add', 'remove', 'update'],
-	actions_list: ['add', 'perfect', 'remove', 'type', 'update'],
-	synopsis: 'Show bosses.',
-	description: 'Display current Raid Bosses',
-	syntax: ['boss {boss name}'],
+	//actions_list: ['add', 'perfect', 'remove', 'type', 'update'],
+	//synopsis: 'Show bosses.',
+	//description: 'Display current Raid Bosses',
+	//syntax: ['boss {boss name}'],
+	/*
 	usage: {
 		'To show bosses:': 'boss',
 		'To show specific boss:': 'boss darkari',
 		'To show a tier': 'boss l5'
 	},
+	*/
 	cooldown: 5,
 	execute(message, argv) {
 	
@@ -75,6 +94,12 @@ module.exports = {
 		// ACTION: ADD
 		if(args[0] === 'add'){
 			action = 'add'
+			args.shift()
+		}
+		
+		// ACTION: LIST (DEFAULT)
+		if((args.length == 0) || args[0] === 'list' || args[0] === 'ls'){
+			action = 'list'
 			args.shift()
 		}
 		
@@ -109,17 +134,6 @@ module.exports = {
 		if(action) {
 			var data = {embed, args, message}
 			require(`./boss_actions/${action}`)(data)
-			return
-		}
-
-		// FULL BOSS LIST CARD			
-		if(args.length == 0){
-			embed.setTitle('Boss List')
-			discord.setThumbnail(embed, './public/images/icons/gym.png', 'gym.png')
-			bosses.tiers.forEach(tier => embed.addField(tier.name, tier.value.join(', ')) )
-			//embed.setFooter('Updated: ' + bosses.date)
-			embed.setFooter('Updated: ' + dateFormat(bosses.date, "m/dd/yy h:MM TT"))
-			message.channel.send(embed)
 			return
 		}
 

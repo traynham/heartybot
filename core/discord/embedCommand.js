@@ -83,7 +83,11 @@ module.exports = (message, args, command_set) => {
 			embed.setDescription(`${action.description}\n${emoji.spacer}`)
 			
 			if(action.aliases.length) {
-				embed.addField('**Aliases**', action.aliases.join(', '))
+				embed.addField('**Aliases**', action.aliases.join(', ') + `\n${emoji.spacer}`)
+			}
+			
+			if(action.syntax){
+				embed.addField('**Sytax**', '`' + action.syntax + '`' + `\n${emoji.spacer}`)
 			}
 
 			if(action.examples){
@@ -92,6 +96,8 @@ module.exports = (message, args, command_set) => {
 				})	
 				embed.addField('**Examples**', examples)
 			}
+			
+			if(help.show_help_footer){embed.setFooter(help_footer)}
 
 			return payload
 		}
@@ -104,15 +110,13 @@ module.exports = (message, args, command_set) => {
 			
 			if(help.aliases.length > 0) embed.addField('**Aliases**', help.aliases.join(', ') + `\n${emoji.spacer}\n`)
 
-			embed.addField('**Default**', help.default.description + `\n${emoji.spacer}`)
-
 			if(help.actions.length > 0) {
 				
 				let actions = []
 				
 				help.actions.forEach(action => {
 					if(action.roles && !user_roles.includes(action.roles[0])) { return }
-					actions.push(action.name)
+					actions.push(action.name + (action.default ? ' (Default)' : ''))
 				})
 				
 				embed.addField(

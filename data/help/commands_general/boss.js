@@ -1,4 +1,4 @@
-const {prefix: p, syntax_optional: so, syntax_required: sr} = require('@config').discord
+const {prefix: p, syntax_required: sr} = require('@config').discord
 
 module.exports = {
 
@@ -14,19 +14,8 @@ module.exports = {
 										'To show a tier': 'boss l5'
 									},
 	dm:							true,
-	availability:				['PogoNWFortWorth', 'Pogo Barn'],
 	show_help_footer:			true,
-	revision:					'12-18-20',
-
-
-	//DEFAULT ACTION
-	default: {
-		synopsis:				'Returns current raid boss list',
-		description:			'Display a list of current raid bosses.',
-		examples:				[
-										{code: `${p}boss`}
-									]
-	},
+	revision:					'12-23-20',
 
 	// ACTIONS
 	actions: [
@@ -45,18 +34,6 @@ module.exports = {
 									}
 		},
 */
-		// Boss
-		{
-			name:					'boss',
-			aliases:				['mon', 'pokemon'],
-			synopsis:			'View boss card',
-			syntax:				`${p}boss ${sr[0]}boss name${sr[1]}`,
-			description:		'This action will display a boss card with vital information.',
-			examples:			{
-										"Show Heatran boss card.": `${p}boss heatran`
-									}
-		},
-		
 		// ADD (ADMIN)
 		{
 			name:					'add',
@@ -69,15 +46,28 @@ module.exports = {
 										'Add darkari to bosses:': `${p}boss add l5 darkari`
 									}
 		},
-		
-		// LIST (ADMIN)
-/*
+
+		// Boss
 		{
-			name: 'list',
-			aliases: ['ls'],
-			synopsis: 'List current bosses.'
+			name:					'boss',
+			aliases:				['mon', 'pokemon'],
+			synopsis:			'View boss card',
+			syntax:				`${p}boss ${sr[0]}boss name${sr[1]}`,
+			description:		'This action will display a boss card with vital information.',
+			examples:			{
+										"Show Heatran boss card.": `${p}boss heatran`
+									}
 		},
-*/	
+
+		// LIST (DEFAULT)
+		{
+			name:					'list',
+			aliases:				['ls'],
+			default:				true,
+			synopsis:			'Returns current raid boss list',
+			description:		'Display a list of current raid bosses.',
+		},
+
 		// REMOVE (ADMIN)
 		{
 			name:					'remove',
@@ -91,7 +81,7 @@ module.exports = {
 		},
 		
 		// UPDATE (SU)
-			{
+		{
 			name:					'update',
 			aliases:				[],
 			roles:				['su'],
