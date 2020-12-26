@@ -12,9 +12,15 @@ module.exports = (client, message) => {
 	// CHECK FOR HELP ARGUMENT
 	if(argv.h || argv.help) argv._.unshift('help')
 	
+	// CHECK FOR HELP ACTION
+	if(argv._[1] == 'help'){
+		argv._.splice(1, 1)
+		argv._.unshift('help')
+	}
+
 	const commandName = argv._.shift()
 	const args = argv._
-		
+
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
 	
 	if (!command) return;
