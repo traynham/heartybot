@@ -1,4 +1,4 @@
-const {prefix: p, syntax_required: sr} = require('@config').discord
+const {prefix: p, syntax_optional: so, syntax_required: sr} = require('@config').discord
 
 module.exports = {
 
@@ -9,13 +9,13 @@ module.exports = {
 	syntax:						'boss {boss/level/action}',
 	aliases:						[`${p}b`, `${p}bos`],
 	usage: 						{
-										'To show bosses:': 'boss',
-										'To show specific boss:': 'boss darkari',
-										'To show a tier': 'boss l5'
+										'To show bosses:': `${p}boss`,
+										'To show specific boss:': `${p}boss darkari\n${p}boss kyurem perfect`,
+										'To show a tier': `${p}boss l5`
 									},
 	dm:							true,
 	show_help_footer:			true,
-	revision:					'12-23-20',
+	revision:					'12-26-20',
 
 	// ACTIONS
 	actions: [
@@ -52,10 +52,11 @@ module.exports = {
 			name:					'boss',
 			aliases:				['mon', 'pokemon'],
 			synopsis:			'View boss card',
-			syntax:				`${p}boss ${sr[0]}boss name${sr[1]}`,
-			description:		'This action will display a boss card with vital information.',
+			syntax:				`${p}boss ${sr[0]}boss name${sr[1]} ${so[0]}filter${so[1]}`,
+			description:		'This action will display a boss card with vital information. You can also use an optional filter to only show charge, fast, perfect, and type.',
 			examples:			{
-										"Show Heatran boss card.": `${p}boss heatran`
+										"Show Heatran boss card.": `${p}boss heatran`,
+										"Show Kyurem's perfect CPs.": `${p}boss kyurem perfect`
 									}
 		},
 

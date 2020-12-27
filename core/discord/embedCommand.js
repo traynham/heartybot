@@ -131,7 +131,8 @@ module.exports = (message, args, command_set) => {
 
 			if(help.usage){
 				let usage = Object.entries(help.usage).map(entry => {
-					return	`_${entry[0]}_\n` + emoji.blank + '`' + entry[1] + '`' + `\n${emoji.spacer}`
+					//return	`_${entry[0]}_\n` + emoji.blank + '`' + entry[1] + '`' + `\n${emoji.spacer}`
+					return	`_${entry[0]}_\n` + '`' + entry[1] + '`' + `\n${emoji.spacer}`
 				})	
 				embed.addField('**Usage**', usage)
 			}
