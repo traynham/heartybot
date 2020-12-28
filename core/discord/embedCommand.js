@@ -49,7 +49,7 @@ module.exports = (message, args, command_set) => {
 		const command = (
 			commands.get(commandName) || 
 			commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) ||
-			commands.find(cmd => cmd.meta.aliases && cmd.meta.aliases.includes(commandName))
+			commands.find(cmd => cmd.meta && cmd.meta.aliases && cmd.meta.aliases.includes(commandName))
 		)
 
 		//if(command) help = command.help
