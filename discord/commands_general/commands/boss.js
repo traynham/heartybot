@@ -21,9 +21,7 @@ const eggs = require(`@data/pokemongo/eggs.json`)
 
 module.exports = {
 	name: 'boss',
-	aliases: ['b', 'bos'],
-	help: help.get('commands_general', 'boss').value,
-	actions_admin: ['add', 'remove', 'update'],
+	meta: help.get('commands_general', 'boss').value,
 	cooldown: 5,
 	execute(message, argv) {
 		
@@ -32,13 +30,7 @@ module.exports = {
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
 
-		// ACTIONS: VALUES MUST MATCH FILE NAMES IN /BOSS_ACTIONS
-		let actions = [
-			{name: 'add'},
-			{name: 'list', aliases: ['ls']},
-			{name: 'remove', aliases: ['rem', 'rm']},
-			{name: 'update'},
-		]
+		let actions = this.meta.actions
 
 		// SET DEFAULT ACTION IF NEEDED
 		if(!args.length) args.push('list')
@@ -49,8 +41,8 @@ module.exports = {
 			null
 		)
 
-		// EXIT EARLY IF ADMIN ACTION ATTEMPT BY NON-ADMIN.
-		if(this.actions_admin.includes(args[0]) && !discord.isAdmin(message)){			
+		// EXIT EARLY IF USER DOES NOT MEET ROLE REQUIREMENTS.
+		if(action.roles && !discord.hasRole(message, action.roles[0])){
 			embed.setColor(colors.error)
 			embed.setDescription('Sorry, this action requires an admin account.')
 			message.channel.send(embed)
