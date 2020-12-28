@@ -7,7 +7,7 @@ module.exports = {
 	synopsis:					'Display bosses',
 	description:				'Display current Raid Bosses.',
 	syntax:						'boss {boss/level/action}',
-	aliases:						[`${p}b`, `${p}bos`],
+	aliases:						['b', 'bos'], // no prefix!
 	usage: 						{
 										'To show bosses:': `${p}boss`,
 										'To show specific boss:': `${p}boss darkari\n${p}boss kyurem perfect`,
@@ -19,21 +19,7 @@ module.exports = {
 
 	// ACTIONS
 	actions: [
-/*
-		// HELP
-		{
-			name:					'help',
-			synopsis:			'Show Help',
-			description:		'Show Help',
-			syntax:				`${p}boss ${sr[0]}help${sr[1]} ${so[0]}action${so[1]}`,
-			examples:			{
-										'Show boss help using "?" prefix.': `?boss`,
-										'Show boss help.': `${p}boss help`,
-										'Show pokemon action help.': `${p}boss help pokemon`,
-										'Show boss help alias.': `${p}b help`
-									}
-		},
-*/
+
 		// ADD (ADMIN)
 		{
 			name:					'add',
@@ -57,6 +43,22 @@ module.exports = {
 			examples:			{
 										"Show Heatran boss card.": `${p}boss heatran`,
 										"Show Kyurem's perfect CPs.": `${p}boss kyurem perfect`
+									}
+		},
+
+		// HELP
+		{
+			name:					'help',
+			aliases:				['-h'],
+			synopsis:			'Show Help',
+			description:		'Show Help',
+			syntax:				`${p}boss ${sr[0]}help${sr[1]} ${so[0]}action${so[1]}`,
+			examples:			{
+										'Show boss help using "?" prefix.': `?boss`,
+										'Show boss help.': `${p}boss help`,
+										'Show pokemon action help.': `${p}boss help boss`,
+										'Show boss help alias.': `${p}b help`,
+										'Show boss help with extra nerd points.': `${p}b -h`
 									}
 		},
 
