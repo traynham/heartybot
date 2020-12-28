@@ -87,7 +87,8 @@ module.exports = (message, args, command_set) => {
 			embed.setTitle(`**HELP › ${help.name} › ${action.name}**`)
 			embed.setDescription(`${action.description}\n${emoji.spacer}`)
 			
-			if(action.aliases.length) {
+			//if(action.aliases.length) {
+			if(action.aliases) {
 				embed.addField('**Aliases**', action.aliases.join(', ') + `\n${emoji.spacer}`)
 			}
 			
