@@ -46,9 +46,14 @@ module.exports = (message, args, command_set) => {
 
 		const commandName = args[0]
 		
-		const command = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
-	
-		if(command) help = command.help
+		const command = (
+			commands.get(commandName) || 
+			commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) ||
+			commands.find(cmd => cmd.meta.aliases && cmd.meta.aliases.includes(commandName))
+		)
+
+		//if(command) help = command.help
+		if(command) help = command.meta
 		
 		// IF COMMAND IS NOT FOUND, BUT REQUESTED.
 		if(args.length > 0 && !command){
