@@ -1,9 +1,22 @@
-const {discord} = require(`@core`)
+/**
+ * @module Commands
+ * @author Jesse Traynham
+ * @category Discord Commands
+ * @subcategory General
+ */
+
+/**
+ * @param {object} message Discord message
+ * @param {array} argv Arguments array from yargs.
+ * @function
+ * @name commands
+ */
+
+const {discord, help} = require(`@core`)
 
 module.exports = {
 	name: 'commands',
-	aliases: ['?', 'c', 'com', 'comm', 'command', 'h', 'help', 'man', 'opt', 'options'],
-	description: 'View information about raid commands.',
+	meta: help.get('commands_general', 'help').value,
 	cooldown: 5,
 	execute(message, argv) {
 		
