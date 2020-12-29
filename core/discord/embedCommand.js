@@ -29,8 +29,12 @@ module.exports = (message, args, command_set) => {
 
 		let commands = message.client[command_set]
 		let help = {}
-
-		let user_roles = Array.from(message.member.roles.cache.values()).map(role => role.name.toLowerCase())
+		
+		let user_roles = []
+		
+		if(message.channel.type === 'text'){
+			user_roles = Array.from(message.member.roles.cache.values()).map(role => role.name.toLowerCase())
+		}
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
@@ -110,8 +114,8 @@ module.exports = (message, args, command_set) => {
 
 			embed.setTitle(`HELP › **${help.name}**`)
 			embed.setDescription(`${help.description}\n${emoji.spacer}`)
-			
-			if(help.aliases.length > 0) embed.addField('**Aliases**', help.aliases.join(', ') + `\n${emoji.spacer}\n`)
+
+			if(help.aliases) embed.addField('**Aliases**', help.aliases.join(', ') + `\n${emoji.spacer}\n`)
 
 			if(help.actions.length > 0) {
 
