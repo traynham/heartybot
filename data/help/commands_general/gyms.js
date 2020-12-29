@@ -5,43 +5,41 @@ module.exports = {
 
 	// GENERAL
 	name:						'gyms',
-	synopsis:					'Search gyms',
-	description:				'Search and display gym information.',
-	syntax:						`${p}gyms ${sr[0]}search${sr[1]}`,
-	alias:						[`${p}g`, `${p}gym`],
-	dm:							true,
-	availability:				['PogoNWFortWorth', 'Pogo Barn'],
-	revision:					'08-11-20',
+	aliases:					['g', 'gym'],
+	synopsis:				'Search gyms',
+	description:			'Search and display gym information.',
+	syntax:					`${p}gyms ${sr[0]}search${sr[1]}`,
+	alias:					[`${p}g`, `${p}gym`],
+	dm:						true,
+	revision:				'12-28-20',
 
 
 	//DEFAULT ACTION
 	default: {
-		description_short:		'Returns error',
-		synopsis:				'Returns error',
-		description:			'This command will return an error when no action is specified because a search term is required.',
-		examples:				[
+		synopsis:			'Returns error',
+		description:		'This command will return an error when no action is specified because a search term is required.',
+		examples:			[
 									{code: `${p}gyms`},
 									{code: `${p}g`}
 								]
 	},
 
 	// ACTIONS
-	actions: {
+	actions: [
 
 		// HELP
-		help: {
-			name:				'help',
+		{
+			name:					'help',
 			synopsis:			'Show Help',
 			description:		'Show Help',
-			examples:			[
-									{code: `${p}gyms help`},
-									{code: `${p}gym help`}
-								]
+			examples:			{
+										'Show gym help': `${p}gyms help`
+									}
 		},
 
 		// SEARCH
-		search: {
-			name:				'Search',
+		{
+			name:				'search',
 			synopsis:			'Gym search term',
 			description:		'Search criteria to find gym.',
 			syntax:				`${p}gyms ${sr[0]}search${sr[1]}`,
@@ -53,6 +51,6 @@ module.exports = {
 								]
 		}
 
-	}
+	]
 
 }

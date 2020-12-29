@@ -1,13 +1,25 @@
+/**
+ * @module Gyms
+ * @author Jesse Traynham
+ * @category Discord Commands
+ * @subcategory General
+ */
+
+/**
+ * @param {object} message Discord message
+ * @param {array} argv Arguments array from yargs.
+ * @function
+ * @name gyms
+ */
+ 
 const Discord = require('discord.js');
-const {gyms} = require('@core')
+const {gyms, help} = require('@core')
 const {domain} = require(`@config`)
 
 module.exports = {
 	name: 'gyms',
-	aliases: ['g', 'gym'],
-	description: 'View information about gyms',
+	meta: help.get('commands_general', 'gyms').value,
 	cooldown: 5,
-//	execute(message, args) {
 	async execute(message, argv) {
 
 /**
@@ -17,18 +29,16 @@ module.exports = {
 	
 **/
 	
-//		(async () => {
-		//console.log('DOMAIN', domain)
+
 			let args = argv._
 			
-			//let request = {
-			//	args: args
-			//}
+			if(args.length == 0){
+				message.channel.send('Whoops. Enter a search to find a gym.')
+				return
+			}
 
-			//let response = await gyms.find(request)
 			let response = await gyms.find(args)
 			
-			//console.log(response)
 
 			if(response.rows.length == 0){
 				// send help card.
@@ -40,15 +50,12 @@ module.exports = {
 				
 				response.rows.forEach(function(element, index) {
 					if(index < 10) {
-//						gyms.push(`${index + 1}. [${element.name}](${domain}/gyms/${element.gymid}) (${element.uniqID}, ${element.gymid.toUpperCase()})`)
-
 						gyms.push(`${index + 1}. [${element.name}](${domain}/gyms/${element.gymid}) (${element.gymid.toUpperCase()})`)
 					}
 				})
 
 				const gembed = new Discord.MessageEmbed()
 				gembed.setColor('#0099ff')
-				//gembed.setAuthor('Hearty', `${domain}/images/icons/hearty.png`, `${domain}`)
 
 
 				// One Gym
@@ -182,7 +189,6 @@ module.exports = {
 			
 			} // IF FOUND
 
-//		})() // ASYNC
 
 	} // EXECUTE
 
