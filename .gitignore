@@ -3,7 +3,6 @@
 .nova
 .env
 .env_dev
-.jest.config.js
 /data/cache
 /data/private
 /jest

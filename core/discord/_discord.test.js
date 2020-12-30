@@ -19,6 +19,9 @@ const setThumbnail = require('./setThumbnail')
 // MOCK MESSAGE OBJECT
 const message = {
 	client: {},
+	channel: {
+		type: 'text'
+	},
 	member: {
 
 		roles: {
