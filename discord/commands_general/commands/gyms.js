@@ -13,8 +13,9 @@
  */
  
 const Discord = require('discord.js');
-const {gyms, help} = require('@core')
+const {gyms: gyms_core, help} = require('@core')
 const {domain} = require(`@config`)
+const {colors, emoji} = require(`@config`).discord
 
 module.exports = {
 	name: 'gyms',
@@ -22,173 +23,109 @@ module.exports = {
 	cooldown: 5,
 	async execute(message, argv) {
 
-/**
-	TODO
-	* Add spacing and bold stuff so cards will look better on mobile.
-	* Return message when there is no q. Currently, it's erroring in gyms.find()
-	
-**/
-	
+		let args = argv._
 
-			let args = argv._
-			
-			if(args.length == 0){
-				message.channel.send('Whoops. Enter a search to find a gym.')
-				return
+		// EMPTY ARGS
+		if(args.length == 0){
+			message.channel.send('Whoops. Enter a search to find a gym. Use `?gyms` for help.')
+			return
+		}
+
+		let response = await gyms_core.find(args)
+
+		// FOUND NONE
+		if(response.rows.length == 0){
+			// send help card.
+			message.channel.send('No gyms were found. Use `?gyms` for help.')
+			return
+		}
+
+		let gym = response.gym
+		let gyms = []
+
+		response.rows.forEach(function(element, index) {
+			if(index < 10) {
+				gyms.push(`${index + 1}. [${element.name}](${domain}/gyms/${element.gymid}) (${element.gymid.toUpperCase()})`)
+			}
+		})
+		gyms.push(`${emoji.spacer}`)
+
+		const embed = new Discord.MessageEmbed()
+		embed.setColor(colors.primary)
+
+		// One Gym
+		if(response.rows.length == 1) {
+	
+			const attachment = new Discord
+				.MessageAttachment(`./public/images/gyms/${gym.gymid}.jpeg`, `${gym.gymid}.jpeg`);
+	
+			embed.title = `**${gym.name}**`
+			embed.url = `${domain}/Gyms/${response.gym.gymid}`
+			embed.attachFiles(attachment)
+			embed.setThumbnail(`attachment://${gym.gymid}.jpeg`);
+
+			embed.addField(
+				`**Address/Directions:**`,
+				`[${gym.address}](https://www.google.com/maps/search/${encodeURIComponent(gym.coordinates)} 'Get Directions')`
+			)
+
+		} // IF ONE GYM
+
+
+		// Many Gyms
+		if(response.rows.length > 1 && !['by', 'in'].includes(response.method)) {
+
+			embed.title = `**Search for "${response.q}"**`
+			embed.url = `${domain}/Gyms/${response.q}`
+
+			if(response.rows.length <= 10) {
+				embed.addField(`Found ${response.rows.length} gyms matching "${response.q}"...`, gyms, true)
+			} else {
+				embed.addField(`**Showing 10 of ${response.rows.length} gyms:**`, gyms, false)
+				embed.addField(`**More:**`, `[See more on heartyjessman.com](${domain}/Gyms/${response.q})`)
 			}
 
-			let response = await gyms.find(args)
-			
+		}
 
-			if(response.rows.length == 0){
-				// send help card.
-				message.channel.send('No gyms were found.')
+		// BY GYM
+		if(response.method == 'by') {
+
+			if(response.gym) {
+				embed.title = `** ${response.gym.name}**`
+				embed.url = `${domain}/Gyms/${response.gym.gymid}`
+				embed.setThumbnail(`http://heartyjessman.com/images/gyms_by_id/${gym.gymid}.jpeg`)
+				embed.addField(
+					`**Address/Directions:**`,
+					`[${gym.address}](https://www.google.com/maps/search/${encodeURIComponent(gym.coordinates)} 'Get Directions')\n${emoji.spacer}`
+				)
+
 			} else {
+				embed.title = `**Gyms near "${response.q}"**`
+				embed.url = `${domain}/Gyms/${response.q}`
+			}
 
-				let gym = response.gym
-				let gyms = []
-				
-				response.rows.forEach(function(element, index) {
-					if(index < 10) {
-						gyms.push(`${index + 1}. [${element.name}](${domain}/gyms/${element.gymid}) (${element.gymid.toUpperCase()})`)
-					}
-				})
+			embed.addField('**Nearby Gyms**', gyms, true)		
 
-				const gembed = new Discord.MessageEmbed()
-				gembed.setColor('#0099ff')
+		} // BY GYM
 
+		// IN AREA
+		if(response.method == 'in') {
 
-				// One Gym
-				if(response.rows.length == 1) {
-				
-					/*
-					gembed.setAuthor(
-						`${gym.name}`,
-						`${domain}/images/icons/gym.png`, 
-						`${domain}/Gyms/${response.gym.gymid}`
-					)
-					*/
-					
-					const attachment = new Discord
-                      .MessageAttachment(`./public/images/gyms/${gym.gymid}.jpeg`, `${gym.gymid}.jpeg`);
+			embed.title = `**${gym.area} Gyms (${response.rows.length})**`
+			embed.url = `${domain}/Gyms/${gym.area_encoded}`
 
-					console.log('ATTACHMENT: ', attachment)
+			embed.setThumbnail(`${domain}/images/icons/gym.png`)
+		
+			if(response.rows.length <= 10) {
+				embed.addField(`Found ${response.rows.length} gyms:`, gyms, false)
+			} else {
+				embed.addField(`Showing 10 of ${response.rows.length} gyms:`, gyms, false)
+				embed.addField(`**More:**`, `[See more on heartyjessman.com](${domain}/Gyms/${gym.area_encoded})`)
+			}
 
-					gembed.title = gym.name
-					gembed.url = `${domain}/Gyms/${response.gym.gymid}`
-					
-					gembed.attachFiles(attachment)
-					
-					//gembed.setImage(`http://heartyjessman.com/images/gyms/${gym.area_encoded}/${gym.name_encoded}.jpeg`)
-					//gembed.setThumbnail(`http://heartyjessman.com/images/gyms/${gym.area_encoded}/${gym.name_encoded}.jpeg`)
-			//		gembed.setThumbnail(`http://heartyjessman.com/images/gyms_by_id/${gym.gymid}.jpeg`)
-//					gembed.setThumbnail(`${domain}/images/gyms/${gym.gymid}.jpeg`)
-					//gembed.setImage(`${domain}/images/gyms/${gym.gymid}.jpeg`)
-					
-					gembed.setThumbnail(`attachment://${gym.gymid}.jpeg`);
-				//	gembed.setImage(`attachment://${gym.gymid}.jpeg`);
+		}
 
-					gembed.addField(
-						`Address/Directions:`,
-						`[${gym.address}](https://www.google.com/maps/search/${encodeURIComponent(gym.coordinates)} 'Get Directions')`
-					)
-				}
-
-				
-				// Many Gyms
-				if(response.rows.length > 1 && !['by', 'in'].includes(response.method)) {
-
-					/*
-					gembed.setAuthor(
-						`Search for "${response.q}"`,
-						`${domain}/images/icons/gym.png`, 
-						`${domain}/Gyms/${response.q}`
-					)
-					*/
-					
-					gembed.title = `Search for "${response.q}"`
-					gembed.url = `${domain}/Gyms/${response.q}`
-					
-										
-					if(response.rows.length <= 10) {
-						gembed.addField(`Found ${response.rows.length} gyms matching "${response.q}"...`, gyms, true)
-					} else {
-						gembed.addField(`Showing 10 of ${response.rows.length} gyms:`, gyms, false)
-						gembed.addField(`More:`, `[See more on heartyjessman.com](${domain}/Gyms/${response.q})`)
-					}
-
-				}
-
-
-				// BY GYM
-				if(response.method == 'by') {
-				
-					if(response.gym) {
-						/*
-						gembed.setAuthor(
-							`Gyms near "${response.gym.name}"`,
-							`${domain}/images/icons/gym.png`, 
-							`${domain}/Gyms/${response.gym.gymid}`
-						)
-						*/
-//						gembed.title = `Gyms near "${response.gym.name}"`
-						gembed.title = response.gym.name
-						gembed.url = `${domain}/Gyms/${response.gym.gymid}`
-						gembed.setThumbnail(`http://heartyjessman.com/images/gyms_by_id/${gym.gymid}.jpeg`)
-						gembed.addField(
-							`Address/Directions:`,
-							`[${gym.address}](https://www.google.com/maps/search/${encodeURIComponent(gym.coordinates)} 'Get Directions')`
-						)
-
-					} else {
-						/*
-						gembed.setAuthor(
-							`Gyms near "${response.q}"`,
-							`${domain}/images/icons/gym.png`, 
-							`${domain}/Gyms/${response.q}`
-						)
-						*/
-						gembed.title = `Gyms near "${response.q}"`
-						gembed.url = `${domain}/Gyms/${response.q}`
-					}
-				
-					gembed.addField('Nearby Gyms', gyms, true)		
-
-				}
-
-
-				// IN AREA
-				if(response.method == 'in') {
-				
-					/*
-					gembed.setAuthor(
-						`${gym.area} Gyms (${response.rows.length})`,
-						`${domain}/images/icons/gym.png`, 
-						`${domain}/Gyms/${gym.area_encoded}`
-					)
-					*/
-					
-					
-					gembed.title = `${gym.area} Gyms (${response.rows.length})`
-					gembed.url = `${domain}/Gyms/${gym.area_encoded}`
-
-					gembed.setThumbnail(`${domain}/images/icons/gym.png`)
-				
-					if(response.rows.length <= 10) {
-						gembed.addField(`Found ${response.rows.length} gyms:`, gyms, false)
-					} else {
-						gembed.addField(`Showing 10 of ${response.rows.length} gyms:`, gyms, false)
-						gembed.addField(`More:`, `[See more on heartyjessman.com](${domain}/Gyms/${gym.area_encoded})`)
-					}
-
-				}
-			
-				console.log(gembed)
-			
-				message.channel.send(gembed);
-			
-			} // IF FOUND
-
+		message.channel.send(embed);
 
 	} // EXECUTE
 

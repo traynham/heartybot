@@ -23,7 +23,6 @@ const message = {
 		type: 'text'
 	},
 	member: {
-
 		roles: {
 			cache: [
 				{name: 'admin'},
