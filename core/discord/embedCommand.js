@@ -157,7 +157,7 @@ module.exports = (message, args, command_set) => {
 		data.push('Use `?[command name]` for more details, for example, `?boss`.\n');
 
 		commands.map(command => {
-			data.push(`**${command.name}**: ${command.synopsis}`)
+			data.push(`**${command.name}**: ${command.meta ? command.meta.synopsis : ''}`)
 		})
 
 		embed.setDescription(data)
