@@ -28,6 +28,7 @@ module.exports = (action) => {
 	}
 
 	let actions = [
+		{ name: 'card', value: 'show_card' },
 		{ name: 'cd', value: 'cd' },
 		{ name: 'code', value: 'code' },
 		{ name: 'community day', value: 'cd' },
@@ -35,9 +36,15 @@ module.exports = (action) => {
 		{ name: 'level', value: 'level' },
 		{ name: 'lvl', value: 'level' },
 		{ name: 'privacy', value: 'privacy' },
+		{ name: 'pri', value: 'privacy' },
+		{ name: 'priv', value: 'privacy' },
 		{ name: 'private', value: 'privacy' },
+		{ name: 'pvt', value: 'privacy' },
 		{ name: 'show', value: 'show' },
 		{ name: 'started', value: 'started' },
+		{ name: 'start', value: 'started' },
+		{ name: 'tea', value: 'team' },
+		{ name: 'tm', value: 'team' },
 		{ name: 'team', value: 'team' }
 	]
 

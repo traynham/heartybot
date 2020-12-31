@@ -24,7 +24,7 @@ module.exports = (client, message) => {
 	const command = (
 		client.commands.get(commandName) || 
 		client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) ||
-		client.commands.find(cmd => cmd.meta.aliases && cmd.meta.aliases.includes(commandName))
+		client.commands.find(cmd => cmd.meta && cmd.meta.aliases && cmd.meta.aliases.includes(commandName))
 	)
 	
 	if (!command) return;

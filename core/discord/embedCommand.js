@@ -94,7 +94,7 @@ module.exports = (message, args, command_set) => {
 			}
 
 			if(action.syntax){
-				embed.addField('**Sytax**', '`' + action.syntax + '`' + `\n${emoji.spacer}`)
+				embed.addField('**Syntax**', '`' + action.syntax + '`' + `\n${emoji.spacer}`)
 			}
 
 			if(action.examples){
@@ -102,6 +102,10 @@ module.exports = (message, args, command_set) => {
 					return	`_${entry[0]}_\n` + emoji.blank + '`' + entry[1] + '`' + `\n${emoji.spacer}`
 				})	
 				embed.addField('**Examples**', examples)
+			}
+			
+			if(action.values){
+				embed.addField('**Possible Values**', action.values)
 			}
 
 			if(help.show_help_footer){embed.setFooter(help_footer)}
