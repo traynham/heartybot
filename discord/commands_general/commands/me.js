@@ -62,7 +62,7 @@ module.exports = {
 		}
 
 		if(!action){
-
+// REDO THIS WITH SEARCHING THROUGH META FOR NAME AND ALIASES.
 			// DETECT ACTION
 			let detectAction = await detect.action(args)
 
