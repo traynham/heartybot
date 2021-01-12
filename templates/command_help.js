@@ -14,6 +14,7 @@ module.exports = {
 										['Basic use:', `${p}command`],
 										['Use an action:', `${p}command action`]
 									],
+	show_help_footer:			true,
 
 	// ACTIONS
 	actions: [ // An array of actions.
