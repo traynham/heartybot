@@ -3,6 +3,7 @@ module.exports = {
 	// GENERAL
 	token: process.env.discord_token,
 	prefix: process.env.discord_prefix,
+	prefix_help: process.env.discord_prefix_help,
 	
 	// SYNTAX TOKENS
 	syntax_required: ['[', ']'],
