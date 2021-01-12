@@ -10,6 +10,10 @@ module.exports = {
 	aliases:						['pokemon', 'mon', 'dex'], // Array of aliases.
 	dm:							true, // Command can be used in a DM with bot.
 	revision:					'01-11-21', // Updated date.
+	usage: 						[ // Array of arrays. Inner arrays are [description, code]
+										['Basic use:', `${p}command`],
+										['Use an action:', `${p}command action`]
+									],
 
 	// ACTIONS
 	actions: [ // An array of actions.

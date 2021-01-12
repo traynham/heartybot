@@ -98,8 +98,9 @@ module.exports = (message, args, command_set) => {
 			}
 
 			if(action.examples){
-				let examples = Object.entries(action.examples).map(entry => {
-					return	`_${entry[0]}_\n` + emoji.blank + '`' + entry[1] + '`' + `\n${emoji.spacer}`
+				let examples = action.examples.map(entry => {
+					let [description, code] = entry
+					return	`_${description}_\n` + emoji.blank + '`' + code + '`' + `\n${emoji.spacer}`
 				})	
 				embed.addField('**Examples**', examples)
 			}
@@ -140,9 +141,9 @@ module.exports = (message, args, command_set) => {
 			if(help.syntax) embed.addField('**Syntax**', '`' + help.syntax + '`' + `\n${emoji.spacer}`)
 
 			if(help.usage){
-				let usage = Object.entries(help.usage).map(entry => {
-					//return	`_${entry[0]}_\n` + emoji.blank + '`' + entry[1] + '`' + `\n${emoji.spacer}`
-					return	`_${entry[0]}_\n` + '`' + entry[1] + '`' + `\n${emoji.spacer}`
+				let usage = help.usage.map(entry => {
+					let [description, code] = entry
+					return	`_${description}_\n` + '`' + code + '`' + `\n${emoji.spacer}`
 				})	
 				embed.addField('**Usage**', usage)
 			}
