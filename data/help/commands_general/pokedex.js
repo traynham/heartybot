@@ -9,7 +9,7 @@ module.exports = {
 	syntax:						`${p}pokedex ${sr[0]}pokemon${sr[1]}`,
 	aliases:						['pokemon', 'mon', 'dex'],
 	dm:							true,
-	revision:					'01-11-21',
+	revision:					'01-12-21',
 
 	// ACTIONS
 	actions: [
@@ -21,11 +21,11 @@ module.exports = {
 			description:		'Show Help',
 			default:				true,
 			syntax:				`${p}pokedex ${sr[0]}help${sr[1]} ${so[0]}action${so[1]}`,
-			examples:			{
-										"Show pokedex help.": `${p}pokedex help`,
-										"Show pokemon action help.": `${p}pokedex help pokemon`,
-										"Show dex help.": `?dex`
-									}
+			examples:			[
+										["Show pokedex help.", `${p}pokedex help`],
+										["Show pokemon action help.", `${p}pokedex help pokemon`],
+										["Show dex help.", `?dex`]
+									]
 		},
 
 		// Pokemon
@@ -35,10 +35,10 @@ module.exports = {
 			synopsis:			'View pokemon card',
 			syntax:				`${p}pokedex ${sr[0]}pokemon${sr[1]}`,
 			description:		'This action will display a pokemon card with vital information.',
-			examples:			{
-										"Show Pikachu card.": `${p}pokedex pikachu`,
-										"Show Aerodactyl card.": `${p}dex aer`
-									}
+			examples:			[
+										["Show Pikachu card.", `${p}pokedex pikachu`],
+										["Show Aerodactyl card.", `${p}dex aer`]
+									]
 		}
 
 	] // ACTIONS

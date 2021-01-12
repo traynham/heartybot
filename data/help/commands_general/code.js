@@ -9,7 +9,7 @@ module.exports = {
 	syntax:						`${p}code ${so[0]}@mention|code${so[1]}`,
 	aliases:						['cd'],
 	dm:							true,
-	revision:					'12-28-20',
+	revision:					'01-12-21',
 
 	// ACTIONS
 	actions: [
@@ -19,10 +19,10 @@ module.exports = {
 			name:					'code',
 			synopsis:			'Display a code card by passing a trainer code.',
 			description:		`This action allows you to display a code card for a trainer code, even if it is not in the system.`,
-			examples: 			{
-										'Show code card for "1234 5678 9012".': `${p}code 1234 5678 9012`,
-										'Show code card for "123456789012".': `${p}code 123456789012`
-									},
+			examples: 			[
+										['Show code card for "1234 5678 9012".', `${p}code 1234 5678 9012`],
+										['Show code card for "123456789012".', `${p}code 123456789012`]
+									],
 			required:			true,
 			syntax:				`${p}code ${sr[0]}code${sr[1]}`
 		},
@@ -33,9 +33,9 @@ module.exports = {
 			synopsis:			'View a code card by mentioning a discord member.',
 			syntax:				`${p}code ${sr[0]}@mention${sr[1]}`,
 			description:		'This action allows you to look up a trainer code and qrcode by mentioning them.',
-			examples:			{
-										"Show heartyjessman's code card.": `${p}code @heartyjessman`
-									}
+			examples:			[
+										["Show heartyjessman's code card.", `${p}code @heartyjessman`]
+									]
 
 		},
 		
@@ -46,9 +46,10 @@ module.exports = {
 			synopsis:			'View your trainer code card.',
 			description:		'This action allows you to show your trainer code card.',
 			syntax:				`${p}code ${sr[0]}show${sr[1]}`,
-			examples:			{
-										'Show your card': `${p}code show`
-									}
+			examples:			[
+										['Show your card', `${p}code`],
+										['Show your card', `${p}code show`]
+									]
 		}
 
 	] // ACTIONS

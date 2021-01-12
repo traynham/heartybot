@@ -1,13 +1,14 @@
 const Discord = require('discord.js');
 
-const {discord, pokedex, util} = require(`@core`)
+const {discord, help, pokedex, util} = require(`@core`)
 const {colors, emoji} = require(`@config`).discord
 const config = require(`@config`)
 
 module.exports = {
 	name: 'types',
-	aliases: ['type', 't'],
-	description: 'Get Pokemon Type Infos',
+	meta: help.get('commands_general', 'types').value,
+	//aliases: ['type', 't'],
+	//description: 'Get Pokemon Type Infos',
 	cooldown: 5,
 //	execute(message, args) {
 	async execute(message, argv) {

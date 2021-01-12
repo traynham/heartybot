@@ -9,20 +9,8 @@ module.exports = {
 	synopsis:				'Search gyms',
 	description:			'Search and display gym information.',
 	syntax:					`${p}gyms ${sr[0]}search${sr[1]}`,
-	alias:					[`${p}g`, `${p}gym`],
 	dm:						true,
-	revision:				'12-30-20',
-
-
-	//DEFAULT ACTION
-	default: {
-		synopsis:			'Returns error',
-		description:		'This command will return an error when no action is specified because a search term is required.',
-		examples:			[
-									{code: `${p}gyms`},
-									{code: `${p}g`}
-								]
-	},
+	revision:				'01-12-21',
 
 	// ACTIONS
 	actions: [
@@ -30,11 +18,12 @@ module.exports = {
 		// HELP
 		{
 			name:				'help',
+			default:			true,
 			synopsis:		'Show Help',
 			description:	'Show Help',
-			examples:		{
-									'Show gym help': `${p}gyms help`
-								}
+			examples:		[
+									['Show gym help', `${p}gyms help`]
+								]
 		},
 
 		// SEARCH
@@ -44,10 +33,10 @@ module.exports = {
 			description:	'Search criteria to find gym.',
 			syntax:			`${p}gyms ${sr[0]}search${sr[1]}`,
 			tip:				'For most gyms you can also use an acronym.',
-			examples: 		{
-									'Brian Schwengler Memorial Park': `${p}gyms brian`,
-									'Pioneer Country Water Tower': `${p}gyms pcwt`
-								}
+			examples: 		[
+									['Brian Schwengler Memorial Park', `${p}gyms brian`],
+									['Pioneer Country Water Tower', `${p}gyms pcwt`]
+								]
 		},
 		
 		// By
@@ -58,10 +47,10 @@ module.exports = {
 			description:	'List gyms close to a gym or coordinates.',
 			syntax:			`${p}gyms ${sr[0]}by${sr[1]} ${sr[0]}search${sr[1]}`,
 			tip:				'For most gyms you can also use an acronym.',
-			examples: 		{
-									'Show gyms near the "Frog" gym.': `${p}gyms by frog`,
-									'Show gyms near "33.05442455967762, -97.46975223981603".': `${p}gyms by 33.05442455967762, -97.46975223981603`
-								}
+			examples: 		[
+									['Show gyms near the "Frog" gym.', `${p}gyms by frog`],
+									['Show gyms near "33.05442455967762, -97.46975223981603".', `${p}gyms by 33.05442455967762, -97.46975223981603`]
+								]
 		},
 		
 		// In
@@ -72,10 +61,10 @@ module.exports = {
 			description:	'List gyms in an area.',
 			syntax:			`${p}gyms ${sr[0]}in${sr[1]} ${sr[0]}search${sr[1]}`,
 			tip:				'For most gyms you can also use an acronym.',
-			examples: 		{
-									'Show gyms in "Hastlet" gym.': `${p}gyms in Haslet`,
-									'Show gyms in "32.829658908183106, -97.39242177812784".': `${p}gyms in 32.829658908183106, -97.39242177812784`
-								}
+			examples: 		[
+									['Show gyms in "Hastlet" gym.', `${p}gyms in Haslet`],
+									['Show gyms in "32.829658908183106, -97.39242177812784".', `${p}gyms in 32.829658908183106, -97.39242177812784`]
+								]
 		}
 
 	]
