@@ -1,13 +1,11 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js')
 
-const {discord, pokedex} = require(`@core`)
+const {discord, help} = require(`@core`)
 const {colors} = require(`@config`).discord
 
 module.exports = {
 	name: 'pokedex',
-	aliases: ['pokemon', 'mon', 'dex'],
-	actions_su: ['update'],
-	description: 'Get Pokemon Infos',
+	meta: help.get('commands_general', 'pokedex').value,
 	cooldown: 5,
 	execute(message, argv) {
 	
@@ -16,23 +14,16 @@ module.exports = {
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
 		
-		// EXIT EARLY IF ADMIN ACTION ATTEMPT BY NON-ADMIN.
-		if(this.actions_su.includes(args[0]) && !discord.hasRole(message, 'su')){			
-			embed.setColor(colors.error)
-			embed.setDescription('Sorry, this action requires a su account.')
-			message.channel.send(embed)
+		console.log(argv)
+		
+		//IF NO PARAM, SHOW HELP.
+		if(args.length == 0){
+			
+			argv._.push('pokedex')
+			const help_command = message.client.commands.find(cmd => cmd.name =='commands')
+			help_command.execute(message, argv)
 			return
 		}
-		
-		// ACTION: UPDATE
-		if(args[0] === 'update'){
-			pokedex.update()
-			embed.setColor(colors.success)
-			embed.setDescription('Pokedex was updated. I mean it probably was anyway. You should probably double check.')
-			message.channel.send(embed)
-			return
-		}
-		
 	
 		// SEND POKEMON EMBED
 		discord.embedPokemon(embed, args)

@@ -3,53 +3,44 @@ const {prefix: p, syntax_optional: so, syntax_required: sr} = require('@config')
 module.exports = {
 
 	// GENERAL
-	name:						'pokedex',
-	synopsis:					'View pokemon cards',
-	description:				'View pokemon cards',
-	syntax:						`${p}pokedex ${so[0]}pokemon${so[1]}`,
-	alias:						[`${p}dex`],
+	name:							'pokedex',
+	synopsis:					'View pokemon card',
+	description:				'View pokemon card',
+	syntax:						`${p}pokedex ${sr[0]}pokemon${sr[1]}`,
+	aliases:						['pokemon', 'mon', 'dex'],
 	dm:							true,
-	availability:				['PogoNWFortWorth', 'Pogo Barn'],
-	revision:					'09-02-20',
-
-	//DEFAULT ACTION
-	default: {
-		description_short:		'bogus string in pokedex.js help.',
-		synopsis:				'Displays usage.',
-		description:			'Displays usage.',
-		examples:				[
-									{code: `${p}pokedex`}
-								]
-	},
+	revision:					'01-11-21',
 
 	// ACTIONS
-	actions: {
+	actions: [
 
 		// HELP
-		help: {
-			name:				'help',
+		{
+			name:					'help',
 			synopsis:			'Show Help',
 			description:		'Show Help',
+			default:				true,
 			syntax:				`${p}pokedex ${sr[0]}help${sr[1]} ${so[0]}action${so[1]}`,
-			examples:			[
-									{code: `${p}pokedex help`, description: "Show pokedex help."},
-									{code: `${p}pokedex help pokemon`, description: "Show pokemon action help."},
-									{code: `${p}dex help`, description: "Show pokedex help."}
-								]
+			examples:			{
+										"Show pokedex help.": `${p}pokedex help`,
+										"Show pokemon action help.": `${p}pokedex help pokemon`,
+										"Show dex help.": `?dex`
+									}
 		},
 
 		// Pokemon
-		pokemon: {
-			name:				'Pokemon',
+		{
+			name:					'pokemon',
+			aliases:				['poke', 'mon'],
 			synopsis:			'View pokemon card',
 			syntax:				`${p}pokedex ${sr[0]}pokemon${sr[1]}`,
 			description:		'This action will display a pokemon card with vital information.',
-			examples:			[
-									{code: `${p}pokedex pikachu`, description: "Show Pikachu card."},
-									{code: `${p}dex aer`, description: "Show Aerodactyl card."}
-								]
+			examples:			{
+										"Show Pikachu card.": `${p}pokedex pikachu`,
+										"Show Aerodactyl card.": `${p}dex aer`
+									}
 		}
 
-	} // ACTIONS
+	] // ACTIONS
 
 }
