@@ -1,0 +1,7 @@
+# DISCORD
+discord_token=my-long-discord-token
+discord_prefix=!
+discord_prefix_help=?
+
+# WEBSITE
+web_uri=https://www.heartyjessman.com
