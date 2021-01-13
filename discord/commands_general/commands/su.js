@@ -1,14 +1,17 @@
 const Discord = require('discord.js');
 
-const {discord, pokedex, util} = require(`@core`)
+const {discord, help, pokedex, util} = require(`@core`)
 const {colors} = require(`@config`).discord
 
 module.exports = {
 	name: 'su',
-	aliases: ['admin'],
-	description: 'Get Pokemon Infos',
+	meta: help.get('commands_general', 'su').value,
+//	aliases: ['admin'],
+	//description: 'Get Pokemon Infos',
 	cooldown: 5,
 	execute(message, argv) {
+		
+		console.log(this.meta)
 	
 		let args = argv._
 		
@@ -22,6 +25,10 @@ module.exports = {
 			message.channel.send(embed)
 			return
 		}
+
+// CHANGE: Make "update" an action and "pokedex" and "bosses" the possible values.
+// CREATE: Make a `!help command actions` embed to display actions for a given command.
+//         Then use `!help su actions` as the default action.
 
 		// SHOW HELP
 		if(argv.h || args.length == 0){

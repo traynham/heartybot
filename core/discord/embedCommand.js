@@ -54,7 +54,6 @@ module.exports = (message, args, command_set) => {
 		commands.find(cmd => cmd.meta && cmd.meta.aliases && cmd.meta.aliases.includes(commandName))
 	)
 
-	//if(command) help = command.help
 	if(command) help = command.meta
 
 	// IF COMMAND IS NOT FOUND, BUT REQUESTED.
@@ -116,6 +115,13 @@ module.exports = (message, args, command_set) => {
 	
 	// COMMAND DETAIL
 	if(args.length > 0 && help){
+		
+		// ROLE PERMISSION CHECK.
+		if(help.roles && !user_roles.includes(help.roles[0])){
+			embed.setTitle(`HELP › **ERROR**`)
+			embed.setDescription('Sorry, you do not have permission to use this command.')
+			return payload
+		}
 
 		embed.setTitle(`HELP › **${help.name}**`)
 		embed.setDescription(`${help.description}\n${emoji.spacer}`)
@@ -163,9 +169,18 @@ module.exports = (message, args, command_set) => {
 	const data = []
 	
 	data.push('Use `?[command name]` for more details, for example, `?boss`.\n');
+	
+	commands.forEach(command => {
+		
+		let hasRoleRequirement = command.meta && command.meta.roles
 
-	commands.map(command => {
-		data.push(`**${command.name}**: ${command.meta ? command.meta.synopsis : ''}`)
+		if(
+			(hasRoleRequirement && user_roles.includes(command.meta.roles[0])) ||
+			!hasRoleRequirement
+		){
+			data.push(`**${command.name}**: ${command.meta ? command.meta.synopsis : ''}`)
+		}
+
 	})
 
 	embed.setDescription(data)
