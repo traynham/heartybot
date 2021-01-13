@@ -3,7 +3,7 @@ module.exports = (client, message) => {
 	const { prefix } = client.config
 
 	var argv = require('yargs-parser')(message.content, {
-		boolean: ['d', 'h', 's', 'v', 'debug', 'help'],
+		boolean: ['d', 'h', 's', 'u', 'v', 'debug', 'help'],
 		configuration: {
 			'short-option-groups': true
 		}
@@ -60,6 +60,9 @@ module.exports = (client, message) => {
 		}
 	}
 */
+
+	// DO ROLE CHECKS HERE BEFORE EXECUTING
+	
 	try {
 		command.execute(message, argv)
 	} catch (error) {

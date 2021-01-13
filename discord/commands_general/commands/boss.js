@@ -42,7 +42,7 @@ module.exports = {
 		)
 
 		// EXIT EARLY IF USER DOES NOT MEET ROLE REQUIREMENTS.
-		if(action.roles && !discord.hasRole(message, action.roles[0])){
+		if(action && action.roles && !discord.hasRole(message, action.roles[0])){
 			embed.setColor(colors.error)
 			embed.setDescription('Sorry, this action requires an admin account.')
 			message.channel.send(embed)

@@ -30,7 +30,8 @@ module.exports = {
 										["Show command help.", `?command`],
 										["Show command help.", `${p}command help`],
 										["Show command action help.", `${p}command help pokemon`]
-									]
+									],
+			values:				['one', 'two', 'three']
 		},
 
 		// Action1
@@ -43,7 +44,8 @@ module.exports = {
 			examples:			[ // Array of arrays. Inner arrays are [description, code]
 										["Show Pikachu card.", `${p}pokedex pikachu`],
 										["Show Aerodactyl card.", `${p}dex aer`]
-									]
+									],
+			values:				['one', 'two', 'three']
 		}
 
 	] // ACTIONS

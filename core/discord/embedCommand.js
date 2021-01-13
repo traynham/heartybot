@@ -126,7 +126,9 @@ module.exports = (message, args, command_set) => {
 		embed.setTitle(`HELP › **${help.name}**`)
 		embed.setDescription(`${help.description}\n${emoji.spacer}`)
 
-		if(help.aliases) embed.addField('**Aliases**', help.aliases.join(', ') + `\n${emoji.spacer}\n`)
+		if(help.aliases && help.aliases.length){
+			embed.addField('**Aliases**', help.aliases.join(', ') + `\n${emoji.spacer}\n`)
+		} 
 
 		if(help.actions.length > 0) {
 
@@ -134,12 +136,16 @@ module.exports = (message, args, command_set) => {
 
 			help.actions.forEach(action => {
 				if(action.roles && !user_roles.includes(action.roles[0])) { return }
-				actions.push(action.name + (action.default ? ' (Default)' : ''))
+				actions.push(
+					//action.name + (
+				//	action.default ? ' (Default)' : '') + `: ${action.synopsis}`
+					`_**${action.name} ${action.default ? '(Default)' : ''}**_: ${action.synopsis}`
+				)
 			})
 
 			embed.addField(
 				'**Actions**', 
-				actions.join(', ') + '\n\nUse `?' + help.name + ' [action]` for addtional help.\n' + emoji.spacer
+				actions.join('\n') + '\n\nUse `?' + help.name + ' [action]` for addtional help.\n' + emoji.spacer
 			)
 
 		}
