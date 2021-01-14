@@ -1,6 +1,6 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js')
 
-const {discord, help, pokedex, util} = require(`@core`)
+const {help, pokedex, util} = require(`@core`)
 const {colors} = require(`@config`).discord
 
 module.exports = {
@@ -12,15 +12,6 @@ module.exports = {
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
-
-		// EXIT EARLY IF ATTEMPTED BY NON-SU ACCOUNT.
-		// MOVE THIS FUNCTIONALITY TO INDEX.JS?
-		if(!discord.hasRole(message, 'su')){			
-			embed.setColor(colors.error)
-			embed.setDescription('Sorry, this command is only for Super Users.')
-			message.channel.send(embed)
-			return
-		}
 
 		//IF NO PARAM, SHOW HELP.
 		if(args.length == 0){
@@ -54,14 +45,12 @@ module.exports = {
 			if(valueDesired === 'bosses'){
 				util.update_bosses()
 				embed.setDescription('Bosses were updated.')
-				console.log('update bosses')
 			}
 
 			if(valueDesired === 'pokedex'){
 				pokedex.update()
 				embed.setDescription('Pokedex was updated.')
-					console.log('update pokedex')
-				}
+			}
 
 			message.channel.send(embed)
 			return
