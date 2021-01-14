@@ -34,7 +34,7 @@ module.exports = (client, message) => {
 	// https://discordjs.guide/command-handling/adding-features.html#cooldowns
 
 	// ROLE CHECK. CURRENT ONLY SUPPORTS ONE ROLE.	
-	if(command.meta.roles && !discord.hasRole(message, command.meta.roles[0])) {
+	if(command.meta && command.meta.roles && !discord.hasRole(message, command.meta.roles[0])) {
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.error)
 		embed.setDescription('Sorry, you do not have permission to use this command.')
