@@ -51,7 +51,7 @@ module.exports = {
 
 		// Type
 		{
-			name:				'type',
+			name:				'[type]',
 			synopsis:		'View pokemon type card',
 			syntax:			`${p}types ${sr[0]}type${sr[1]}`,
 			description:	'This action will display a type card.',
