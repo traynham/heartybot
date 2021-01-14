@@ -9,7 +9,8 @@ module.exports = {
 	syntax:						`${p}command ${sr[0]}action${sr[1]}`, // Basic syntax example.
 	aliases:						['pokemon', 'mon', 'dex'], // Array of aliases.
 	dm:							true, // Command can be used in a DM with bot.
-	revision:					'01-11-21', // Updated date.
+	revision:					'01-13-21', // Updated date.
+	roles:						['su'],
 	usage: 						[ // Array of arrays. Inner arrays are [description, code]
 										['Basic use:', `${p}command`],
 										['Use an action:', `${p}command action`]
@@ -45,6 +46,7 @@ module.exports = {
 										["Show Pikachu card.", `${p}pokedex pikachu`],
 										["Show Aerodactyl card.", `${p}dex aer`]
 									],
+			roles:				['admin'],
 			values:				['one', 'two', 'three']
 		}
 
