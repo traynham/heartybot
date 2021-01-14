@@ -1,29 +1,34 @@
 const Discord = require('discord.js');
 const {colors} = require(`@config`).discord
+const bosses = require('@models_lowdb/bosses.js').bosses()
 
 module.exports = (payload) => {
 	
 	const lowdb_raids = require('@models_lowdb/raids.js')
 	const {discord} = require(`@core`)
 	const gather = require('./gather')
-	
+		
 	// MISSING BOSS
 	if(!payload.pokemon){
-		// INCLUDE BOSS LIST HERE.
+
+		const bosses_list = bosses.tiers.map(tier => {
+			return `**${tier.name}:** ${tier.value.join(', ')}`
+		})
+
 		gather({
 			title: 'Boss',
-			description: 'Enter a boss name and submit.',
+			description: `Enter a boss name and submit.\n\n${bosses_list.join('\n')}`,
 			payload: payload
 		}, function(term){
 			payload.pokemon = discord.parseRaid.extract_boss({value: term})		// TRY BOSS
 		})
-		
+
 		return true
 	}
 	
 	// TO MANY BOSSES
 	if(Array.isArray(payload.pokemon.value)){
-				
+
 		let values = payload.pokemon.value.map((value, i) => `${i + 1}. ${value}` )
 		
 		gather({
@@ -33,13 +38,13 @@ module.exports = (payload) => {
 		}, function(index){
 			payload.pokemon.value = payload.pokemon.value[index - 1]
 		})
-		
+
 		return true
 	}
 	
 	// MISSING TIME
 	if(!payload.time){
-		
+
 		gather({
 			title: 'Time/Duration',
 			description: 'Enter a time and submit.',
@@ -48,13 +53,13 @@ module.exports = (payload) => {
 			payload.time = discord.parseRaid.extract_time({value: time})
 			if(!payload.time){ payload.time = discord.parseRaid.extract_duration({value: time}) }
 		})
-		
+
 		return true
 	}
 	
 	// MISSING GYM
 	if(!payload.gym){
-		
+
 		gather({
 			title: 'No gym found.',
 			description: `I could not find the gym you are looking for. Enter a search for a gym and submit.`,
@@ -62,13 +67,13 @@ module.exports = (payload) => {
 		}, async function(term){
 			payload.gym = await discord.parseRaid.extract_gym({value: term})	// TRY GYM
 		})
-		
+	
 		return true
 	}
 
 	// TO MANY GYMS
 	if(payload.gym.rows.length > 1 && !payload.gym_found){
-		
+
 		let values = payload.gym.rows.map((value, i) => `${i + 1}. ${value.name}` )
 	
 		gather({
@@ -79,15 +84,14 @@ module.exports = (payload) => {
 			payload.gym.gym = payload.gym.rows[index - 1]
 			payload.gym_found = true
 		})
-		
+
 		return true
-		
+
 	}
 	
 	// check for multiple bosses and gyms.
 
 	// ADD RAID
-	//let addRaid = lowdb_raids.addRaid({
 	let raids_add = lowdb_raids.raids_add({
 		asset: payload.pokemon.asset,
 		boss: payload.pokemon.value,
@@ -98,7 +102,6 @@ module.exports = (payload) => {
 	})
 
 	// CHECK RAID EXISTENCE
-	//if (addRaid.error) {
 	if (raids_add.error) {
 		console.log('raid already exists, create embed response')
 		
@@ -114,12 +117,11 @@ module.exports = (payload) => {
 		topic: 'This is the topic',
 		parent: payload.message.channel.parent
 	}).then(channel => {
-		
-		let setRaidChannel = //lowdb_raids.updateRaid(payload.gym.gym.name,'channel', channel.id)
-		lowdb_raids.raids_update(payload.gym.gym.name,'channel', channel.id)
-		
+
+		let setRaidChannel = lowdb_raids.raids_update(payload.gym.gym.name,'channel', channel.id)
+
 		console.log(setRaidChannel)
-			
+
 	}).catch(error => { console.log('ERROR CREATING RAID CHANNEL:', error)})
 
 }
