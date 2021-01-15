@@ -43,6 +43,18 @@ module.exports = {
 										["List raids.", `${p}r`]
 									]
 		},
+		
+		// List
+		{
+			name:					'new',
+			synopsis:			'Report new raids',
+			description:		'Report a new raid by responding to prompts.',
+			syntax:				`${p}raid ${sr[0]}new${sr[1]}`,
+			examples:			[
+										["Report raid.", `${p}raid new`],
+										["Report raid alternate.", `${p}r new`]
+									]
+		},
 
 		// Report
 		{
@@ -56,6 +68,7 @@ module.exports = {
 		}
 
 		// ADD ADMIN OR SU COMMANDS TO REMOVE A RAID? BETTER TO PUT IN RAID CHANNEL?
+		// ADD WEB COMMAND TO REPORT RAID VIA WEB INTERFACE.
 
 	] // ACTIONS
 

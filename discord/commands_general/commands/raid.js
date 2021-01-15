@@ -1,6 +1,6 @@
 const {discord, help} = require(`@core`)
-const debug = require('./raid_core/debug')
 const dispatcher = require('./raid_core/dispatcher')
+const payload_obj = require('@core/util/payload')
 
 module.exports = {
 	name: 'raid',
@@ -8,56 +8,43 @@ module.exports = {
 	cooldown: 5,
 	async execute(message, argv) {
 	
-		console.log('-----------------------------------')
-	
-		let args = argv._
-		
-		// IGNORE LIST AND LS COMMAND AS IT IS DEFAULT.
-		if(['list', 'ls'].includes(args[0])){
-			args.shift()
+		let payload = {
+			...payload_obj(), 
+			...{pokemon: null, time: null, gym: null, message: message}
 		}
+		let args = argv._
+		let q = {value: args.join(' ')} // MUTABLE
 
-		if(args.length == 0){
-			//console.log('Product raid report.')
+		// LIST
+		if(args.length == 0 || ['list', 'ls'].includes(args[0])){
 			require('./raid_core/list')(message)
 			return
 		}
 
-		let args_string = args.join(' ')
-
-		//let q = {value: args.join(' '), debug: []} // MUTABLE
-		let q = {value: args.join(' ')} // MUTABLE
-
-		var payload = {
-			pokemon: null,
-			time: null,
-			gym: null,
-			message: message
-		}
-
-		if(args_string == 'new'){
+		// NEW
+		if(args[0] == 'new'){
 			console.log('this is a "new" request')
 			dispatcher(payload)
-			// NEED RETURN HERE?
+			return
+		}
+		
+		// WEB
+		if(args[0] == 'web'){
+			console.log('this is a "web" request')
+			// NEED TO CREATE AN EMBED THAT SHOWS A LINK TO CLICK ON TO FINISH THE PROCESS.
+			return
 		}
 
-		if(args_string != 'new'){
-			payload.time = discord.parseRaid.extract_time(q)		// TRY TIME
-			payload.pokemon = discord.parseRaid.extract_boss(q)		// TRY BOSS
-			payload.gym = await discord.parseRaid.extract_gym(q)	// TRY GYM
+		// REPORT
+		payload.time = discord.parseRaid.extract_time(q)		// TRY TIME
+		payload.pokemon = discord.parseRaid.extract_boss(q)	// TRY BOSS
+		payload.gym = await discord.parseRaid.extract_gym(q)	// TRY GYM
 
-			if(!payload.pokemon){ payload.pokemon = discord.parseRaid.extract_boss(q) }	// TRY BOSS AGAIN
-			if(!payload.time){ payload.time = discord.parseRaid.extract_duration(q) }	// TRY DURATION
-			if(!payload.gym){ payload.gym = await discord.parseRaid.extract_gym(q)}	// TRY GYM
+		if(!payload.pokemon){ payload.pokemon = discord.parseRaid.extract_boss(q) }	// TRY BOSS AGAIN
+		if(!payload.time){ payload.time = discord.parseRaid.extract_duration(q) }		// TRY DURATION
+		if(!payload.gym){ payload.gym = await discord.parseRaid.extract_gym(q)}			// TRY GYM
 
-			if(argv.debug){
-				debug(q, payload, message)
-			}
-			
-			dispatcher(payload)
-		
-		} // IF NOT NEW
-
+		dispatcher(payload)
 
 	} // EXECUTE
 

@@ -17,7 +17,7 @@ module.exports = (payload) => {
 
 		gather({
 			title: 'Boss',
-			description: `Enter a boss name and submit.\n\n${bosses_list.join('\n')}`,
+			description: `Enter a boss name and submit.\n\n${bosses_list.join('\n\n')}`,
 			payload: payload
 		}, function(term){
 			payload.pokemon = discord.parseRaid.extract_boss({value: term})		// TRY BOSS
@@ -33,7 +33,7 @@ module.exports = (payload) => {
 		
 		gather({
 			title: 'To many **bosses** detected.',
-			description: `I detected to many bosses. Which one did you mean? Enter a number and submit. \n\n${values.join('\n')}`,
+			description: `I detected to many bosses. Which one did you mean? **Enter a number** and submit. \n\n${values.join('\n')}`,
 			payload: payload
 		}, function(index){
 			payload.pokemon.value = payload.pokemon.value[index - 1]
@@ -61,8 +61,8 @@ module.exports = (payload) => {
 	if(!payload.gym){
 
 		gather({
-			title: 'No gym found.',
-			description: `I could not find the gym you are looking for. Enter a search for a gym and submit.`,
+			title: 'Gym.',
+			description: `Enter a search for a gym and submit.`,
 			payload: payload
 		}, async function(term){
 			payload.gym = await discord.parseRaid.extract_gym({value: term})	// TRY GYM
@@ -121,6 +121,8 @@ module.exports = (payload) => {
 		let setRaidChannel = lowdb_raids.raids_update(payload.gym.gym.name,'channel', channel.id)
 
 		console.log(setRaidChannel)
+		
+		// CREATE MESSAGE WITH COMPLETE INFO AND POST.
 
 	}).catch(error => { console.log('ERROR CREATING RAID CHANNEL:', error)})
 

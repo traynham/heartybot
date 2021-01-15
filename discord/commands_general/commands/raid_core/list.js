@@ -10,7 +10,7 @@ module.exports = (message) => {
 	//let raids = lowdb_raids.listRaids()
 	let raids = lowdb_raids.raids_list()
 	
-	console.log(raids)
+	//console.log(raids)
 
 	let embed = new Discord.MessageEmbed()
 	embed.setColor(colors.primary)	
