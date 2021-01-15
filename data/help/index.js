@@ -7,8 +7,9 @@ module.exports = {
 		help: require('./commands_general/help'),
 		me: require('./commands_general/me'),
 		pokedex: require('./commands_general/pokedex'),
-		types: require('./commands_general/types'),
-		su: require('./commands_general/su')
+		raid: require('./commands_general/raid'),
+		su: require('./commands_general/su'),
+		types: require('./commands_general/types')
 	},
 	
 	commands_raids: {
