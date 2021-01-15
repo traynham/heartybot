@@ -1,6 +1,7 @@
 const {discord, help} = require(`@core`)
 const dispatcher = require('./raid_core/dispatcher')
 const payload_obj = require('@core/util/payload')
+//const lowdb_raids = require('@models_lowdb/raids.js')
 
 module.exports = {
 	name: 'raid',
@@ -20,7 +21,28 @@ module.exports = {
 			require('./raid_core/list')(message)
 			return
 		}
-
+/*
+		// ARCHIVE
+		if(args[0] == 'archive'){
+			console.log('this is a "archive" request')
+			args.shift()
+			console.log(args)
+			
+			if(args.length){
+				// Need to remove channel first?
+				
+				let raid_record = lowdb_raids.raids_find(args.join(''))
+				console.log(raid_record)
+				//console.log(
+				//	lowdb_raids.raids_archive(args.join(' '))
+				//)
+			} else {
+				console.log('SU: Tried to archive, but did not pass gym search.')
+			}
+			
+			return
+		}
+*/
 		// NEW
 		if(args[0] == 'new'){
 			console.log('this is a "new" request')
