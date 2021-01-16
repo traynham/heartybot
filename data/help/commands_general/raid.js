@@ -19,6 +19,19 @@ module.exports = {
 	// ACTIONS
 	actions: [
 
+		// ARCHIVE
+		{
+			name:					'archive',
+			aliases:				['arc', 'rm', 'delete'],
+			synopsis:			'Archive a raid',
+			description:		'Archive a raid and remove its channel.',
+			roles:				['su'],
+			syntax:				`${p}archive ${sr[0]}gym${sr[1]}`,
+			examples:			[
+										["Archive raids", `${p}r archive frog`]
+									]
+		},
+
 		// HELP
 		{
 			name:					'help',
@@ -31,9 +44,10 @@ module.exports = {
 									]
 		},
 		
-		// List
+		// LIST
 		{
 			name:					'list',
+			aliases:				['ls'],
 			synopsis:			'List raids',
 			description:		'List active raids',
 			default:				true,
@@ -44,7 +58,7 @@ module.exports = {
 									]
 		},
 		
-		// List
+		// NEW (PROMPTED)
 		{
 			name:					'new',
 			synopsis:			'Report new raids',
@@ -65,6 +79,19 @@ module.exports = {
 			examples:			[
 										["Report a Tier 5 at frog in 30 minuts.", `${p}r l5 frog 30m`]
 									],
+		},
+		
+		// WEB (LINK TO WEB INTERFACE)
+		{
+			enabled:				false,
+			name:				'web',
+			synopsis:			'Report raid on web.',
+			description:		'Report a new raid using the web interface.',
+			syntax:				`${p}raid ${sr[0]}web${sr[1]}`,
+			examples:			[
+										["Report on web.", `${p}raid web`],
+										["Report raid on web alternate.", `${p}r web`]
+									]
 		}
 
 		// ADD ADMIN OR SU COMMANDS TO REMOVE A RAID? BETTER TO PUT IN RAID CHANNEL?

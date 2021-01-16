@@ -21,6 +21,8 @@ const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const dateFormat = require('dateformat')
 
+const TrieSearch = require('trie-search')
+
 const {me} = require(`@core`)
 const payload_obj = require('@core/util/payload')
 const file = require('@core/util/file')
@@ -53,10 +55,32 @@ db.defaults({
 * @returns {object}
 **/
 const _locateRaid = (q) => {
+	
 	/* MAKE PAYLOAD AND RETURN ERRORS AND SUCH? */
+
+	// BY CHANNEL
 	let raid = db.get('raids').find({ channel: q })
-	if(!raid.value()) raid = db.get('raids').find({ name: q })
+	
+	// BY NAME
+	if(!raid.value()) { raid = db.get('raids').find({ name: q }) }
+	
+	// BY TRIE SEARCH (ONLY WHEN ONE RESULT IS LOCATED)
+	if(!raid.value()) {
+
+		let raids = db.get('raids').value()
+		var raidsTrie = new TrieSearch('name')
+		raidsTrie.addAll(raids);
+		
+		let result = raidsTrie.get(q)
+	
+		if(result.length == 1){
+			raid = db.get('raids').find({ channel: result[0].channel })			
+		}
+
+	}
+
 	return raid
+
 }
 
 module.exports = {
@@ -100,6 +124,8 @@ module.exports = {
 		let raid = _locateRaid(q)
 		let raid_value = raid.value()
 		
+		payload.value = raid_value
+
 		if(!raid.value()){
 			payload.error = true
 			payload.error_message = 'Raid not found.'

@@ -33,13 +33,41 @@ module.exports = (client, message) => {
 	// ADD COOLDOWNS:
 	// https://discordjs.guide/command-handling/adding-features.html#cooldowns
 
-	// ROLE CHECK. CURRENT ONLY SUPPORTS ONE ROLE.	
+	//  COMMAND ROLE CHECK. CURRENT ONLY SUPPORTS ONE ROLE.	
 	if(command.meta && command.meta.roles && !discord.hasRole(message, command.meta.roles[0])) {
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.error)
 		embed.setDescription('Sorry, you do not have permission to use this command.')
 		message.channel.send(embed)
 		return
+	}
+		
+	if(command.meta && command.meta.actions){
+		
+		let actions = command.meta.actions
+
+		let action = (
+			actions.find(act => act.name == argv._[0] && act.enabled != false) ||
+			actions.find(act => act.aliases && act.aliases.includes(argv._[0]) && act.enabled != false)
+		)
+
+		// IF NO ACTION AND NO PARAMS, LOCATE DEFAULT ACTION.
+		if(!action && argv._.length == 0){ action = actions.find(act => act.default) }
+
+		if(action) {
+			argv.action = action
+//			argv._.shift()
+		}
+		
+		//  ACTION ROLE CHECK. CURRENT ONLY SUPPORTS ONE ROLE.	
+		if(action && action.roles && !discord.hasRole(message, action.roles[0])) {
+			let embed = new Discord.MessageEmbed()
+			embed.setColor(colors.error)
+			embed.setDescription('Sorry, you do not have permission to use this action.')
+			message.channel.send(embed)
+			return
+		}
+
 	}
 	
 	try {

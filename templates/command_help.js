@@ -37,6 +37,7 @@ module.exports = {
 
 		// Action1
 		{
+			enabled:				false,
 			name:					'action1', // Action name
 			aliases:				['act', 'act1'], // Array of action aliases.
 			synopsis:			'take action', // One or two word description.
