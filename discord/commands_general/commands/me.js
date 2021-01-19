@@ -19,19 +19,14 @@ const {colors} = require(`@config`).discord
 module.exports = {
 	name: 'me',
 	meta: help.get('commands_general', 'me').value,
-	actions: ['code', 'hide', 'level', 'privacy', 'show', 'started', 'team'],
-	cooldown: 5,
 	async execute(message, argv) {
 
 		let args = argv._
+		let action = (argv.action ? argv.action.name : null)
+		let value = args.join(' ')
 
 		// I SHOULD MAKE THIS A FIND OR CREATE, AND PASS THE WHOLE MESSAGE OBJECT SO I CAN CREATE.
 		let member = await me.find(message.author.id)
-		//let privacy = member.privacy.split(',')
-
-		let action = null
-		let value = null
-		let content = null
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
@@ -56,31 +51,20 @@ module.exports = {
 			action = 'level'
 			value = detectLevel.value
 		}
-
-		if(args.length == 0){
-			action = 'show_card'
-		}
-
+		
 		if(!action){
-// REDO THIS WITH SEARCHING THROUGH META FOR NAME AND ALIASES.
-			// DETECT ACTION
-			let detectAction = await detect.action(args)
-
-			if(!detectAction.error){
-				action = detectAction.value
-				args.shift()
-				value = args.join(' ')
-			} else if(args.length > 0) {
-				action = 'error'
-			}
-
+			embed.setColor(colors.error)
+			embed.title = 'Error: Action not found.'
+			embed.addField('Valid Actions', this.meta.actions.map(action => action.name).sort())
+			message.channel.send(embed)
+			return
 		}
 
-		// CALL SUB COMMAND			
+		// CALL SUB COMMAND
 		var data = {embed, member, value, message}
 		await require(`./me_actions/${action}`)(data)
 
-		message.channel.send(content, embed);
+		message.channel.send(embed)
 
 	} // EXECUTE
 

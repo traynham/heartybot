@@ -84,7 +84,7 @@ module.exports = {
 		// WEB (LINK TO WEB INTERFACE)
 		{
 			enabled:				false,
-			name:				'web',
+			name:					'web',
 			synopsis:			'Report raid on web.',
 			description:		'Report a new raid using the web interface.',
 			syntax:				`${p}raid ${sr[0]}web${sr[1]}`,

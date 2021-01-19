@@ -31,9 +31,9 @@ module.exports = (level) => {
 		return res
 	}
 	
-	if(level < 10 || level > 40){
+	if(level < 10 || level > 50){
 		res.error = true
-		res.error_message = 'Level must be a number between 10-40'
+		res.error_message = 'Level must be a number between 10-50'
 		return res
 	}
 	

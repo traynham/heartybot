@@ -9,26 +9,20 @@ module.exports = {
 	execute(message, argv) {
 	
 		let args = argv._
+		let action = (argv.action ? argv.action : null)
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
 
-		//IF NO PARAM, SHOW HELP.
-		if(args.length == 0){
+		//HELP
+		if(action.name === 'help'){
 			argv._.push(this.name)
 			const help_command = message.client.commands.find(cmd => cmd.name =='commands')
 			help_command.execute(message, argv)
 			return
 		}
 
-		let [actionDesired, value] = args		
-		let actions = this.meta.actions
-
-		let action = (
-			actions.find(action => action.name == actionDesired) || 
-			actions.find(action => action.aliases && action.aliases.includes(actionDesired)) ||
-			null
-		)
+		let value = args.join(' ')	
 
 		let values = {
 			'bosses': 'bosses',
@@ -38,6 +32,7 @@ module.exports = {
 	
 		let valueDesired = values[Object.keys(values).find(key => key.startsWith(value))]
 
+		// UPDATE
 		if(argv.u || action.name === 'update'){
 
 			embed.setColor(colors.success)

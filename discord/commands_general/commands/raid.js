@@ -1,7 +1,9 @@
+const Discord = require('discord.js')
 const {discord, help} = require(`@core`)
 const dispatcher = require('./raid_core/dispatcher')
 const payload_obj = require('@core/util/payload')
 const lowdb_raids = require('@models_lowdb/raids.js')
+const {colors, prefix: p, syntax_required: sr} = require('@config').discord
 
 module.exports = {
 	name: 'raid',
@@ -24,22 +26,21 @@ module.exports = {
 		}
 
 		// ARCHIVE
-		// * RETURN ERRORS IF NEEDED. (HELP IF EMPTY PARAM.)
+		// * RETURN ERRORS IF NEEDED.
 		if(action == 'archive'){
-			args.shift()
-			
 			if(args.length){
 				let archive = lowdb_raids.raids_archive(args.join(' '))
-			
 				if(!archive.error){
 					const fetchedChannel = message.guild.channels.cache.get(archive.value.channel);
 					fetchedChannel.delete();
 				}
-				
 			} else {
+				let embed = new Discord.MessageEmbed()
+				embed.setColor(colors.error)
+				embed.addField('syntax', '`' + `${p}raid archive ${sr[0]}gym${sr[1]}` + '`')
+				message.channel.send(embed)
 				console.log('SU: Tried to archive, but did not pass gym search.')
 			}
-			
 			return
 		}
 

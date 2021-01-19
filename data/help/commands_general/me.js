@@ -55,6 +55,7 @@ module.exports = {
 		// HIDE
 		{
 			name:					'hide',
+			aliases:				['hd',],
 			synopsis:			'Hide items on your me card.',
 			description:		`This action allows you to hide sections of your me card. For example, if you are maxed out on friends, you can hide your friend code.\n\n**NOTE:** Your code will be shown if you use ${p}me code or ${p}code, but will be hidden in all other situations.`,
 			examples: 			[
@@ -68,7 +69,7 @@ module.exports = {
 		// LEVEL
 		{
 			name:					'level',
-			aliases:				['lvl'],
+			aliases:				['lvl', 'lev'],
 			synopsis:			'View or set your level',
 			description:		`This action will allow you to view or set your level. To set your level, simply pass a valid level number to ${p}me`,
 			examples: 			[
@@ -82,7 +83,7 @@ module.exports = {
 		// PRIVACY
 		{
 			name:					'privacy',
-			aliases:				['pri', 'priv', 'private', 'pvt'],
+			aliases:				['pr', 'pri', 'priv', 'private', 'prv', 'pvt'],
 			synopsis:			'View your privacy settings',
 			description:		'This action will show you what items are hidden and shown on your Me card.',
 			examples: 			[
@@ -94,6 +95,7 @@ module.exports = {
 		// SHOW
 		{
 			name:					'show',
+			aliases:				['sh', 'sho'],
 			synopsis:			'Show items on your me card.',
 			description:		'This action allows you to show sections of your me card.',
 			examples: 			[
@@ -107,7 +109,7 @@ module.exports = {
 		// STARTED
 		{
 			name:					'started',
-			aliases:				['start'],
+			aliases:				['sta', 'star', 'start'],
 			synopsis:			'View or set your started date',
 			description:		'Show off how long you have been playing by setting your Pokémon Go started date.',
 			examples: 			[

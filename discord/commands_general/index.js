@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js')
 const {discord} = require(`@core`)
 const {colors} = require(`@config`).discord
 
@@ -56,7 +56,7 @@ module.exports = (client, message) => {
 
 		if(action) {
 			argv.action = action
-//			argv._.shift()
+			argv._.shift()
 		}
 		
 		//  ACTION ROLE CHECK. CURRENT ONLY SUPPORTS ONE ROLE.	

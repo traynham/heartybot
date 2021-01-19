@@ -26,20 +26,10 @@ module.exports = {
 	execute(message, argv) {
 		
 		let args = argv._
+		let action = (argv.action ? argv.action : null)
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
-
-		let actions = this.meta.actions
-
-		// SET DEFAULT ACTION IF NEEDED
-		if(!args.length) args.push('list')
-
-		let action = (
-			actions.find(action => action.name == args[0]) || 
-			actions.find(action => action.aliases && action.aliases.includes(args[0])) ||
-			null
-		)
 
 		// EXIT EARLY IF USER DOES NOT MEET ROLE REQUIREMENTS.
 		if(action && action.roles && !discord.hasRole(message, action.roles[0])){
