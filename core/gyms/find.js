@@ -62,14 +62,11 @@ const Op = require('sequelize').Op
 const Gyms = require(`@models/gyms`)
 const areas = require('@core/gyms/areas')
 
-//module.exports = async (query, opt) => {
 module.exports = async (query) => {
 
 	let res = {}	
 	let q = !Array.isArray(query) ? String(query).split(' ') : query
-	let action = q[0].toLowerCase()
-	//let method = ''
-	//let field = ''
+	let action = String(q[0]).toLowerCase()
 	
 	res.action = action
 	
@@ -102,7 +99,6 @@ module.exports = async (query) => {
 	let isArea = await areas(q)
 	
 	if(isArea) {
-		//field = 'area'
 		res.field = 'area'
 		res.method = 'in'
 		methods.unshift({name: 'isArea', method: {area: isArea.area} })		
