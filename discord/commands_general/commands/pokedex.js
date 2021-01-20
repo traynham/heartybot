@@ -10,14 +10,15 @@ module.exports = {
 	execute(message, argv) {
 	
 		let args = argv._
+		let action = (argv.action ? argv.action : null)
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
 
-		//IF NO PARAM, SHOW HELP.
-		if(args.length == 0){
-			argv._.push('pokedex')
+		//HELP
+		if(action && action.name === 'help'){
 			const help_command = message.client.commands.find(cmd => cmd.name =='commands')
+			argv._ = [this.name]
 			help_command.execute(message, argv)
 			return
 		}
