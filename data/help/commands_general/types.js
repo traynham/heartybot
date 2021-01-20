@@ -37,19 +37,33 @@ module.exports = {
 								]
 		},
 
-		// List
+		// INFOGRAPHIC
+		{
+			name:				'infographic',
+			aliases:			['info', 'ig', 'graphc'],
+			default:			true,
+			synopsis:		'Show pokemon types infographic',
+			syntax:			`${p}types ${sr[0]}infographic${sr[1]}`,
+			description:	'Show pokemon types infographic.',
+			examples:		[
+									["Show Infographic", `${p}type info`],
+									["Show Infographic", `${p}type`],
+								]
+		},
+		
+		// LIST
 		{
 			name:				'list',
-			default:			true,
+			aliases:			['ls'],
 			synopsis:		'Lists pokemon types',
 			syntax:			`${p}types ${sr[0]}list${sr[1]}`,
 			description:	'This action will list pokemon types.',
 			examples:		[
-									["Show types.", `${p}type`]
+									["Show types.", `${p}type list`]
 								]
 		},
 
-		// Type
+		// TYPE
 		{
 			name:				'[type]',
 			synopsis:		'View pokemon type card',
