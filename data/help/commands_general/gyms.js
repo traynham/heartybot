@@ -29,13 +29,15 @@ module.exports = {
 		// SEARCH
 		{
 			name:				'search',
+			aliases:			['sea', 'sear'],
 			synopsis:		'Gym search term',
 			description:	'Search criteria to find gym.',
 			syntax:			`${p}gyms ${sr[0]}search${sr[1]}`,
 			tip:				'For most gyms you can also use an acronym.',
 			examples: 		[
 									['Brian Schwengler Memorial Park', `${p}gyms brian`],
-									['Pioneer Country Water Tower', `${p}gyms pcwt`]
+									['Pioneer Country Water Tower by acronym', `${p}gyms pcwt`],
+									['Burlington Northern Caboose by ID', `${p}g g3`]
 								]
 		},
 		

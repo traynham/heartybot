@@ -24,11 +24,18 @@ module.exports = {
 	async execute(message, argv) {
 
 		let args = argv._
+		let action = (argv.action ? argv.action : null)
+		const help_command = message.client.commands.find(cmd => cmd.name =='commands')
 
-		// EMPTY ARGS
-		if(args.length == 0){
-			message.channel.send('Whoops. Enter a search to find a gym. Use `?gyms` for help.')
+		//HELP
+		if(action && action.name === 'help'){
+			argv._ = [this.name]
+			help_command.execute(message, argv)
 			return
+		}
+		
+		if(action){
+			args.unshift(action.name)
 		}
 
 		let response = await gyms_core.find(args)
@@ -36,7 +43,8 @@ module.exports = {
 		// FOUND NONE
 		if(response.rows.length == 0){
 			// send help card.
-			message.channel.send('No gyms were found. Use `?gyms` for help.')
+			argv._ = ['gyms', 'search']
+			help_command.execute(message, argv)
 			return
 		}
 
