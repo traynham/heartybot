@@ -7,7 +7,7 @@ module.exports = (payload) => {
 	const lowdb_raids = require('@models_lowdb/raids.js')
 	const {discord} = require(`@core`)
 	const gather = require('./gather')
-		
+
 	// MISSING BOSS
 	if(!payload.pokemon){
 
@@ -30,7 +30,7 @@ module.exports = (payload) => {
 	if(Array.isArray(payload.pokemon.value)){
 
 		let values = payload.pokemon.value.map((value, i) => `${i + 1}. ${value}` )
-		
+
 		gather({
 			title: 'To many **bosses** detected.',
 			description: `I detected to many bosses. Which one did you mean? **Enter a number** and submit. \n\n${values.join('\n')}`,
@@ -112,6 +112,12 @@ module.exports = (payload) => {
 		return true
 	}
 
+console.log('PUT EMBED CODE HERE')
+
+
+
+
+
 	// OPEN CHANNEL
 	payload.message.guild.channels.create('_' + payload.gym.gym.name, {
 		topic: 'This is the topic',
@@ -121,6 +127,8 @@ module.exports = (payload) => {
 		let setRaidChannel = lowdb_raids.raids_update(payload.gym.gym.name,'channel', channel.id)
 
 		console.log(setRaidChannel)
+		
+console.log('PUT CHANNEL EMBEDS HERE')
 		
 		// CREATE MESSAGE WITH COMPLETE INFO AND POST.
 

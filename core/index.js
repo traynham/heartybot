@@ -15,6 +15,7 @@ module.exports = {
 	discord: {
 		embedCommand: require('./discord/embedCommand'),
 		embedPokemon: require('./discord/embedPokemon'),
+		embedRaid: require('./discord/embedRaid'),
 		hasRole: require('./discord/hasRole'),
 		isAdmin: require('./discord/isAdmin'),
 		parseRaid: require('./discord/parseRaid'),

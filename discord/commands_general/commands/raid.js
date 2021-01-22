@@ -43,6 +43,13 @@ module.exports = {
 			}
 			return
 		}
+		
+		// SHOW
+		if(action == 'show'){
+			let raid = lowdb_raids.raids_find(args.join(''))
+			discord.embedRaid(message, raid, {})
+			return
+		}
 
 		// NEW
 		if(action == 'new'){

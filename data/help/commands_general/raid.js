@@ -81,6 +81,18 @@ module.exports = {
 									],
 		},
 		
+		{
+			name:					'show',
+			aliases:				['sh'],
+			roles:				['su'],
+			synopsis:			'Show raid detail',
+			description:		'Show raid detail.',
+			syntax:				`${p}raid ${sr[0]}show${sr[1]} ${sr[0]}gym${sr[1]}`,
+			examples:			[
+										["Show raid detail.", `${p}r sh frog`]
+									]
+		},
+		
 		// WEB (LINK TO WEB INTERFACE)
 		{
 			enabled:				false,
