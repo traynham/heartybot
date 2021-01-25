@@ -2,40 +2,32 @@ const dateFormat = require('dateformat')
 const Discord = require('discord.js')
 const {colors} = require('@config').discord
 const {domain} = require(`@config`)
-//const {detect} = require(`@core`)
 const payload_obj = require('@core/util/payload')
 
-/**
-
-	* Check to see if this is an update somehow? Pass as option, then find all the snowflakes for the raid.
-	* save message id in lowdb_raids record.
-	* should message param be move over to options since it won't always be needed (for updates)?
-**/
-
-module.exports = async (message, raid, opt) => {
+module.exports = async (raid, opt) => {
+	
+	/*
+		
+		opt.message	Working message instance
+		opt.new		For new Channel message
+		opt.update	Update all messages for a raid.
+	
+	*/
 
 	let payload = payload_obj()
 	
 	const lowdb_raids = require('@models_lowdb/raids.js')
+	const {detect} = require(`@core`)
 
-	console.log(raid)
-	console.log(opt)
-	
-	console.log(typeof raid)
-	
+	// FIND RAID OBJECT IF STRING
 	if(typeof raid === 'string'){
 		raid = lowdb_raids.raids_find(raid)
-		console.log('NEW RAID::', raid)
 	}
 	
-	
-	//let isEgg = detect.isEgg(raid.boss).value
-	let isEgg = false
+	let isEgg = detect.isEgg(raid.boss).value
 	
 	const embed = new Discord.MessageEmbed()
 	payload.value = embed
-
-
 	embed.setColor(colors.primary)
 	
 	
@@ -51,18 +43,35 @@ module.exports = async (message, raid, opt) => {
 		`[${raid.gym.address}](https://www.google.com/maps/search/${encodeURIComponent(raid.gym.coordinates)} 'Get Directions')`
 	)
 	
+	if(opt.new){
+		let chan = await opt.message.client.channels.fetch(raid.channel)		
+		let result = await chan.send(embed)
+		lowdb_raids.raids_update(raid.channel, 'messages', [...raid.messages, [raid.channel, result.id]])
+		return payload
+	}
 	
-	let result = await message.channel.send(embed)
-	console.log('RESULT::', result)
-	console.log('RESULT::', result.id)
+	if(opt.message && opt.update != true){
+		let result = await opt.message.channel.send(embed)
+		lowdb_raids.raids_update(raid.channel, 'messages', [...raid.messages, [opt.message.channel.id, result.id]])
+		return payload
+	}
 	
-	
-	
-	// SEND MESSAGE
-	//message.channel.send(embed)
+	if(opt.update){
+
+		raid.messages.reverse().forEach(async ([channelID, messageID]) => {
+
+			let chan = await opt.message.client.channels.fetch(channelID)
+
+			chan.messages.fetch(messageID).then(message => {
+				message.edit(embed)
+			})
+
+		})
+
+		return payload
+
+	}
 	
 	return payload
 	
-	
-
 }

@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 
 const lowdb_raids = require('@models_lowdb/raids.js')
 const {colors, raid_duration_egg, raid_duration_boss} = require(`@config`).discord
-const {detect, util} = require(`@core`)
+const {detect, discord, util} = require(`@core`)
 
 module.exports = {
 	name: 'ends',
@@ -25,7 +25,6 @@ module.exports = {
 		embed.setThumbnail(util.emoji_img('alarm_clock', {h: 25}).value)
 		embed.setFooter(`${author.username}`, `${author.displayAvatarURL()}`)
 
-		//let raid = lowdb_raids.findRaid(message.channel.id)
 		let raid = lowdb_raids.raids_find(message.channel.id)
 		let isEgg = detect.isEgg(raid.boss).value
 		let errorMsg = null
@@ -55,7 +54,7 @@ module.exports = {
 		if(isEgg && isAfter(time.value, add(new Date(), {minutes: raid_duration_egg + raid_duration_boss})) ){
 			errorMsg = `Sorry, the time or duration you entered is to far in the future.`
 		}
-		
+
 		// TO FAR IN FUTURE.
 		if(!isEgg && isAfter(time.value, add(new Date(), {minutes: raid_duration_boss})) ){
 			errorMsg = `Sorry, the time or duration you entered is to far in the future.`
@@ -74,16 +73,16 @@ module.exports = {
 		let raid_hatch = sub(time.value, {minutes: raid_duration_boss})
 
 		// UPDATE RAID
-		//let setTime = lowdb_raids.updateRaid(message.channel.id, 'time', raid_time)
-		//let setHatch = lowdb_raids.updateRaid(message.channel.id, 'hatches', raid_hatch)
-		let setTime = lowdb_raids.raids_update(message.channel.id, 'time', raid_time)
-		let setHatch = lowdb_raids.raids_update(message.channel.id, 'hatches', raid_hatch)
+		lowdb_raids.raids_update(message.channel.id, 'time', raid_time)
+		lowdb_raids.raids_update(message.channel.id, 'hatches', raid_hatch)
 
 		// SHOW CONFIRMATION MESSAGE
 		embed.setTitle('**Raid End Time (Updated)**')
 		embed.setColor(colors.success)
 		embed.addField('**Ends**', dateFormat(raid_time, "h:MM TT"))
 		message.channel.send(embed)
+
+		discord.embedRaid(raid, {message: message, update: true})
 
 	}
 

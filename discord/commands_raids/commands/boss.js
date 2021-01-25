@@ -43,7 +43,6 @@ module.exports = {
 
 		let args = argv._
 		let action = null
-		//let raid = lowdb_raids.findRaid(message.channel.id)
 		let raid = lowdb_raids.raids_find(message.channel.id)
 		let isEgg = detect.isEgg(raid.boss).value
 

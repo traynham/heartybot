@@ -47,20 +47,21 @@ module.exports = {
 		// SHOW
 		if(action == 'show'){
 			let raid = lowdb_raids.raids_find(args.join(''))
-			discord.embedRaid(message, raid, {})
+			//discord.embedRaid(message, raid, {})
+			//discord.embedRaid(raid, {message: message})
+			discord.embedRaid(raid, {message: message, update: true})
 			return
 		}
 
 		// NEW
 		if(action == 'new'){
-			console.log('this is a "new" request')
 			dispatcher(payload)
 			return
 		}
 		
 		// WEB
 		if(action == 'web'){
-			console.log('this is a "web" request')
+			console.log('This is a "web" request.')
 			// NEED TO CREATE AN EMBED THAT SHOWS A LINK TO CLICK ON TO FINISH THE PROCESS.
 			return
 		}

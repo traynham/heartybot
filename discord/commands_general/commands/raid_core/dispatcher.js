@@ -122,13 +122,16 @@ console.log('PUT EMBED CODE HERE')
 	payload.message.guild.channels.create('_' + payload.gym.gym.name, {
 		topic: 'This is the topic',
 		parent: payload.message.channel.parent
-	}).then(channel => {
+	}).then( async (channel) => {
 
-		let setRaidChannel = lowdb_raids.raids_update(payload.gym.gym.name,'channel', channel.id)
+		let setRaidChannel = await lowdb_raids.raids_update(payload.gym.gym.name,'channel', channel.id)
 
 		console.log(setRaidChannel)
 		
 console.log('PUT CHANNEL EMBEDS HERE')
+
+	
+		discord.embedRaid(channel.id, {message: payload.message, new: true})
 		
 		// CREATE MESSAGE WITH COMPLETE INFO AND POST.
 

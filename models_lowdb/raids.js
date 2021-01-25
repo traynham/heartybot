@@ -37,6 +37,7 @@ db.defaults({
 			boss: '',
 			channel: '',
 			name: '',
+			messages: [],
 			pull: '',
 			status: '',
 			time: '',
@@ -105,6 +106,7 @@ module.exports = {
 			return payload
 		}
 
+		raid.messages = []
 		raid.trainers = []
 		raid.pull = null
 		payload.value = db.get('raids').push(raid).write()
