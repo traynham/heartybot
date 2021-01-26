@@ -5,8 +5,8 @@ const {help, util} = require(`@core`)
 const {colors} = require(`@config`).discord
 
 module.exports = {
-	name: 'address',
-	meta: help.get('commands_raids', 'address').value,
+	name: 'coordinates',
+	meta: help.get('commands_raids', 'coordinates').value,
 	cooldown: 5,
 	execute(message) {
 
@@ -14,21 +14,6 @@ module.exports = {
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
-	
-		if(raid.gym.address){
-
-			embed.addField(
-				'**Address**',
-				`[${raid.gym.address}](https://www.google.com/maps/search/${encodeURIComponent(raid.gym.address)} 'Get Directions')`
-			)
-
-			embed.setThumbnail(util.emoji_img('red_car', {h: 25}).value)
-
-			message.channel.send(embed)
-
-			return
-
-		}
 
 		if(raid.gym.coordinates){
 
@@ -37,18 +22,18 @@ module.exports = {
 				`[${raid.gym.coordinates}](https://www.google.com/maps/search/${encodeURIComponent(raid.gym.coordinates)} 'Get Directions')`
 			)
 			embed.setThumbnail(util.emoji_img('compass', {h: 25}).value)
-
-
+	
 			message.channel.send(embed)
 
 			return
 
 		}
-	
+
 		embed.setColor(colors.primary)
-		embed.addField('**Whoops**', 'This gym appears to have no address and no coordinates.')
+		embed.addField('**Whoops**', 'This gym appears to have no coordinates.')
 		embed.setThumbnail(util.emoji_img('shrug', {h: 25}).value)
 		message.channel.send(embed)
 	
 	}
-};
+
+}

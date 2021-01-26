@@ -22,6 +22,8 @@ module.exports = (client, message) => {
 
 	const commandName = argv._.shift()
 
+// cmd.aliases to be obsolete.
+
 	const command = (
 		client.commands.get(commandName) || 
 		client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) ||

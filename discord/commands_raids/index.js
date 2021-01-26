@@ -1,12 +1,11 @@
-const {trainer_states_replacements} = require(`@config`).discord
+const Discord = require('discord.js')
+const {colors, trainer_states_replacements} = require('@config').discord
+const {discord} = require('@core')
 
 module.exports = (client, message) => {
 	
 	let commandString = message.content.toLowerCase()
-	
-	// ALLOW ? prefixed help requests.
-	commandString = commandString.replace(/^\? ?/g, 'help ')
-	
+		
 	// CHECK FOR FULL COMMAND REPLACEMENTS. (SINGLE COMMANDS WITH SPACES)
 	let replacement = trainer_states_replacements.find(cmd => cmd.command == commandString)
 
@@ -19,7 +18,7 @@ module.exports = (client, message) => {
 			'short-option-groups': true
 		}
 	})
-	
+
 	// CHECK FOR HELP ARGUMENT
 	if(argv.h || argv.help) argv._.unshift('help')
 	
@@ -28,8 +27,22 @@ module.exports = (client, message) => {
 	
 	// INSERT COMMANDNAME INTO ARGV AS "COMMAND"
 	argv.command = commandName
+
+// cmd.aliases to be obsolete.	
+	const command = (
+		client.raid_commands.get(commandName) ||
+		client.raid_commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) ||
+		client.raid_commands.find(cmd => cmd.meta && cmd.meta.aliases && cmd.meta.aliases.includes(commandName))
+	)
 	
-	const command = client.raid_commands.get(commandName) || client.raid_commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
+	//  COMMAND ROLE CHECK. CURRENT ONLY SUPPORTS ONE ROLE.	
+	if(command && command.meta && command.meta.roles && !discord.hasRole(message, command.meta.roles[0])) {
+		const embed = new Discord.MessageEmbed()
+		embed.setColor(colors.error)
+		embed.setDescription('Sorry, you do not have permission to use this command.')
+		message.channel.send(embed)
+		return
+	}
 
 	// SCAN FOR BOSSES HERE? AS IN, A BOSS ONLY CONTENT STRING. (AFTER RULING OUT ANY COMMANDS)
 	// ACTUALLY, SCAN FOR OTHER STUFF ONCE EVERYTHING HAS BEEN PROCESSED.

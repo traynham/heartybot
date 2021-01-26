@@ -30,7 +30,7 @@ client.raid_commands = new Discord.Collection()
 const raid_command_files = fs.readdirSync('./discord/commands_raids/commands').filter(file => file.endsWith('.js'))
 
 for (const file of raid_command_files) {
-	const command = require(`./commands_raids/commands/${file}`);
+	const command = require(`./commands_raids/commands/${file}`)
 	client.raid_commands.set(command.name, command);
 }
 
@@ -77,10 +77,16 @@ client.on('message', message => {
 	message.content = message.content.toLowerCase()
 
 	let isRaidChannel = false
-	let isRaidTrain = false
+//	let isRaidTrain = false
 
 	if(lowdb_raids.raids_find(message.channel.id)){
 		isRaidChannel = true
+	}
+	
+	if(message.content.startsWith('?')) {
+		message.content = `help ${message.content.slice(1)}`
+		//commands_general(client, message)
+		//return
 	}
 
 	if(isRaidChannel) {

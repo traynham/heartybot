@@ -13,7 +13,9 @@ module.exports = {
 	},
 	
 	commands_raids: {
+		address: require('./commands_raids/address'),
 		boss: require('./commands_raids/boss'),
+		coordinates: require('./commands_raids/coordinates'),
 	}
 
 }

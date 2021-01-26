@@ -1,13 +1,14 @@
 const Discord = require('discord.js');
 const lowdb_raids = require('@models_lowdb/raids.js')
 
-const {detect, discord, pokedex} = require(`@core`)
+const {detect, discord, help, pokedex} = require(`@core`)
 
 const {colors, emoji} = require(`@config`).discord
 
 module.exports = {
 	name: 'boss',
-	aliases: ['b', 'bos'],
+	meta: help.get('commands_raids', 'boss').value,
+	//aliases: ['b', 'bos'],
 	actions_admin: ['add', 'remove', 'update'],
 	actions: [
 		{
