@@ -1,4 +1,4 @@
-const {prefix: p, syntax_optional: so, syntax_required: sr} = require('@config').discord
+const {syntax_optional: so, syntax_required: sr} = require('@config').discord
 
 module.exports = {
 
@@ -26,7 +26,7 @@ module.exports = {
 			description:		`This action allows you to display a code card for a trainer code, even if it is not in the system.`,
 			examples: 			[
 										['Show code card for "1234 5678 9012".', `code 1234 5678 9012`],
-										['Show code card for "123456789012".', `${p}code 123456789012`]
+										['Show code card for "123456789012".', `code 123456789012`]
 									],
 			required:			true,
 			syntax:				`code ${sr[0]}code${sr[1]}`
@@ -51,8 +51,8 @@ module.exports = {
 			description:		'This action allows you to show your trainer code card.',
 			syntax:				`code ${sr[0]}show${sr[1]}`,
 			examples:			[
-										['Show your card', `${p}code`],
-										['Show your card', `${p}code show`]
+										['Show your card', `code`],
+										['Show your card', `code show`]
 									]
 		}
 
