@@ -8,42 +8,14 @@ const {colors, emoji} = require(`@config`).discord
 module.exports = {
 	name: 'boss',
 	meta: help.get('commands_raids', 'boss').value,
-	//aliases: ['b', 'bos'],
-	actions_admin: ['add', 'remove', 'update'],
-	actions: [
-		{
-		name: 'add',
-		aliases: [],
-		synopsis: 'Add a boss to the bosses list.'
-		},
-		{
-		name: 'list',
-		aliases: ['ls'],
-		synopsis: 'List current bosses.'
-		},
-		{
-		name: 'remove',
-		aliases: ['rem', 'rm'],
-		synopsis: 'Remove a boss from the bosses list.'
-		},
-		{
-		name: 'update',
-		aliases: [],
-		synopsis: 'Update the bosses list.'
-		},
-	],
-	synopsis: 'Set/Show boss.',
-	description: 'Set or show the boss for the current raid.',
-	syntax: ['boss {boss name}'],
-	usage: {'To show boss:': 'boss', 'To set boss:': 'boss {mewtwo}'},
-	show_help_footer: true,
 	cooldown: 5,
 	execute(message, argv) {
 
 		const boss_command = message.client.commands.find(cmd => cmd.name =='boss')
 
 		let args = argv._
-		let action = null
+		let action = (argv.action ? argv.action : null)
+
 		let raid = lowdb_raids.raids_find(message.channel.id)
 		let isEgg = detect.isEgg(raid.boss).value
 
@@ -56,31 +28,32 @@ module.exports = {
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
-		
-		// EXIT EARLY IF ADMIN ACTION ATTEMPT BY NON-ADMIN.
-		if(this.actions_admin.includes(args[0]) && !discord.isAdmin(message)){			
-			embed.setColor(colors.error)
-			embed.setDescription('Sorry, this action requires an admin account.')
-			message.channel.send(embed)
-			return
-		}
-		
-		// PASS SELECTED ACTIONS TO MAIN BOSS COMMAND
-		if(['add', 'list', 'ls', 'remove', 'rm', 'update'].includes(args[0])){
-			if(['list', 'ls'].includes(args[0])) args.shift()
+
+		// SHOW
+		if(action && action.name == 'show'){
+			argv._ = raid.boss.split(' ')
+			argv.action = null
 			boss_command.execute(message, argv)
 			return
 		}
 
+		// PASS SELECTED ACTIONS TO MAIN BOSS COMMAND
+		// CHECKING ACTUAL BOSS_COMMAND ACTIONS!
+		if(action && boss_command.meta.actions.map(act => act.name).includes(action.name)){
+			boss_command.execute(message, argv)
+			return
+		}
+
+
 		// ACTION: SET BOSS IF NO ACTION.
 		if(!action && args.length) {
-			action = 'set'
+			action = {name: 'set'}
 		}
-		
+
 		// RUN ACTION
 		if(action) {
 			var data = {embed, args, message}
-			require(`./boss_actions/${action}`)(data)
+			require(`./boss_actions/${action.name}`)(data)
 			return
 		}
 

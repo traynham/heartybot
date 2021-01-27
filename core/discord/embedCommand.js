@@ -117,7 +117,7 @@ module.exports = (message, args, command_set) => {
 	if(args.length > 0 && help){
 		
 		// ROLE PERMISSION CHECK.
-		if(help.roles && !user_roles.includes(help.roles[0])){
+		if(help.roles && help.roles.length && !user_roles.includes(help.roles[0])){
 			embed.setTitle(`HELP › **ERROR**`)
 			embed.setDescription('Sorry, you do not have permission to use this command.')
 			return payload
@@ -178,7 +178,7 @@ module.exports = (message, args, command_set) => {
 	
 	commands.forEach(command => {
 		
-		let hasRoleRequirement = command.meta && command.meta.roles
+		let hasRoleRequirement = command.meta && command.meta.roles && command.meta.roles.length
 
 		if(
 			(hasRoleRequirement && user_roles.includes(command.meta.roles[0])) ||

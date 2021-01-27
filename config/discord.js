@@ -182,7 +182,7 @@ module.exports = {
 		{
 			state: 'done',
 			value: 'Done',
-			aliases: ['don'],
+			aliases: ['don', 'dn'],
 			description: 'I completed the raid.',
 			emoji: 'heavy_check_mark'
 		},
@@ -205,6 +205,10 @@ module.exports = {
 		},
 		{
 			command: '100',
+			replace: 'perfect'
+		},
+		{
+			command: 'hundy',
 			replace: 'perfect'
 		}
 	]

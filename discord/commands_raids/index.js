@@ -36,12 +36,41 @@ module.exports = (client, message) => {
 	)
 	
 	//  COMMAND ROLE CHECK. CURRENT ONLY SUPPORTS ONE ROLE.	
-	if(command && command.meta && command.meta.roles && !discord.hasRole(message, command.meta.roles[0])) {
+	if(command && command.meta && command.meta.roles && command.meta.roles.length && !discord.hasRole(message, command.meta.roles[0])) {
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.error)
 		embed.setDescription('Sorry, you do not have permission to use this command.')
 		message.channel.send(embed)
 		return
+	}
+	
+	// ACTION
+	if(command && command.meta && command.meta.actions){
+		
+		let actions = command.meta.actions
+
+		let action = (
+			actions.find(act => act.name == argv._[0] && act.enabled != false) ||
+			actions.find(act => act.aliases && act.aliases.includes(argv._[0]) && act.enabled != false)
+		)
+
+		// IF NO ACTION AND NO PARAMS, LOCATE DEFAULT ACTION.
+		if(!action && argv._.length == 0){ action = actions.find(act => act.default) }
+
+		if(action) {
+			argv.action = action
+			argv._.shift()
+		}
+		
+		//  ACTION ROLE CHECK. CURRENT ONLY SUPPORTS ONE ROLE.	
+		if(action && action.roles && !discord.hasRole(message, action.roles[0])) {
+			let embed = new Discord.MessageEmbed()
+			embed.setColor(colors.error)
+			embed.setDescription('Sorry, you do not have permission to use this action.')
+			message.channel.send(embed)
+			return
+		}
+
 	}
 
 	// SCAN FOR BOSSES HERE? AS IN, A BOSS ONLY CONTENT STRING. (AFTER RULING OUT ANY COMMANDS)

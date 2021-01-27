@@ -14,6 +14,9 @@ module.exports = {
 	cooldown: 5,
 	execute(message, argv) {
 	
+	// * Make a list action - use in help.
+	// * Move trainer_states to help document?
+	
 		//let args = argv._
 
 		const embed = new Discord.MessageEmbed()

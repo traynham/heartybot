@@ -1,56 +1,104 @@
-const {prefix: p, syntax_optional: so, syntax_required: sr} = require('@config').discord
+const {syntax_optional: so, syntax_required: sr} = require('@config').discord
 
 module.exports = {
 
 	// GENERAL
-	name:						'boss',
-	command_set:			'raids',
-	synopsis:					'View raid bosses',
-	description:				'View current raid boss information.',
-	syntax:						`${p}boss ${so[0]}pokemon${so[1]}`,
-	alias:						[`${p}b`],
-	dm:							true,
-	availability:				['PogoNWFortWorth', 'Pogo Barn'],
-	revision:					'09-02-20',
-
-
-	//DEFAULT ACTION
-	default: {
-		description_short:		'Returns current raid boss list',
-		synopsis:			'Returns current raid boss list',
-		description:			'This command will display a list of current raid bosses.',
-		examples:				[
-									{code: `${p}boss`}
-								]
-	},
+	name:							'boss',
+	command_set:				'raids',
+	synopsis:					'View/Set raid boss',
+	description:				'View or set the current raid boss.',
+	syntax:						`boss ${so[0]}action/pokemon${so[1]}`,
+	aliases:						['b'],
+	roles:						[],
+	dm:							false,
+	revision:					'01-26-21',
 
 	// ACTIONS
-	actions: {
+	actions: [
 
+		// ADD
+		{
+			name:					'add',
+			aliases:				[],
+			roles:				['admin'],
+			syntax:				`boss ${sr[0]}boss tier${sr[1]} ${sr[0]}boss name${sr[1]}`,
+			synopsis:			'Add a boss to the bosses list.',
+			description:		'Add a boss to the bosses list.',
+			examples:			[
+										['Add darkari to bosses:', 'boss add l5 darkari']
+									]
+		},
+		
 		// HELP
-		help: {
-			name:				'help',
+		{
+			name:					'help',
 			synopsis:			'Show Help',
 			description:		'Show Help',
-			syntax:				`${p}boss ${sr[0]}help${sr[1]} ${so[0]}action${so[1]}`,
+			syntax:				`boss ${sr[0]}help${sr[1]} ${so[0]}action${so[1]}`,
 			examples:			[
-									{code: `${p}boss help`, description: "Show boss help."},
-									{code: `${p}boss help pokemon`, description: "Show pokemon action help."},
-									{code: `${p}b help`, description: "Show boss help."}
-								]
+										['Show boss help', '?boss']
+									]
 		},
-
-		// Pokemon
-		pokemon: {
-			name:				'Pokemon',
-			synopsis:			'View boss card',
-			syntax:				`${p}boss ${sr[0]}pokemon${sr[1]}`,
+		
+		// LIST
+		{
+			name:					'list',
+			aliases:				['ls'],
+			synopsis:			'Show raid boss list',
+			description:		'Display a list of current raid bosses.',
+			examples:			[
+										['Show boss list', 'boss list'],
+										['Show boss list, alternate', 'boss ls']
+									]
+		},
+		
+		// REMOVE (ADMIN)
+		{
+			name:					'remove',
+			aliases:				['rem', 'rm'],
+			roles:				['admin'],
+			synopsis:			'Remove boss from list.',
+			description:		'Remove a boss from the bosses list.',
+			examples:			[
+										['Remove darkari from bosses:', `boss remove darkari`]
+									]
+		},
+		
+		// Set
+		{
+			name:					'set',
+			synopsis:			'Set raid boss',
+			syntax:				`boss ${sr[0]}boss name${sr[1]}`,
 			description:		'This action will display a boss card with vital information.',
 			examples:			[
-									{code: `${p}boss heatran`, description: "Show Heatran boss card."}
-								]
+										['Set raid boss to Heatran', 'boss heatran']
+									]
+		},
+
+		// Show
+		{
+			name:					'show',
+			default:				true,
+			synopsis:			'View raid boss',
+			syntax:				'boss',
+			description:		'This action will display a boss card with vital information.',
+			examples:			[
+										['Show boss', 'boss']
+									]
+		},
+		
+		// UPDATE (SU)
+		{
+			name:					'update',
+			aliases:				[],
+			roles:				['su'],
+			synopsis:			'Update bosses.',
+			description:		'Update the bosses list.',
+			examples:			[
+										['Update boss list:', 'boss update']
+									]
 		}
 
-	} // ACTIONS
+	] // ACTIONS
 
 }
