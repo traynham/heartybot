@@ -16,6 +16,7 @@ module.exports = {
 		address: require('./commands_raids/address'),
 		boss: require('./commands_raids/boss'),
 		coordinates: require('./commands_raids/coordinates'),
+		charge: require('./commands_raids/charge'),
 	}
 
 }
