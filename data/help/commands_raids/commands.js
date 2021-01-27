@@ -3,13 +3,13 @@ const {prefix_help: p, syntax_optional: so} = require('@config').discord
 module.exports = {
 
 	// GENERAL
-	name:							'help',
+	name:							'commands',
 	synopsis:					'Show help',
 	description:				'View inline help for raid commands and actions.',
 	syntax:						`${p}${so[0]}command${so[1]} ${so[0]}action${so[1]}`,
 	aliases:						['?', 'com', 'comm', 'command', 'commands', 'h', 'help', 'man', 'opt', 'options'],
 	dm:							true,
-	revision:					'01-25-21',
+	revision:					'01-27-21',
 
 	// ACTIONS
 	actions: [

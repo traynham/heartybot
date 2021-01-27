@@ -19,6 +19,7 @@ module.exports = {
 		charge: require('./commands_raids/charge'),
 		code: require('./commands_raids/code'),
 		codes: require('./commands_raids/codes'),
+		commands: require('./commands_raids/commands'),
 	}
 
 }
