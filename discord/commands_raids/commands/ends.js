@@ -4,16 +4,11 @@ const Discord = require('discord.js')
 
 const lowdb_raids = require('@models_lowdb/raids.js')
 const {colors, raid_duration_egg, raid_duration_boss} = require(`@config`).discord
-const {detect, discord, util} = require(`@core`)
+const {detect, discord, help, util} = require(`@core`)
 
 module.exports = {
 	name: 'ends',
-	aliases: ['end', 'ending', 'ended'],
-	synopsis: 'Show/Set end time.',
-	description: 'Show or set the end time for this raid.',
-	syntax: ['ends {time/duration}'],
-	usage: {'Show end time:': 'ends', 'Set end time with duration:': 'ends 10m', 'Set end time with time': 'ends 12:45'},
-	cooldown: 5,
+	meta: help.get('commands_raids', 'ends').value,
 	execute(message, argv) {
 
 		let args = argv._
