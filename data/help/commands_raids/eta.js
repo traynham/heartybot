@@ -12,7 +12,7 @@ module.exports = {
 	usage:						[
 										['Show eta:', 'eta'],
 										['Set eta with duration:', 'eta 5m'],
-										['Set eta with time', 'ends 5:05']
+										['Set eta with time', 'eta 5:05']
 									],
 	revision:					'01-28-21',
 
@@ -27,7 +27,7 @@ module.exports = {
 			syntax:				`eta ${sr[0]}time/duration${sr[1]}`,
 			examples:			[
 										['Set eta with duration:', 'eta 5m'],
-										['Set eta with time', 'ends 5:05']
+										['Set eta with time', 'eta 5:05']
 									]
 		},
 		

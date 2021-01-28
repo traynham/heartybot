@@ -4,21 +4,15 @@ const Discord = require('discord.js');
 const lowdb_raids = require('@models_lowdb/raids.js')
 
 const {colors, raid_duration_egg, raid_duration_boss} = require(`@config`).discord
-const {detect, util} = require(`@core`)
+const {detect, help, util} = require(`@core`)
 
 module.exports = {
 	name: 'hatches',
-	aliases: ['hat', 'hatch'],
-	synopsis: 'Show/Set hatch time.',
-	description: 'Show or set the egg hatch time for this raid.',
-	syntax: ['hatches {time/duration}'],
-	usage: {'Show hatch time:': 'hatches', 'Set hatch time with duration:': 'hatches 32m', 'Set hatch time with time': 'ends 6:42'},
-	cooldown: 5,
+	meta: help.get('commands_raids', 'hatches').value,
 	execute(message, argv) {
 		
 		let args = argv._
 		let author = message.author
-		//let raid = lowdb_raids.findRaid(message.channel.id)
 		let raid = lowdb_raids.raids_find(message.channel.id)
 		let isEgg = detect.isEgg(raid.boss).value
 		let errorMsg = null
@@ -74,10 +68,8 @@ module.exports = {
 		let raid_hatch = time.value
 
 		// UPDATE RAID
-		//let setTime = lowdb_raids.updateRaid(message.channel.id, 'time', raid_time)
-		//let setHatch = lowdb_raids.updateRaid(message.channel.id, 'hatches', raid_hatch)
-		let setTime = lowdb_raids.raids_update(message.channel.id, 'time', raid_time)
-		let setHatch = lowdb_raids.raids_update(message.channel.id, 'hatches', raid_hatch)
+		lowdb_raids.raids_update(message.channel.id, 'time', raid_time)
+		lowdb_raids.raids_update(message.channel.id, 'hatches', raid_hatch)
 
 		// SHOW CONFIRMATION MESSAGE
 		embed.setTitle('**Hatch Time (Updated)**')
