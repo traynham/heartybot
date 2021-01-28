@@ -36,7 +36,7 @@ module.exports = {
 			name:					'show',
 			default:				true,
 			synopsis:			'Show end time.',
-			description:		'Show end time..',
+			description:		'Show end time.',
 			syntax:				'ends',
 			examples:			[
 										['Show time', 'ends']

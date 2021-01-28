@@ -4,16 +4,11 @@ const Discord = require('discord.js');
 
 const lowdb_raids = require('@models_lowdb/raids.js')
 const {colors} = require(`@config`).discord
-const {detect, util} = require(`@core`)
+const {detect, help, util} = require(`@core`)
 
 module.exports = {
 	name: 'eta',
-	aliases: [],
-	synopsis: 'Show/Set eta.',
-	description: 'Show or set when you can arrive at the raid, IRL.',
-	syntax: ['eta {time/duration}'],
-	usage: {'Show eta:': 'eta', 'Set eta with duration:': 'eta 5m', 'Set eta with time': 'ends 5:05'},
-	cooldown: 5,
+	meta: help.get('commands_raids', 'eta').value,
 	execute(message, argv) {
 		
 		let args = argv._
@@ -25,11 +20,8 @@ module.exports = {
 		embed.setThumbnail(util.emoji_img('stopwatch', {h: 25}).value)
 		embed.setFooter(`${author.username}`, `${author.displayAvatarURL()}`)
 
-		//let raid = lowdb_raids.findRaid(message.channel.id)
 		let raid = lowdb_raids.raids_find(message.channel.id)
-		//let trainer = lowdb_raids.findTrainer(message.channel.id, author)
 		let trainer = lowdb_raids.trainers_find(message.channel.id, author)
-		//let isEgg = detect.isEgg(raid.boss).value
 		let errorMsg = null
 
 		// SHOW "NOT SET"
@@ -76,8 +68,7 @@ module.exports = {
 		author.eta = time.value
 		
 		// UPDATE TRAINER
-		//let updateTrainer = lowdb_raids.updateOrCreateTrainer(message.channel.id, author)
-		let updateTrainer = lowdb_raids.trainers_updateOrCreate(message.channel.id, author)
+		lowdb_raids.trainers_updateOrCreate(message.channel.id, author)
 
 		// SHOW CONFIRMATION MESSAGE
 		embed.setTitle('**ETA (Updated)**')

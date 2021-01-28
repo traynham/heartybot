@@ -21,6 +21,7 @@ module.exports = {
 		codes: require('./commands_raids/codes'),
 		commands: require('./commands_raids/commands'),
 		ends: require('./commands_raids/ends'),
+		eta: require('./commands_raids/eta'),
 	}
 
 }
