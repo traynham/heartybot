@@ -27,8 +27,8 @@ module.exports = {
 		
 		// LIST (DEFAULT)
 		{
-			name:					'list',
-			aliases:				['ls'],
+			name:					'show',
+			aliases:				['sh'],
 			default:				true,
 			synopsis:			'List available commands',
 			description:		'This will show all available commands in which you can view help.',

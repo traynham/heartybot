@@ -2,20 +2,12 @@ const dateFormat = require('dateformat')
 const Discord = require('discord.js')
 const lowdb_raids = require('@models_lowdb/raids.js')
 
+const {help} = require(`@core`)
 const {colors, emoji, trainer_states} = require(`@config`).discord
 
 module.exports = {
 	name: 'list',
-	aliases: ['l', 'ls', 'lis'],
-	synopsis: 'List trainers.',
-	description: 'List trainers and their status for the raid.',
-	syntax: ['list {state}'],
-	usage: {
-		'To list trainers:': 'list',
-		'To show trainers that are "here":': 'list here'
-	},
-	show_help_footer: true,
-	cooldown: 5,
+	meta: help.get('commands_raids', 'list').value,
 	execute(message, argv) {
 
 		let args = argv._
