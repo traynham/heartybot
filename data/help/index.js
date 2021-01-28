@@ -22,6 +22,7 @@ module.exports = {
 		commands: require('./commands_raids/commands'),
 		ends: require('./commands_raids/ends'),
 		eta: require('./commands_raids/eta'),
+		fast: require('./commands_raids/fast'),
 	}
 
 }
