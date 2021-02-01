@@ -75,7 +75,6 @@ client.on('message', message => {
 
 	// SET CONTENT TO LOWERCASE.
 	message.content = message.content.toLowerCase()
-
 	let isRaidChannel = false
 //	let isRaidTrain = false
 
@@ -85,8 +84,6 @@ client.on('message', message => {
 	
 	if(message.content.startsWith('?')) {
 		message.content = `help ${message.content.slice(1)}`
-		//commands_general(client, message)
-		//return
 	}
 
 	if(isRaidChannel) {
@@ -102,8 +99,7 @@ client.on('message', message => {
 		return
 	}
 	
-	if(message.content.startsWith('?')) {
-		message.content = `help ${message.content.slice(1)}`
+	if(message.content.startsWith('help')) {
 		commands_general(client, message)
 		return
 	}

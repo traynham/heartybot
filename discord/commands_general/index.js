@@ -3,7 +3,7 @@ const {discord} = require(`@core`)
 const {colors} = require(`@config`).discord
 
 module.exports = (client, message) => {
-	
+
 	var argv = require('yargs-parser')(message.content, {
 		boolean: ['d', 'h', 's', 'u', 'v', 'debug', 'help'],
 		configuration: {
