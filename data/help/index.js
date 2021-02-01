@@ -25,6 +25,7 @@ module.exports = {
 		fast:				require('./commands_raids/fast'),
 		hatches:			require('./commands_raids/hatches'),
 		list:				require('./commands_raids/list'),
+		people:				require('./commands_raids/people'),
 	}
 
 }

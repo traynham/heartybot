@@ -2,21 +2,14 @@ const Discord = require('discord.js');
 
 const lowdb_raids = require('@models_lowdb/raids.js')
 const {colors} = require(`@config`).discord
-const {util} = require(`@core`)
+const {help, util} = require(`@core`)
 
 module.exports = {
 	name: 'people',
-	aliases: ['acc', 'account', 'accounts', 'p', 'ppl', 'peo', 'tra', 'trainer', 'trainers'],
-	synopsis: 'Show/set people/accounts count.',
-	description: 'Show or set how many people or accounts are raiding.',
-	syntax: ['people {count}', 'accounts {count}'],
-	usage: {'To show count:': 'people', 'To set count:': 'people 3'},
-	show_help_footer: true,
-	cooldown: 5,
+	meta: help.get('commands_raids', 'people').value,
 	execute(message, argv) {
 
 		let args = argv._
-		//let action = argv.command
 		let author = message.author
 		let value = args[0]
 
@@ -26,12 +19,11 @@ module.exports = {
 		embed.setThumbnail(util.emoji_img('busts_in_silhouette', {h: 25}).value)
 		embed.setFooter(`${author.username}`, `${author.displayAvatarURL()}`)
 
-		//let trainer = lowdb_raids.findTrainer(message.channel.id, author)
 		let trainer = lowdb_raids.trainers_find(message.channel.id, author)
 
 		// SHOW PEOPLE COUNT
 		if(args.length === 0){
-			embed.setDescription(`Your people count is ${trainer.value.people}`)
+			embed.setDescription(`Your people count is ${trainer.value.people ? trainer.value.people : 1}`)
 			message.channel.send(embed)
 			return
 		}
@@ -47,8 +39,7 @@ module.exports = {
 
 		// UPDATE TRAINER
 		author.people = value
-		//let updateTrainer = lowdb_raids.updateOrCreateTrainer(message.channel.id, author)
-		let updateTrainer = lowdb_raids.trainers_updateOrCreate(message.channel.id, author)
+		lowdb_raids.trainers_updateOrCreate(message.channel.id, author)
 
 		// SHOW SUCCESS
 		embed.setColor(colors.success)
