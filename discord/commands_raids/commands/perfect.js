@@ -1,22 +1,16 @@
 const Discord = require('discord.js');
 const lowdb_raids = require('@models_lowdb/raids.js')
 
-const {detect} = require(`@core`)
+const {help, detect} = require(`@core`)
 const {colors} = require(`@config`).discord
 
 module.exports = {
 	name: 'perfect',
-	aliases: ['100', '100%', 'per', 'perf'],
-	synopsis: 'Show perfects.',
-	description: 'Show perfect cp values for raid boss.',
-	syntax: ['perfect'],
-	usage: {'Show perfects:': 'perfect'},
-	show_help_footer: false,
-	cooldown: 5,
+	meta: help.get('commands_raids', 'perfect').value,
 	execute(message, argv) {
 		
-		//let args = argv._
-		//let raid = lowdb_raids.findRaid(message.channel.id)
+		argv.action = null
+
 		let raid = lowdb_raids.raids_find(message.channel.id)
 		let boss_command = message.client.commands.find(cmd => cmd.name =='boss')
 		let isEgg = detect.isEgg(raid.boss).value
