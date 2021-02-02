@@ -35,6 +35,11 @@ module.exports = (client, message) => {
 		client.raid_commands.find(cmd => cmd.meta && cmd.meta.aliases && cmd.meta.aliases.includes(commandName))
 	)
 	
+	// EXIT IF COMMAND IS DISABLED
+	if(command && command.meta && command.meta.enabled === false) {
+		return
+	}
+	
 	//  COMMAND ROLE CHECK. CURRENT ONLY SUPPORTS ONE ROLE.	
 	if(command && command.meta && command.meta.roles && command.meta.roles.length && !discord.hasRole(message, command.meta.roles[0])) {
 		const embed = new Discord.MessageEmbed()

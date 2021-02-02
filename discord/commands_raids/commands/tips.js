@@ -1,10 +1,12 @@
 const Discord = require('discord.js');
 const tips = require('@data/tips.json')
+const {help} = require(`@core`)
 
 const {colors} = require(`@config`).discord
 
 module.exports = {
 	name: 'tip',
+	meta: help.get('commands_raids', 'tips').value,
 	aliases: ['tips'],
 	synopsis: 'Show a tip.',
 	description: 'Display a tip',
@@ -12,7 +14,8 @@ module.exports = {
 	syntax: ['tip'],
 	usage: {'To show a tipe:': 'tip'},
 	cooldown: 5,
-	execute(message, argv) {
+	//execute(message, argv) {
+	execute(message) {
 	
 		/**
 			IDEAS:

@@ -53,6 +53,16 @@ module.exports = (message, args, command_set) => {
 		commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) ||
 		commands.find(cmd => cmd.meta && cmd.meta.aliases && cmd.meta.aliases.includes(commandName))
 	)
+	
+	// EXIT IF COMMAND IS DISABLED
+	if(command && command.meta && command.meta.enabled === false) {
+		payload.error = true
+		payload.error_message = `Sorry. That command was not found.`
+		embed.setTitle(`**HELP ERROR**`)
+		embed.setColor(colors.error)
+		embed.setDescription(payload.error_message)
+		return payload
+	}
 
 	if(command) help = command.meta
 
@@ -177,14 +187,18 @@ module.exports = (message, args, command_set) => {
 	data.push('Use `?[command name]` for more details, for example, `?boss`.\n');
 	
 	commands.forEach(command => {
-		
-		let hasRoleRequirement = command.meta && command.meta.roles && command.meta.roles.length
 
-		if(
-			(hasRoleRequirement && user_roles.includes(command.meta.roles[0])) ||
-			!hasRoleRequirement
-		){
-			data.push(`**${command.name}**: ${command.meta ? command.meta.synopsis : ''}`)
+		if(command.meta && command.meta.enabled != false){
+
+			let hasRoleRequirement = command.meta && command.meta.roles && command.meta.roles.length
+	
+			if(
+				(hasRoleRequirement && user_roles.includes(command.meta.roles[0])) ||
+				!hasRoleRequirement
+			){
+					data.push(`**${command.name}**: ${command.meta ? command.meta.synopsis : ''}`)
+			}
+
 		}
 
 	})
