@@ -2,24 +2,15 @@ const Discord = require('discord.js');
 
 const lowdb_raids = require('@models_lowdb/raids.js')
 const {colors} = require(`@config`).discord
-const {detect, discord, util} = require(`@core`)
+const {detect, discord, help, util} = require(`@core`)
 
 module.exports = {
 	name: 'team',
-	aliases: ['tea'],
-	synopsis: 'Show/set team.',
-	description: 'Show/set your team for this raid.',
-	syntax: ['team {instinct/mystic/valor}'],
-	usage: {'To show your team:': 'team', 'To set team:': 'team valor'},
-	show_help_footer: true,
-	cooldown: 5,
+	meta: help.get('commands_raids', 'team').value,
 	execute(message, argv) {
 
 		let args = argv._
-		//let action = argv.command
 		let author = message.author
-		//let value = args[0]
-		//let trainer = lowdb_raids.findTrainer(message.channel.id, author)
 		let trainer = lowdb_raids.trainers_find(message.channel.id, author)
 		let team = detect.team(args)
 	
@@ -49,12 +40,8 @@ module.exports = {
 
 		// UPDATE TRAINER
 		author.team = team.value
-		console.log(author)
-		//let updateTrainer = lowdb_raids.updateOrCreateTrainer(message.channel.id, author)
-		let updateTrainer = lowdb_raids.trainers_updateOrCreate(message.channel.id, author)
+		lowdb_raids.trainers_updateOrCreate(message.channel.id, author)
 		let png = team.value.toLowerCase()
-		
-		console.log('UPDATE: ', updateTrainer)
 
 		// SHOW SUCCESS
 		embed.setColor(colors.success)

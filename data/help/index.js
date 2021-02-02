@@ -30,6 +30,7 @@ module.exports = {
 		pull:				require('./commands_raids/pull'),
 		states:			require('./commands_raids/states'),
 		status:			require('./commands_raids/status'),
+		team:			require('./commands_raids/team'),
 	}
 
 }
