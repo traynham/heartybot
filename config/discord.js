@@ -133,7 +133,7 @@ module.exports = {
 		{
 			state: 'omw',
 			value: 'On My Way',
-			aliases: ['on my way', 'on my way!', 'omy'],
+			aliases: ['on my way', 'on my way!', 'omw', 'omy'],
 			description: 'I\'m on my way!',
 			emoji: 'door'
 		},
