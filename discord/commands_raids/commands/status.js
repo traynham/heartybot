@@ -1,16 +1,10 @@
 const lowdb_raids = require('@models_lowdb/raids.js')
 const {discord} = require(`@core`)
+const {help} = require(`@core`)
 
 module.exports = {
 	name: 'status',
-	aliases: ['s', 'stat', 'stats'],
-	actions_admin: ['add', 'remove', 'update'],
-	synopsis: 'Show raid status.',
-	description: 'Show the status card for the raid.',
-	syntax: ['status'],
-	usage: {'To show status:': 'status'},
-	show_help_footer: false,
-	cooldown: 5,
+	meta: help.get('commands_raids', 'status').value,
 	execute(message, argv) {
 
 		console.log(argv)
