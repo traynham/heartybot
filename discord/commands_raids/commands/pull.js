@@ -4,24 +4,16 @@ const Discord = require('discord.js');
 const lowdb_raids = require('@models_lowdb/raids.js')
 
 const {colors} = require(`@config`).discord
-const {detect, util} = require(`@core`)
+const {detect, help, util} = require(`@core`)
 
 module.exports = {
 	name: 'start',
-	aliases: ['pul', 'pull', 'star', 'starting'],
-	synopsis: 'Show/set start time.',
-	description: 'Show or set when to start the raid.',
-	syntax: ['start {time/duration}'],
-	usage: {'Show start time:': 'start', 'Set start time with duration:': 'start 25m', 'Set start time with time': 'start 7:13'},
-	show_help_footer: true,
-	cooldown: 5,
+	meta: help.get('commands_raids', 'pull').value,
 	execute(message, argv) {
 		
 		let args = argv._
 		let author = message.author
-		//let raid = lowdb_raids.findRaid(message.channel.id)
 		let raid = lowdb_raids.raids_find(message.channel.id)
-		//let isEgg = detect.isEgg(raid.boss).value
 		let errorMsg = null
 
 		const embed = new Discord.MessageEmbed()
@@ -77,8 +69,7 @@ module.exports = {
 		}
 
 		// UPDATE RAID
-		//let updateRaid = lowdb_raids.updateRaid(message.channel.id, 'pull', time.value)
-		let raids_update = lowdb_raids.raids_update(message.channel.id, 'pull', time.value)
+		lowdb_raids.raids_update(message.channel.id, 'pull', time.value)
 
 		// SHOW CONFIRMATION MESSAGE
 		embed.setTitle('**Set Pull Time (Updated)**')

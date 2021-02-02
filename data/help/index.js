@@ -27,6 +27,7 @@ module.exports = {
 		list:				require('./commands_raids/list'),
 		people:			require('./commands_raids/people'),
 		perfect:			require('./commands_raids/perfect'),
+		pull:				require('./commands_raids/pull'),
 	}
 
 }
