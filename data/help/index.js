@@ -33,6 +33,7 @@ module.exports = {
 		team:					require('./commands_raids/team'),
 		tips:					require('./commands_raids/tips'),
 		trainer_status:	require('./commands_raids/trainer_status'),
+		type:					require('./commands_raids/type'),
 	}
 
 }
