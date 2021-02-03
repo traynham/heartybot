@@ -27,8 +27,7 @@ const {me} = require(`@core`)
 const payload_obj = require('@core/util/payload')
 const file = require('@core/util/file')
 
-//const adapter = new FileSync('./data/raids.json')
-const adapter = new FileSync('./data/cache/raids.json')
+const adapter = new FileSync(require.resolve('@data/cache/raids.json'))
 const db = low(adapter)
 
 db.defaults({
