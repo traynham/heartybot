@@ -17,6 +17,7 @@ module.exports = {
 		// HELP
 		{
 			name:					'help',
+			roles:				['su'],
 			default:				true,
 			synopsis:			'Get help',
 			description:		'Show Help',
@@ -25,9 +26,22 @@ module.exports = {
 									]
 		},
 
+		// JEEVES
+		{
+			name:					'jeeves',
+			aliases: 			['j', 'jv'],
+			roles:				['su'],
+			synopsis:			'Run Jeeves',
+			description:		'Run Jeeves',
+			examples:			[
+										['Run Jeeves', `${p}su jeeves`]
+									]
+		},
+
 		// Update
 		{
 			name:				'update',
+			roles:			['su'],
 			aliases:			['u', 'up', 'ud', 'refresh', 'fresh'],
 			synopsis:		'Update things',
 			description:	'Update the Pokedes or Bosses list.',

@@ -13,7 +13,7 @@ module.exports = (req) => {
 
 // TODO:
 // * ADD SEARCH TRIE FUNCTIONALITY.
-// * Error checking, better logic.
+// IDEA: Error checking, better logic.
 
 //	const q = Array.isArray(req) ? req.join(' ') : req
 	

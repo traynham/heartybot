@@ -5,7 +5,7 @@ module.exports = {
 	synopsis:					'Show raid status.',
 	description:				'Show the status card for the raid.',
 	syntax:						'status',
-	aliases:						['s', 'stat', 'stats'],
+	aliases:						['s', 'sta', 'stat', 'stats'],
 	dm:							false,
 	revision:					'02-01-21',
 

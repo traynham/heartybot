@@ -10,6 +10,7 @@ const {prefix} = require(`@config`).discord
 
 client.config = { prefix: prefix }
 
+var cron = require('node-cron')
 
 // COMMANDS - GENERAL
 const commands_general = require('./commands_general')
@@ -146,5 +147,13 @@ client.on('messageReactionAdd', async (reaction, user) => {
 */
 
 //client.login(token)
+
+
+	const run_jeeves = false
+
+	if(run_jeeves){
+		const jeeves = require('./jeeves')
+		cron.schedule('*/1 * * * *', () => { jeeves(client) });
+	}
 
 module.exports = client

@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const {colors} = require(`@config`).discord
 const bosses = require('@models_lowdb/bosses.js').bosses()
+const guilds = require('@data/private/guilds.json')
 
 module.exports = (payload) => {
 	
@@ -132,6 +133,32 @@ console.log('PUT CHANNEL EMBEDS HERE')
 
 	
 		discord.embedRaid(channel.id, {message: payload.message, new: true})
+		
+		
+		//let guild = guilds.find(guild => guild.id = '743528914823020584')
+		let guild = guilds.find(guild => guild.id = payload.message.guild.id)
+		
+		console.log('GUILD::', guild)
+		
+		// SHOULD THIS BE FOUND IN EMBEDRAIDS.JS INSTEAD?
+		let raid_channel = guild.channels.find(channel => {
+			if(channel.type == 'raid') { return true}
+		})
+		
+		console.log('RAID_CHANNEL::', raid_channel.id)
+		
+		discord.embedRaid(channel.id, {message: payload.message, raid_channel: raid_channel.id})
+
+	/*	
+		// GATHER RAID CHANNEL IDS FROM GUILDS.JSON
+		guilds.forEach( guild => {
+			guild.channels.forEach(channel => {
+				if(channel.type == 'raid') { raid_channels.push(channel.id)}
+			})
+		})
+	*/
+		
+		
 		
 		// CREATE MESSAGE WITH COMPLETE INFO AND POST.
 

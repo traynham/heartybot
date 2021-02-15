@@ -56,6 +56,9 @@ db.defaults({
 **/
 const _locateRaid = (q) => {
 	
+// MOVE TO CHECKING FILE UPDATED DATE TO TIMESTAMP IN JSON FILE.
+//	db.read() // QUESTION: How expensive is this?
+	
 	/* MAKE PAYLOAD AND RETURN ERRORS AND SUCH? */
 
 	// BY CHANNEL
@@ -104,6 +107,8 @@ module.exports = {
 			payload.error_message = 'Raid already exists.'
 			return payload
 		}
+
+// TODO: ADD HATCH TIME HERE SO THAT THERE WILL ALWAYS BE A VALUE.
 
 		raid.messages = []
 		raid.trainers = []
@@ -178,6 +183,8 @@ module.exports = {
 		
 		let payload = payload_obj()	
 		let raid = _locateRaid(q)
+
+// TODO: UPDATE HATCH TIME HERE SO THAT THERE WILL ALWAYS BE A VALUE.
 		
 		if(!raid.value()){
 			payload.error = true
@@ -186,6 +193,49 @@ module.exports = {
 		}
 		
 		return raid.set(key, value).write()
+
+	},
+	
+	// UPDATE STATUS
+	/**
+		* Update raid status object. Returns a payload.
+		* @param {string} q The gym name or channel snowflake.
+		* @param {string} key The key to update.
+		* @param {string} value The value to set key to.
+		* @returns {payload}
+		* @todo Allow an object of values to be updated. (Pass multiple key/values)
+	*/
+	raids_status: (q, key, value) => {
+		
+		let payload = payload_obj()	
+		let raid = _locateRaid(q)
+
+		// RETURN IF RAID NOT FOUND
+		if(!raid.value()){
+			payload.error = true
+			payload.error_message = 'Raid not found.'
+			return payload
+		}
+		
+		let status = raid.get('status').value()
+		
+		// CREATE STATUS OBJECT IF NEEDED
+		if(!status){
+			raid.value().status = {}
+		}
+		
+		// IF NO KEY, RETURN STATUS OBJECT
+		if(!key){
+			payload.value = raid.value().status
+			return payload
+		}
+
+		if(key){
+			raid.value().status[key] = value
+			raid.write()
+		}
+		
+		return payload
 
 	},
 

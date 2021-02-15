@@ -44,11 +44,25 @@ module.exports = async (raid, opt) => {
 	)
 	
 	if(opt.new){
+		console.log('this is the "New"')
 		let chan = await opt.message.client.channels.fetch(raid.channel)		
 		let result = await chan.send(embed)
 		lowdb_raids.raids_update(raid.channel, 'messages', [...raid.messages, [raid.channel, result.id]])
 		return payload
 	}
+
+
+	
+	if(opt.raid_channel){
+		console.log('It this triggered??? - raid_channel')
+		console.log(opt)
+		let chan = await opt.message.client.channels.fetch(opt.raid_channel)		
+		let result = await chan.send(embed)
+		lowdb_raids.raids_update(raid.channel, 'messages', [...raid.messages, [opt.raid_channel, result.id]])
+		return payload
+	}
+
+
 	
 	if(opt.message && opt.update != true){
 		let result = await opt.message.channel.send(embed)

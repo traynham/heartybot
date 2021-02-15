@@ -3,6 +3,8 @@ const Discord = require('discord.js')
 const {help, pokedex, util} = require(`@core`)
 const {colors} = require(`@config`).discord
 
+const jeeves = require('@root/discord/jeeves')
+
 module.exports = {
 	name: 'su',
 	meta: help.get('commands_general', 'su').value,
@@ -19,6 +21,12 @@ module.exports = {
 			argv._.push(this.name)
 			const help_command = message.client.commands.find(cmd => cmd.name =='commands')
 			help_command.execute(message, argv)
+			return
+		}
+		
+		//JEEVES
+		if(action.name === 'jeeves'){
+			jeeves(message.client)
 			return
 		}
 

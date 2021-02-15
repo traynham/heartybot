@@ -47,8 +47,6 @@ module.exports = {
 		// SHOW
 		if(action == 'show'){
 			let raid = lowdb_raids.raids_find(args.join(''))
-			//discord.embedRaid(message, raid, {})
-			//discord.embedRaid(raid, {message: message})
 			discord.embedRaid(raid, {message: message, update: true})
 			return
 		}

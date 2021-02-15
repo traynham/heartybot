@@ -39,6 +39,7 @@
     "lowdb": "^1.0.0",
     "module-alias": "^2.2.2",
     "moment": "^2.29.1",
+    "node-cron": "^2.0.3",
     "node-fetch": "^2.6.1",
     "puppeteer": "^5.5.0",
     "qrcode": "^1.4.4",
