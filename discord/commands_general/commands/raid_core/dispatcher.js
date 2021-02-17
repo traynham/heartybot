@@ -17,7 +17,7 @@ module.exports = (payload) => {
 		})
 
 		gather({
-			title: 'Boss',
+			title: 'Which Boss?',
 			description: `Enter a boss name and submit.\n\n${bosses_list.join('\n\n')}`,
 			payload: payload
 		}, function(term){
@@ -47,7 +47,7 @@ module.exports = (payload) => {
 	if(!payload.time){
 
 		gather({
-			title: 'Time/Duration',
+			title: 'What Time/Duration?',
 			description: 'Enter a time and submit.',
 			payload: payload
 		}, function(time){
@@ -62,7 +62,7 @@ module.exports = (payload) => {
 	if(!payload.gym){
 
 		gather({
-			title: 'Gym.',
+			title: 'What Gym?',
 			description: `Enter a search for a gym and submit.`,
 			payload: payload
 		}, async function(term){
@@ -113,54 +113,26 @@ module.exports = (payload) => {
 		return true
 	}
 
-console.log('PUT EMBED CODE HERE')
-
-
-
-
-
 	// OPEN CHANNEL
 	payload.message.guild.channels.create('_' + payload.gym.gym.name, {
 		topic: 'This is the topic',
 		parent: payload.message.channel.parent
 	}).then( async (channel) => {
 
-		let setRaidChannel = await lowdb_raids.raids_update(payload.gym.gym.name,'channel', channel.id)
+		// UPDATE RAID WITH CHANNEL ID.
+		await lowdb_raids.raids_update(payload.gym.gym.name,'channel', channel.id)
 
-		console.log(setRaidChannel)
-		
-console.log('PUT CHANNEL EMBEDS HERE')
-
-	
+		// POST RAID EMBED TO NEW CHANNEL
 		discord.embedRaid(channel.id, {message: payload.message, new: true})
 		
-		
-		//let guild = guilds.find(guild => guild.id = '743528914823020584')
+		// POST RAID EMBED TO GUILD'S RAID CHANNEL
 		let guild = guilds.find(guild => guild.id = payload.message.guild.id)
 		
-		console.log('GUILD::', guild)
-		
-		// SHOULD THIS BE FOUND IN EMBEDRAIDS.JS INSTEAD?
 		let raid_channel = guild.channels.find(channel => {
 			if(channel.type == 'raid') { return true}
 		})
-		
-		console.log('RAID_CHANNEL::', raid_channel.id)
-		
-		discord.embedRaid(channel.id, {message: payload.message, raid_channel: raid_channel.id})
 
-	/*	
-		// GATHER RAID CHANNEL IDS FROM GUILDS.JSON
-		guilds.forEach( guild => {
-			guild.channels.forEach(channel => {
-				if(channel.type == 'raid') { raid_channels.push(channel.id)}
-			})
-		})
-	*/
-		
-		
-		
-		// CREATE MESSAGE WITH COMPLETE INFO AND POST.
+		discord.embedRaid(channel.id, {message: payload.message, raid_channel: raid_channel.id})
 
 	}).catch(error => { console.log('ERROR CREATING RAID CHANNEL:', error)})
 

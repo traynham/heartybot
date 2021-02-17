@@ -57,6 +57,7 @@ db.defaults({
 const _locateRaid = (q) => {
 	
 // MOVE TO CHECKING FILE UPDATED DATE TO TIMESTAMP IN JSON FILE.
+// THIS WILL NEED TO BE FIXED SO THAT JEEVES CAN OUROBOROS.
 //	db.read() // QUESTION: How expensive is this?
 	
 	/* MAKE PAYLOAD AND RETURN ERRORS AND SUCH? */
