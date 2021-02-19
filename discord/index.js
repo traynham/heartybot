@@ -5,8 +5,7 @@ const lowdb_raids = require('@models_lowdb/raids.js')
 
 const Discord = require('discord.js')
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
-//const {prefix, token} = require(`@config`).discord
-const {prefix} = require(`@config`).discord
+const {mode, prefix} = require(`@config`).discord
 
 client.config = { prefix: prefix }
 
@@ -55,16 +54,19 @@ client.on('error', error => {
 	console.error('Discord Error:', error)
 })
 
-/** @todo Only do warn and debug in dev mode */
-// ON Warn
-client.on('warn', warn => {
-	console.error('Discord Warning:', warn)
-})
+if(mode === 'dev'){
+	
+	// ON Warn
+	client.on('warn', warn => {
+		console.error('Discord Warning:', warn)
+	})
+	
+	// ON Debug
+	client.on('debug', debug => {
+		console.error('Discord Debug:', debug)
+	})
 
-// ON Debug
-client.on('debug', debug => {
-	console.error('Discord Debug:', debug)
-})
+} // IF DEV MODE
 
 process.on('unhandledRejection', error => {
 	console.error('Unhandled promise rejection:', error)
@@ -149,7 +151,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 //client.login(token)
 
 
-	const run_jeeves = false
+	const run_jeeves = true
 
 	if(run_jeeves){
 		const jeeves = require('./jeeves')

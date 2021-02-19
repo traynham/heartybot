@@ -23,8 +23,6 @@ module.exports = async (client) => {
 	
 	// PROCESS RAID CHANNELS.
 	raid_channels.forEach( async raid_channel => {
-
-		console.log('MANAGE RAID CHANNEL MESSAGES')
 	
 		let raid_messages = []
 

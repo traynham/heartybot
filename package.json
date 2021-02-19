@@ -4,10 +4,8 @@
   "description": "Pokemon Discord Bot",
   "main": "index.js",
   "scripts": {
-    "_test": "jest --coverage",
     "test": "jest --verbose --coverage --config=.jest.config.js",
-    "start_old": "nodemon index.js --ignore '*.json'",
-    "start": "nodemon -r dotenv/config index.js --ignore '*.json' dotenv_config_path=config/.env",
+    "start": "node -r dotenv/config index.js dotenv_config_path=config/.env",
     "dev": "nodemon -r dotenv/config index.js --ignore '*.json' dotenv_config_path=config/.env_dev",
     "doc": "nodemon -e js --ignore jsdoc/ --exec jsdoc -c ./jsdoc/jsdoc.json"
   },
