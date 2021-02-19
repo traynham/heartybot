@@ -2,6 +2,7 @@
 discord_token=my-long-discord-token
 discord_prefix=!
 discord_prefix_help=?
+discord_mode=production
 
 # WEBSITE
 web_uri=https://www.heartyjessman.com
