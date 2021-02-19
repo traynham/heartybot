@@ -5,7 +5,10 @@ const help = require('../../../data/help')
 const {prefix} = require('../../../config/main')
 
 // GET home page.
-router.get('/help/commands/:command', function(req, res, next) {
+//router.get('/help/commands/:command', function(req, res, next) {
+router.get('/help/commands/:command', function(req, res) {
+
+res.render('public/index')
 
 	let payload = {
 		prefix: prefix,

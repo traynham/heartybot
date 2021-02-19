@@ -5,7 +5,10 @@ const {gyms} = require('../../../core')
 //const db = required(`/models/${config.section}`)
 
 // GET home page.
-router.get('/gyms/near', function(req, res, next) {
+//router.get('/gyms/near', function(req, res, next) {
+router.get('/gyms/near', function(req, res) {
+
+res.render('public/index')
 
 	(async () => {
 	

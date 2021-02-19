@@ -5,7 +5,10 @@ const {gyms} = require('../../../core')
 
 
 // GET GYM AREAS.
-router.get('/gyms', async function(req, res, next) {
+//router.get('/gyms', async function(req, res, next) {
+router.get('/gyms', async function(req, res) {
+	
+res.render('public/index')
 
 	let payload = {
 		areas: []

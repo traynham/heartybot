@@ -43,8 +43,7 @@ db.defaults({
 			trainers: [],
 			gym: {}
 		}
-	],
-	ouroboros: ''
+	]
 }).write()
 
 // LOCATE RAID HELPER FUNCTION

@@ -4,7 +4,10 @@ const router = express.Router();
 const {gyms} = require('../../../core')
 
 // GET GYMS Q.
-router.get('/gyms/:q', async function(req, res, next) {
+//router.get('/gyms/:q', async function(req, res, next) {
+router.get('/gyms/:q', async function(req, res) {
+
+res.render('public/index')
 
 	let payload = {
 		area: await gyms.areas(req.params.q),
