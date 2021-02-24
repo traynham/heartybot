@@ -38,7 +38,11 @@ module.exports = (req) => {
 	
 	theMon = theMon.replace('(', '')
 	theMon = theMon.replace(')', '')
+	theMon = theMon.replace("'", '')
+	theMon = theMon.replace('.', '')
 	theMon = theMon.toLowerCase().replace('alolan', 'alola')
+	
+	console.log(theMon)
 	
 	let records = pokeTrie.get(theMon)
 
