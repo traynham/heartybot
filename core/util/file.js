@@ -43,6 +43,8 @@ const createDir = dirPath => {
 /**
  * @name createFile
  * @param {string} path The path including filename starting at process root.
+ * @param {object} data The file data as an object.
+ * @param {object} opt.overwrite Boolean to overwrite the file or not.
  * @function
  * @example
  * // Create file "test.json" in "test" folder.
@@ -51,9 +53,12 @@ const createDir = dirPath => {
  * // Create file "another_test.json" in "test/blah" folder.
  * file.createFile('test/blah/another_test.json', {'test':'blah'}) 
  */
-const createFile = (path, data) => {
+const createFile = (path, data, opt = {}) => {
 	
 	let payload = payload_obj()
+	
+	payload.fileExists = fs.existsSync(Path.join(process.cwd(), path))
+	payload.overwrite = opt.overwrite === false ? false : true //OVERWRITE BY DEFAULT
 
 	// CREATE DIR IF NEEDED
 	if(!fs.existsSync(Path.join(process.cwd() + Path.dirname(path)))){
@@ -67,7 +72,9 @@ const createFile = (path, data) => {
 
 	// WRITE FILE
 	try {
-		fs.writeFileSync(Path.join(process.cwd(), path), data)
+		if(!payload.fileExists || payload.overwrite){
+			fs.writeFileSync(Path.join(process.cwd(), path), data)
+		}
 	} catch (err) {
 		payload.error = true
 		payload.error_message = err
