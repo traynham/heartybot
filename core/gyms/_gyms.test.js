@@ -102,8 +102,8 @@ describe('Core Gyms', () => {
 	})
 	
 	// FIND » FIELD (shortid)
-	test('Find: Find "The Y YMCA - Northwest" using "shortid qsMNO0WDnw"', async () => {
-		let result = await find('shortid qsMNO0WDnw')
+	test('Find: Find "The Y YMCA - Northwest" using "shortid p43CwF-C6O"', async () => {
+		let result = await find('shortid p43CwF-C6O')
 		expect(result).toHaveProperty('gym.name', 'The Y YMCA - Northwest')
 		expect(result).toHaveProperty('method', 'valid field')
 		expect(result).toHaveProperty('count', 1)

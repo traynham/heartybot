@@ -44,15 +44,12 @@ describe('Detect', () => {
 	test('Boss: Detect "Mega" using "mega" as term.', () => {
 		expect(boss('mega')).toHaveProperty('value', 'Mega')
 	})
+
+	test('Boss: Detect first mega as term.', () => {
+		let mega = boss('mega ').value[0]
+		expect(boss(mega)).toHaveProperty('value', mega)
+	})
 	
-	test('Boss: Detect "Mega Gengar" using "Mega Gengar" as term.', () => {
-		expect(boss('Mega Gengar')).toHaveProperty('value', 'Mega Gengar')
-	})
-/*	
-	test('Boss: Detect "Bulbasaur" using "bulb" as term.', () => {
-		expect(boss('bulb')).toHaveProperty('value', 'Bulbasaur')
-	})
-*/
 	test('Boss: Detect "Bogus". (Will have zero count)', () => {
 		expect(boss('bogus')).toHaveProperty('count', 0)
 	})
@@ -143,12 +140,12 @@ describe('Detect', () => {
 		expect(level(15)).toHaveProperty('value', 15)
 	})
 	
-	test('Level: Throw error on trainer level "0" (Level must be between 1-40)', () => {
+	test('Level: Throw error on trainer level "0" (Level must be between 1-50)', () => {
 		expect(level(0)).toHaveProperty('error', true)
 	})
 	
-	test('Level: Throw error on trainer level "50" (Level must be between 1-40)', () => {
-		expect(level(50)).toHaveProperty('error', true)
+	test('Level: Throw error on trainer level "60" (Level must be between 1-50)', () => {
+		expect(level(60)).toHaveProperty('error', true)
 	})
 	
 	
@@ -178,7 +175,7 @@ describe('Detect', () => {
 	})
 	
 	
-	// TEAM
+	// TIME
 	test('Time: Detect "Bogus" time.', () => {
 		expect(time('bogus')).toHaveProperty('error', true)
 	})

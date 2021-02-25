@@ -44,13 +44,11 @@ describe('Core › Util', () => {
 	test('File: Create file "test.json" in "test" folder', () => {
 		let result = file.createFile('../test/test.json', {'test':'testing'})
 		expect(result).toHaveProperty('error', false)
-		console.log(result)
 	})
 	
 	test('File: Create file "test.json" in "test" folder with overwrite set to false.', () => {
 		let result = file.createFile('../test/test.json', {'Nope':'do not write'}, {overwrite: false})
 		expect(result).toHaveProperty('error', false)
-		console.log(result)
 	})
 	
 	test('File: Create file "another_test.json" in "test/blah" folder', () => {
