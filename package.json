@@ -7,7 +7,8 @@
     "test": "jest --verbose --coverage --config=.jest.config.js",
     "start": "node -r dotenv/config index.js dotenv_config_path=config/.env",
     "dev": "nodemon -r dotenv/config index.js --ignore '*.json' dotenv_config_path=config/.env_dev",
-    "doc": "nodemon -e js --ignore jsdoc/ --exec jsdoc -c ./jsdoc/jsdoc.json"
+    "doc": "nodemon -e js --ignore jsdoc/ --exec jsdoc -c ./jsdoc/jsdoc.json",
+    "setup": "node -r dotenv/config bin/setup.js dotenv_config_path=config/.env"
   },
   "bin": {
     "hearty": "./bin/hearty.js"
