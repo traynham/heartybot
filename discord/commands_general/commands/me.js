@@ -27,9 +27,10 @@ module.exports = {
 
 		// I SHOULD MAKE THIS A FIND OR CREATE, AND PASS THE WHOLE MESSAGE OBJECT SO I CAN CREATE.
 		//let member = await me.find(message.author.id)
-		let member = await me.findOrCreate(message.author.id).value
-		
-		
+		let fetch_member = await me.findOrCreate(message.author)
+		member = fetch_member.value
+//		console.log('MEMBER::', member)
+//		console.log('MEMBER VALUE::', member.value)
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)

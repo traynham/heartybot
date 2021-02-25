@@ -33,6 +33,12 @@ const Members = sequelize.define('member', {
 	// GENERAL
 	motto:						Sequelize.STRING,
 	privacy:					Sequelize.TEXT,
+/*
+	privacy:					{
+									type: Sequelize.TEXT, 
+									defaultValue: ""
+								},
+*/
 	note:						Sequelize.TEXT,
 	
 	// MET GAME
@@ -46,7 +52,9 @@ Members.beforeCreate(function(member) {
 	
 	// WRAP IN TRY SO THAT IT CAN FAIL SILENTLY WHEN NO CODE IS AVAILABLE	
 	try {
-		member.trainer_code = member.trainer_code.replace(/ /g, '')		// Remove Spaces from code
+		if(member.trainer_code){
+			member.trainer_code = member.trainer_code.replace(/ /g, '')		// Remove Spaces from code
+		}
 	} catch (error) {
 		console.error(error);
 	}

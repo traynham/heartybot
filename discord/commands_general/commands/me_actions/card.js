@@ -2,7 +2,9 @@ const dateFormat = require('dateformat')
 
 module.exports = async ({embed, member, message}) => {
 
-	let privacy = member.privacy.split(',')
+// INCLUDE LOGIC FOR WHEN FIELDS ARE EMPTY...
+
+	let privacy = member.privacy ? member.privacy.split(',') : []
 	
 	if(!privacy.includes('name')) embed.addField('Name', member.nickname)
 	if(!privacy.includes('team')) embed.addField('Team', member.team)
