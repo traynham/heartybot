@@ -1,0 +1,23 @@
+.breadcrumb {
+	text-transform: capitalize;
+}
+
+.breadcrumbs-admin {
+	font-size: .8em;
+	padding: 3px;
+	padding-left: 8px;
+	margin: 0;
+	
+	li::before {
+		color: white !important;
+	}
+	
+	li.active {
+		color: $gray-100;
+	}
+
+	li a {
+		color: #fff;
+	}
+
+}

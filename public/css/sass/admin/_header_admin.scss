@@ -1,0 +1,17 @@
+header_admin {
+	XXXbackground: #006080;
+	XXXbackground: #006A91;
+	XXXbackground: #00A7DB;
+	color: white;
+	padding-left: 15px;
+}
+
+#header_admin {
+			background-color: #3b3f46;
+			background-image: -webkit-gradient(radial, center center, 0, center center, 460, color-stop(0%, rgba(255, 255, 255, 0.1)), color-stop(100%, transparent));
+			background-image: -webkit-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+			background-image: -moz-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+			background-image: -ms-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+			background-image: -o-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+			background-image: radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+		}

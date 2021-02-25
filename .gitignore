@@ -8,7 +8,10 @@
 /jest
 /jsdoc
 /node_modules
-/public
+/public/_index.html
+/public/temp
+/public/images/gyms
+/public/images/members
 /temp
 /test
 /testing.js

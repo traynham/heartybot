@@ -1,0 +1,31 @@
+.toc {
+	margin-right: 20px; 
+	min-width: 200px;
+
+	.toc-header {
+		font-weight: bold;
+		font-size: 1.1em;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+	}
+
+	a {
+		font-size: .9em;
+		display: block;
+		padding: 5px;
+		padding-left: 10px;
+		text-decoration: none;
+
+		&:hover {
+			font-weight: bold;
+		}
+
+		&.active {
+			font-size: .9em;
+			display: block;
+			background: #eeeeee;
+			border-left: 2px solid #009bce;
+		}
+	}
+	
+}

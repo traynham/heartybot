@@ -1,0 +1,136 @@
+.document_header {
+	border: 1px solid #009bce;
+	padding: 25px;
+	background-color: #009bce;
+	border-radius: 5px;
+	color: white;
+	margin: 0;
+	margin-bottom: 25px;
+	padding-top: 75px;
+	padding-bottom: 10px;
+}
+
+/*
+.article_wrapper h1,
+.article_wrapper article
+{
+	border: 1px solid #009bce;
+	padding: 25px;
+}
+.article_wrapper h1.head {
+	background-color: #009bce;
+	border-radius: 5px 5px 0 0;
+	color: white;
+	margin: 0;
+	padding-top: 75px;
+	padding-bottom: 10px;
+}
+*/
+/*
+article p {
+	padding: 0px;
+	background: red;
+}
+*/
+
+article {
+	padding: 25px;
+	padding-top: 0px;
+}
+
+/*
+.article_wrapper article {
+	border-radius: 0 0 5px 5px;
+}
+
+.article_wrapper article h2 {
+	border-left: 5px solid #009bce;
+	padding-left: 20px;
+}
+*/
+/*
+.article_wrapper article p {
+	padding-left: 25px;
+}
+*/
+
+.article_wrapper article blockquote {
+	background: #f8f9fa;
+	outline: 1px solid #d7d8d9;
+	padding: 5px;
+}
+
+.article_wrapper article blockquote p {
+	padding: 0px;
+	margin: 0px;
+}
+
+
+
+.document_content {
+	display: flex; 
+	flex-direction: row; 
+	XXXflex-wrap: wrap; 
+	justify-content: center; 
+	align-content: center;
+}
+
+
+
+.document_content .article_wrapper {
+	flex-grow: 1;
+}
+
+
+/* iPhone Landscape */
+@media screen and (max-width: 40em) {
+
+	.document_content {
+		flex-direction: column;
+		XXXbackground: red;
+		XXXborder: 3px solid blue;
+	}
+	
+	.document_content .toc {
+		margin-right: 0;
+		margin-bottom: 20px; 
+	}
+
+
+}
+
+
+.document_content, #main-content {
+
+	h1.head {
+		border: 1px solid #009bce;
+		padding: 25px;
+		background-color: #009bce;
+		border-radius: 5px;
+		color: white;
+		margin: 0;
+		margin-bottom: 25px;
+		padding-top: 75px;
+		padding-bottom: 10px;
+	}
+
+	h2.subhead {
+		border: 1px solid #006A91;
+		padding: 25px;
+		background-color: #006A91;
+		border-radius: 5px;
+		color: white;
+		margin: 0;
+		margin-bottom: 25px;
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+
+	p.author {
+		font-style: italic;
+	}
+
+	ul.progress {
+		padding: 0;
+	}
+}
