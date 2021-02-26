@@ -104,7 +104,7 @@ module.exports = async () => {
 					
 						out.push(mega)
 						
-						console.log(mega)
+						//console.log(mega)
 					
 					})
 				
