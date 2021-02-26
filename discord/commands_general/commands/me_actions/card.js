@@ -17,8 +17,7 @@ module.exports = async ({embed, member, message}) => {
 		embed.addField('Level', member.level ? member.level : '-' )
 	}
 	
-	// STARTED
-	if(!privacy.includes('started')) {
+	if(!privacy.includes('started') && member.started != 'Invalid Date') {
 		embed.addField(
 			'Started',
 			member.started ? dateFormat(member.started, "m/dd/yy") : '-'
