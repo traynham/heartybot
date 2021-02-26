@@ -1,10 +1,11 @@
 module.exports = {
 
 	// GENERAL
-	token: process.env.discord_token,
+	jeeves: process.env.jeeves_enabled, 
+	mode: process.env.discord_mode,
 	prefix: process.env.discord_prefix,
 	prefix_help: process.env.discord_prefix_help,
-	mode: process.env.discord_mode,
+	token: process.env.discord_token,
 	
 	// SYNTAX TOKENS
 	syntax_required: ['[', ']'],

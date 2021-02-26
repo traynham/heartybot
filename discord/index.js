@@ -5,7 +5,7 @@ const lowdb_raids = require('@models_lowdb/raids.js')
 
 const Discord = require('discord.js')
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
-const {mode, prefix} = require(`@config`).discord
+const {jeeves, mode, prefix} = require(`@config`).discord
 
 client.config = { prefix: prefix }
 
@@ -151,9 +151,10 @@ client.on('messageReactionAdd', async (reaction, user) => {
 //client.login(token)
 
 
-	const run_jeeves = true
+	//const run_jeeves = true
 
-	if(run_jeeves){
+	//if(run_jeeves){
+	if(jeeves){
 		const jeeves = require('./jeeves')
 		cron.schedule('*/1 * * * *', () => { jeeves(client) });
 	}

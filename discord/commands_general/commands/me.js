@@ -28,7 +28,7 @@ module.exports = {
 		// I SHOULD MAKE THIS A FIND OR CREATE, AND PASS THE WHOLE MESSAGE OBJECT SO I CAN CREATE.
 		//let member = await me.find(message.author.id)
 		let fetch_member = await me.findOrCreate(message.author)
-		member = fetch_member.value
+		let member = fetch_member.value
 //		console.log('MEMBER::', member)
 //		console.log('MEMBER VALUE::', member.value)
 

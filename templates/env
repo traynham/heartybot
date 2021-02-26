@@ -4,5 +4,7 @@ discord_prefix=!
 discord_prefix_help=?
 discord_mode=production
 
+jeeves_enabled=true
+
 # WEBSITE
 web_uri=https://www.heartyjessman.com

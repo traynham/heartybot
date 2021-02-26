@@ -2,15 +2,36 @@ const dateFormat = require('dateformat')
 
 module.exports = async ({embed, member, message}) => {
 
-// INCLUDE LOGIC FOR WHEN FIELDS ARE EMPTY...
-
 	let privacy = member.privacy ? member.privacy.split(',') : []
 	
+	// NAME
 	if(!privacy.includes('name')) embed.addField('Name', member.nickname)
-	if(!privacy.includes('team')) embed.addField('Team', member.team)
-	if(!privacy.includes('level')) embed.addField('Level', member.level)
-	if(!privacy.includes('started')) embed.addField('Started', dateFormat(member.started, "m/dd/yy"))
-	if(!privacy.includes('code') && member.trainer_code) embed.addField('Friend Code', member.trainer_code)
+	
+	// TEAM
+	if(!privacy.includes('team')) {
+		embed.addField('Team', member.team ? member.team : '-')
+	}
+	
+	// LEVEL
+	if(!privacy.includes('level')) {
+		embed.addField('Level', member.level ? member.level : '-' )
+	}
+	
+	// STARTED
+	if(!privacy.includes('started')) {
+		embed.addField(
+			'Started',
+			member.started ? dateFormat(member.started, "m/dd/yy") : '-'
+			)
+	}
+	
+	// CODE
+	//if(!privacy.includes('code') && member.trainer_code) {
+	if(!privacy.includes('code')) {
+		embed.addField('Friend Code', member.trainer_code ? member.trainer_code : '-')
+	}
+	
+	// AVATAR THUMBNAIL
 	embed.setThumbnail(message.author.displayAvatarURL())
 
 }
