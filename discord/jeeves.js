@@ -8,6 +8,8 @@ const bosses = require('@models_lowdb/bosses.js').bosses() // Raw BOSSESS JSON.
 
 module.exports = async (client) => {
 	
+	console.log(`Jeeves ${new Date()}`)
+	
 	// ==================================================
 	// MANAGE RAID CHANNEL MESSAGES
 	// ==================================================
@@ -72,6 +74,7 @@ module.exports = async (client) => {
 		let status = lowdb_raids.raids_status(raid.channel).value
 
 		status.left = left
+	
 
 		console.log('\n==================================================')
 		console.log('STATUS', status)

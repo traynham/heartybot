@@ -156,7 +156,8 @@ client.on('messageReactionAdd', async (reaction, user) => {
 	//if(run_jeeves){
 	if(jeeves){
 		const jeeves = require('./jeeves')
-		cron.schedule('*/1 * * * *', () => { jeeves(client) });
+		//cron.schedule('*/1 * * * *', () => { jeeves(client) });
+		cron.schedule('*/1 6-21 * * *', () => { jeeves(client) });
 	}
 
 module.exports = client
