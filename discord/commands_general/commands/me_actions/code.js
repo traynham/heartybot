@@ -69,7 +69,8 @@ module.exports = async ({embed, member, value, message}) => {
 
 	embed.setFooter('Note: long press on mobile to copy code as text.')
 	
-
+	return {content: member.trainer_code}
+	
 }
 
 

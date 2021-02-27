@@ -66,9 +66,13 @@ module.exports = {
 
 		// CALL SUB COMMAND
 		var data = {embed, member, value, message}
-		await require(`./me_actions/${action}`)(data)
+		let action_result = await require(`./me_actions/${action}`)(data)
 
-		message.channel.send(embed)
+		if(action_result && action_result.content){
+			message.channel.send(action_result.content, embed)
+		} else {
+			message.channel.send(embed)
+		}
 
 	} // EXECUTE
 
