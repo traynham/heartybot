@@ -76,8 +76,8 @@ module.exports = async (client) => {
 		status.left = left
 	
 
-		console.log('\n==================================================')
-		console.log('STATUS', status)
+//		console.log('\n==================================================')
+//		console.log('STATUS', status)
 		
 		// TODO: Hatch stuff
 		
