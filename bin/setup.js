@@ -9,6 +9,8 @@ file.createFile('data/cache/pokemongo/bosses.json', '{}', {overwrite: false})
 file.createFile('data/cache/raids.json', '{}', {overwrite: false})
 file.createFile('data/private/guilds.json', '[]', {overwrite: false})
 
+file.createDir('data/cache/qrcodes')
+
 const { pokedex, util} = require('@core')
 
 // INITIALIZE SQUELIZE AND DEFINE MODELS
