@@ -4,8 +4,9 @@ console.log('So far so good?')
 
 const file = require('../core/util/file')
 
-file.createFile('data/cache/pokemongo/pokedex.json', '{}', {overwrite: false})
+file.createFile('data/cache/areas.json', '{}', {overwrite: false})
 file.createFile('data/cache/pokemongo/bosses.json', '{}', {overwrite: false})
+file.createFile('data/cache/pokemongo/pokedex.json', '{}', {overwrite: false})
 file.createFile('data/cache/raids.json', '{}', {overwrite: false})
 file.createFile('data/private/guilds.json', '[]', {overwrite: false})
 
