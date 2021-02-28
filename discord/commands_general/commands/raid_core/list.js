@@ -7,20 +7,21 @@ module.exports = (message) => {
 	
 	console.log('entering raid list code.')	
 	
-	//let raids = lowdb_raids.listRaids()
 	let raids = lowdb_raids.raids_list()
-	
-	//console.log(raids)
 
 	let embed = new Discord.MessageEmbed()
 	embed.setColor(colors.primary)	
 	embed.setTitle('**Current Raids**')
-	
-	for (let raid of raids) {
-		embed.addField(
-			`**${raid.name}**`, 
-			dateFormat(raid.time, 'shortTime') + ' ' + raid.boss
-		)
+
+	if(!raids.length){
+		embed.setDescription('There are no active raids reported at this time.')
+	} else {
+		for (let raid of raids) {
+			embed.addField(
+				`**${raid.name}**`, 
+				dateFormat(raid.time, 'shortTime') + ' ' + raid.boss
+			)
+		}
 	}
 
 	embed.setFooter('Reported at ' + dateFormat(new Date(), 'shortTime'))	
