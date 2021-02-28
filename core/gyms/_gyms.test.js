@@ -102,12 +102,13 @@ describe('Core Gyms', () => {
 	})
 	
 	// FIND » FIELD (shortid)
-	test('Find: Find "The Y YMCA - Northwest" using "shortid p43CwF-C6O"', async () => {
-		let result = await find('shortid p43CwF-C6O')
-		expect(result).toHaveProperty('gym.name', 'The Y YMCA - Northwest')
-		expect(result).toHaveProperty('method', 'valid field')
-		expect(result).toHaveProperty('count', 1)
-	})
+	// TEST FAILS BECAUSE SHORTID IS NOT THE SAME ON EVERY SERVER
+	// test('Find: Find "The Y YMCA - Northwest" using "shortid p43CwF-C6O"', async () => {
+	// 	let result = await find('shortid p43CwF-C6O')
+	// 	expect(result).toHaveProperty('gym.name', 'The Y YMCA - Northwest')
+	// 	expect(result).toHaveProperty('method', 'valid field')
+	// 	expect(result).toHaveProperty('count', 1)
+	// })
 	
 	// FIND » Coordinate (General)
 	test('Find: Find "Shady Grove Park 3" using "32.909287,-97.533585" (General Search)', async () => {
