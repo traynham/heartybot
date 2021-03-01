@@ -1,6 +1,6 @@
 const dateFormat = require('dateformat')
 const Discord = require('discord.js')
-const {colors} = require('@config').discord
+const {colors, prefix_help} = require('@config').discord
 const {domain} = require(`@config`)
 const payload_obj = require('@core/util/payload')
 
@@ -34,6 +34,7 @@ module.exports = async (raid, opt) => {
 	// GET POKEMON EMBED
 	embed.setTitle(`**${raid.boss} Raid**`)
 	embed.setURL(`${domain}/gyms/${raid.gym.gymid}`)
+	embed.setDescription(`Use "${prefix_help}" to see commands list.`)
 	embed.setThumbnail(`https://${raid.asset}`)
 	embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")}`)
 	if(isEgg) embed.addField('**Hatches**', dateFormat(raid.hatches, "h:MM TT"))
