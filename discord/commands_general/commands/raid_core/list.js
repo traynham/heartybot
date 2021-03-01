@@ -5,8 +5,6 @@ const dateFormat = require('dateformat');
 
 module.exports = (message) => {
 	
-	console.log('entering raid list code.')	
-	
 	let raids = lowdb_raids.raids_list()
 
 	let embed = new Discord.MessageEmbed()
