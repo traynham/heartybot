@@ -5,7 +5,7 @@ const lowdb_raids = require('@models_lowdb/raids.js')
 
 const Discord = require('discord.js')
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
-const {jeeves, mode, prefix} = require(`@config`).discord
+const {jeeves, mode, prefix, prefix_help} = require(`@config`).discord
 
 client.config = { prefix: prefix }
 
@@ -85,8 +85,8 @@ client.on('message', message => {
 		isRaidChannel = true
 	}
 	
-	if(message.content.startsWith('?')) {
-		message.content = `help ${message.content.slice(1)}`
+	if(message.content.startsWith(prefix_help)) {
+		message.content = `help ${message.content.slice(prefix_help.length)}`
 	}
 
 	if(isRaidChannel) {
