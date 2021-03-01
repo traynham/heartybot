@@ -146,9 +146,8 @@ module.exports = (message, args, command_set) => {
 
 			help.actions.forEach(action => {
 				if(action.roles && !user_roles.includes(action.roles[0])) { return }
+				if(action.enabled === false) { return }
 				actions.push(
-					//action.name + (
-				//	action.default ? ' (Default)' : '') + `: ${action.synopsis}`
 					`_**${action.name} ${action.default ? '(Default)' : ''}**_: ${action.synopsis}`
 				)
 			})
