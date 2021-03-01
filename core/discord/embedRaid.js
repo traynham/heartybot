@@ -6,6 +6,8 @@ const payload_obj = require('@core/util/payload')
 
 module.exports = async (raid, opt) => {
 	
+	const {discord} = require(`@core`)
+
 	/*
 		
 		opt.message	Working message instance
@@ -40,6 +42,8 @@ module.exports = async (raid, opt) => {
 	if(isEgg) embed.addField('**Hatches**', dateFormat(raid.hatches, "h:MM TT"))
 	embed.addField('**Channel**', `<#${raid.channel}>`)
 	embed.addField('**Ends**', dateFormat(raid.time, "h:MM TT"))
+	
+	discord.setImage(embed, `public/images/gyms/${raid.gym.gymid}.jpeg`, `${raid.gym.gymid}.jpeg`)
 	
 	embed.addField(
 		`**${raid.name}**`,
