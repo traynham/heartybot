@@ -37,8 +37,9 @@ module.exports = async (raid, opt) => {
 	embed.setThumbnail(`https://${raid.asset}`)
 	embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")}`)
 	if(isEgg) embed.addField('**Hatches**', dateFormat(raid.hatches, "h:MM TT"))
+	embed.addField('**Channel**', `<#${raid.channel}>`)
 	embed.addField('**Ends**', dateFormat(raid.time, "h:MM TT"))
-
+	
 	embed.addField(
 		`**${raid.name}**`,
 		`[${raid.gym.address}](https://www.google.com/maps/search/${encodeURIComponent(raid.gym.coordinates)} 'Get Directions')`
