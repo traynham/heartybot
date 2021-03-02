@@ -25,7 +25,7 @@ module.exports = {
 			aliases:				['arc', 'rm', 'delete'],
 			synopsis:			'Archive a raid',
 			description:		'Archive a raid and remove its channel.',
-			roles:				['su'],
+			roles:				['admin'],
 			syntax:				`${p}archive ${sr[0]}gym${sr[1]}`,
 			examples:			[
 										["Archive raids", `${p}r archive frog`]
@@ -85,6 +85,7 @@ module.exports = {
 			name:					'show',
 			aliases:				['sh'],
 			roles:				['su'],
+			enabled:				false,
 			synopsis:			'Show raid detail',
 			description:		'Show raid detail.',
 			syntax:				`${p}raid ${sr[0]}show${sr[1]} ${sr[0]}gym${sr[1]}`,
