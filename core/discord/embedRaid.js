@@ -37,7 +37,9 @@ module.exports = async (raid, opt) => {
 	embed.setTitle(`**${raid.boss} Raid**`)
 	embed.setURL(`${domain}/gyms/${raid.gym.gymid}`)
 	embed.setDescription(`Use "${prefix_help}" to see commands list.`)
-	embed.setThumbnail(`https://${raid.asset}`)
+	if(raid.asset){
+		embed.setThumbnail(`https://${raid.asset}`)
+	}
 	embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")}`)
 	if(isEgg) embed.addField('**Hatches**', dateFormat(raid.hatches, "h:MM TT"))
 	embed.addField('**Channel**', `<#${raid.channel}>`)

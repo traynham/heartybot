@@ -42,6 +42,7 @@ describe('Detect', () => {
 	})
 	
 	test('Boss: Detect "Mega" using "mega" as term.', () => {
+		//let result = boss('mega')
 		expect(boss('mega')).toHaveProperty('value', 'Mega')
 	})
 
