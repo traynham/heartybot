@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const lowdb_raids = require('@models_lowdb/raids.js')
 
 const {colors, raid_duration_egg, raid_duration_boss} = require(`@config`).discord
-const {detect, help, util} = require(`@core`)
+const {detect, discord, help, util} = require(`@core`)
 
 module.exports = {
 	name: 'hatches',
@@ -78,6 +78,8 @@ module.exports = {
 		embed.addField('**Ends**', dateFormat(raid_time, "h:MM TT"))
 
 		message.channel.send(embed)
+		
+		discord.embedRaid(raid, {message: message, update: true})
 
 	}
 
