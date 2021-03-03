@@ -1,12 +1,13 @@
+const {add, sub} = require('date-fns')
 const Discord = require('discord.js');
-const {colors} = require(`@config`).discord
+const {colors, raid_duration_boss} = require(`@config`).discord
 const bosses = require('@models_lowdb/bosses.js').bosses()
 const guilds = require('@data/private/guilds.json')
 
 module.exports = (payload) => {
 	
 	const lowdb_raids = require('@models_lowdb/raids.js')
-	const {discord} = require(`@core`)
+	const {detect, discord} = require(`@core`)
 	const gather = require('./gather')
 
 	// MISSING BOSS
@@ -95,11 +96,18 @@ module.exports = (payload) => {
 	}
 	
 	// check for multiple bosses and gyms.
+	
+	let isEgg = detect.isEgg(payload.pokemon.value).value
+
+	if(isEgg){
+		payload.time.value = add(payload.time.value, {minutes: raid_duration_boss})
+	}
 
 	// ADD RAID
 	let raids_add = lowdb_raids.raids_add({
 		asset: payload.pokemon.asset,
 		boss: payload.pokemon.value,
+		hatches: sub(payload.time.value, {minutes: raid_duration_boss}),
 		name: payload.gym.gym.name,
 		gym: payload.gym.gym,
 		time: payload.time.value,
