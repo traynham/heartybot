@@ -27,6 +27,8 @@ module.exports = (args) => {
 		value: null,
 		count: 0,
 		asset: '',
+		type: null,
+		matched: null,
 		error: false,
 		error_message: ''
 	}
@@ -42,10 +44,11 @@ module.exports = (args) => {
 	if(res.q.split(' ').length == 1){
 		// RETURN IF TIER IS DETECTED
 		let detect_tier = detect.boss_tier(res.q)
-	
+
 		if(!detect_tier.error) {
 			res.value = detect_tier.value
 			res.type = 'tier'
+			res.matched = res.q
 			return res
 		}
 		
@@ -63,6 +66,7 @@ module.exports = (args) => {
 		res.count = bosses.length
 		res.error = true
 		res.error_message = 'To many Pokémon found.'
+		res.matched = res.q
 		return res
 	}
 
@@ -70,6 +74,8 @@ module.exports = (args) => {
 		res.asset = result[0].asset
 		res.value = result[0].value
 		res.count = 1
+		res.matched = res.q
+		res.type = 'pokemon'
 		return res
 	}
 
@@ -79,6 +85,7 @@ module.exports = (args) => {
 	if(!detect_tier.error) {
 		res.value = detect_tier.value
 		res.type = 'tier'
+		res.matched = detect_tier.matched
 		return res
 	}
 	
@@ -87,6 +94,7 @@ module.exports = (args) => {
 		res.count = 0
 		res.error = true
 		res.error_message = 'No valid boss found'
+		res.matched = res.q
 		return res
 	}
 	

@@ -101,13 +101,14 @@ var extract_gym = async (args_raw) => {
  * @todo Document args_raw object type. Something like {value:'l5 10m frog'}
  */
 var extract_boss = (args_raw) => {
-
-	// debug_title(args_raw, 'Extract Boss')
-	// debug_field(args_raw, 'Q', args_raw.value)
 	
 	const {detect} = require(`@core`)
 	const args = args_raw.value.split(' ')
-	
+
+	/*
+		This grabs the first three items, tests, then first two, test, then first, tests.
+	*/
+
 	// FROM FRONT
 	for (let i = 3; i > 0; i--){
 
@@ -116,10 +117,8 @@ var extract_boss = (args_raw) => {
 
 		if(!detectBoss.error){
 			
-			// debug_field(args_raw, 'FRONT MATCH', q.join(' '))
-			// debug_field(args_raw, 'VALUE', ':white_check_mark: ' + detectBoss.value)
-
-			args_raw.value = args_raw.value.replace(q.join(' '), '').trim()
+			//args_raw.value = args_raw.value.replace(q.join(' '), '').trim()
+			args_raw.value = args_raw.value.replace(detectBoss.matched, '').trim()
 			return detectBoss
 		}
 
@@ -133,17 +132,11 @@ var extract_boss = (args_raw) => {
 		let detectBoss = detect.boss(q)
 		
 		if(!detectBoss.error){
-			
-			// debug_field(args_raw, 'BACK MATCH', q.join(' '))
-			// debug_field(args_raw, 'VALUE', ':white_check_mark: ' + detectBoss.value)
-
 			args_raw.value = args_raw.value.replace(q.join(' '), '').trim()
 			return detectBoss
 		}
 
 	} // FOR - LOCATE BOSS
-
-	// debug_field(args_raw, 'MATCH', ':x: NO MATCH')
 	
 	return null
 	
@@ -157,23 +150,14 @@ var extract_boss = (args_raw) => {
  * @todo Document args_raw object type. Something like {value:'l5 10m frog'}
  */
 var extract_time = (args) => {
-	
-	// debug_title(args, 'Extract Time')
-	// debug_field(args, 'Q', args.value)
 
 	const {detect} = require(`@core`)
 	const detectTime = detect.time(args.value)
 	
 	if(!detectTime.error){
-		
-		// debug_field(args, 'MATCHED', detectTime.matched)
-		// debug_field(args, 'VALUE', `:white_check_mark: ${detectTime.value}`)
-		
 		args.value = args.value.replace(detectTime.matched, '').trim()
 		return detectTime
 	}
-
-	// debug_field(args, 'MATCH', ':x: NO MATCH')
 	
 	return null
 
@@ -188,22 +172,14 @@ var extract_time = (args) => {
  */
 var extract_duration = (args) => {
 
-	// debug_title(args, 'Extract Duration')
-	// debug_field(args, 'Q', args.value)
-
 	const {detect} = require(`@core`)
 	const detectTime = detect.duration(args.value)
 	
 	if(!detectTime.error){
 		
-		// debug_field(args, 'MATCHED', detectTime.matched)
-		// debug_field(args, 'VALUE', `:white_check_mark: ${detectTime.value}`)
-		
 		args.value = args.value.replace(detectTime.matched, '').trim()
 		return detectTime
 	}
-	
-	// debug_field(args, 'MATCH', ':x: NO MATCH')
 	
 	return null
 

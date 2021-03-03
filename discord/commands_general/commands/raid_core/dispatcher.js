@@ -53,6 +53,10 @@ module.exports = (payload) => {
 		}, function(time){
 			payload.time = discord.parseRaid.extract_time({value: time})
 			if(!payload.time){ payload.time = discord.parseRaid.extract_duration({value: time}) }
+			console.log('GATHER TIME::', payload.time)
+			console.log('GATHER MON::', payload.pokemon.value)
+			console.log('GATEHER IS TIER?::', payload.pokemon.type)
+			console.log('GATEHER IS TIER?::', payload.pokemon.type === 'tier')
 		})
 
 		return true
