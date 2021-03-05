@@ -5,8 +5,6 @@ const {domain} = require(`@config`)
 const payload_obj = require('@core/util/payload')
 
 module.exports = async (raid, opt) => {
-	
-	const {discord} = require(`@core`)
 
 	/*
 		
@@ -32,21 +30,24 @@ module.exports = async (raid, opt) => {
 	payload.value = embed
 	embed.setColor(colors.primary)
 	
-	
 	// GET POKEMON EMBED
 	embed.setTitle(`**${raid.boss} Raid**`)
 	embed.setURL(`${domain}/gyms/${raid.gym.gymid}`)
 	embed.setDescription(`Use "${prefix_help}" to see commands list.`)
+	
+	const attachment = new Discord.MessageAttachment(`./public/images/gyms/${raid.gym.gymid}.jpeg`, `${raid.gym.gymid}.jpeg`);
+	embed.attachFiles(attachment)
+	embed.setThumbnail(`attachment://${raid.gym.gymid}.jpeg`)
+
 	if(raid.asset){
-		embed.setThumbnail(`https://${raid.asset}`)
+		embed.setImage(`https://images.weserv.nl/?w=50&url=${raid.asset}`)
 	}
+
 	embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")}`)
 	if(isEgg) embed.addField('**Hatches**', dateFormat(raid.hatches, "h:MM TT"))
 	embed.addField('**Channel**', `<#${raid.channel}>`)
 	embed.addField('**Ends**', dateFormat(raid.time, "h:MM TT"))
-	
-	discord.setImage(embed, `public/images/gyms/${raid.gym.gymid}.jpeg`, `${raid.gym.gymid}.jpeg`)
-	
+
 	embed.addField(
 		`**${raid.name}**`,
 		`[${raid.gym.address}](https://www.google.com/maps/search/${encodeURIComponent(raid.gym.coordinates)} 'Get Directions')`
@@ -59,16 +60,12 @@ module.exports = async (raid, opt) => {
 		return payload
 	}
 
-
-	
 	if(opt.raid_channel){
 		let chan = await opt.message.client.channels.fetch(opt.raid_channel)		
 		let result = await chan.send(embed)
 		lowdb_raids.raids_update(raid.channel, 'messages', [...raid.messages, [opt.raid_channel, result.id]])
 		return payload
 	}
-
-
 	
 	if(opt.message && opt.update != true){
 		let result = await opt.message.channel.send(embed)
