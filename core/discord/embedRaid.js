@@ -33,7 +33,7 @@ module.exports = async (raid, opt) => {
 	// GET POKEMON EMBED
 	embed.setTitle(`**${raid.boss} Raid**`)
 	embed.setURL(`${domain}/gyms/${raid.gym.gymid}`)
-	embed.setDescription(`Use "${prefix_help}" to see commands list.`)
+	//embed.setDescription(`Use "${prefix_help}" to see commands list.`)
 	
 	const attachment = new Discord.MessageAttachment(`./public/images/gyms/${raid.gym.gymid}.jpeg`, `${raid.gym.gymid}.jpeg`);
 	embed.attachFiles(attachment)
@@ -43,7 +43,8 @@ module.exports = async (raid, opt) => {
 		embed.setImage(`https://images.weserv.nl/?w=50&url=${raid.asset}`)
 	}
 
-	embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")}`)
+	//embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")}`)
+	embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")} \nUse "${prefix_help}" to see commands list.`)
 	if(isEgg) embed.addField('**Hatches**', dateFormat(raid.hatches, "h:MM TT"))
 	embed.addField('**Channel**', `<#${raid.channel}>`)
 	embed.addField('**Ends**', dateFormat(raid.time, "h:MM TT"))
