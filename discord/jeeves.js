@@ -49,9 +49,11 @@ module.exports = async (client) => {
 		// DELETE REMAINING MESSAGES
 		// TODO: BUILD IN A BETTER THROTTLE
 		messages_filtered.array().forEach( (message, index) => {
-			message.delete({ timeout: 1000 * index, reason: 'Stale Raid Message' })
-			.then(msg => console.log(`Deleted message from ${msg.author.username} after ${1000 * index} milliseconds`))
-			.catch(console.error);
+			if(message.pinned === false){
+				message.delete({ timeout: 1000 * index, reason: 'Stale Raid Message' })
+				.then(msg => console.log(`Deleted message from ${msg.author.username} after ${1000 * index} milliseconds`))
+				.catch(console.error);
+			}
 		})
 
 	})
