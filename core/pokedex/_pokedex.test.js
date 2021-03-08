@@ -33,18 +33,18 @@ describe('Pokédex', () => {
 		expect(result).toHaveProperty('value.name', 'LITLEO')
 	})
 	
-	test('Find: Find "Charizard X"', () => {
-		let result = find('Charizard X')
+	test('Find: Find "Pidgeot"', () => {
+		let result = find('Pidgeot')
 		expect(result).toHaveProperty('error', false)
-		expect(result).toHaveProperty('count', 1)
-		expect(result).toHaveProperty('value.name', 'CHARIZARD MEGA X')
+		expect(result).toHaveProperty('count', 3)
+		expect(result).toHaveProperty('value.name', 'PIDGEOT')
 	})
 	
-	test(`Find: Find "['Mega', 'Char']"`, () => {
-		let result = find(['Mega', 'Char'])
+	test(`Find: Find "['Mega', 'Pid']"`, () => {
+		let result = find(['Mega', 'Pid'])
 		expect(result).toHaveProperty('error', false)
-		expect(result).toHaveProperty('count', 2)
-		expect(result).toHaveProperty('value.pokemonId', 'CHARIZARD')
+		expect(result).toHaveProperty('count', 1)
+		expect(result).toHaveProperty('value.name', 'PIDGEOT MEGA')
 	})
 	
 	test(`Find: Find "['Pika']"`, () => {
