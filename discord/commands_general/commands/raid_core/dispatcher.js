@@ -106,6 +106,7 @@ module.exports = (payload) => {
 	// ADD RAID
 	let raids_add = lowdb_raids.raids_add({
 		asset: payload.pokemon.asset,
+		author: payload.message.author,
 		boss: payload.pokemon.value,
 		hatches: sub(payload.time.value, {minutes: raid_duration_boss}),
 		name: payload.gym.gym.name,
