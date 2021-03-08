@@ -74,7 +74,8 @@ module.exports = async () => {
 
 				// IF MEGA
 		
-				if(data.tempEvoOverrides && data.form == `${pokemon}_NORMAL`){
+				//if(data.tempEvoOverrides && data.form == `${pokemon}_NORMAL`){
+				if(data.tempEvoOverrides && data.tempEvoOverrides[0].tempEvoId == 'TEMP_EVOLUTION_MEGA'){
 
 					data.tempEvoOverrides.forEach(function(evol) {
 					
