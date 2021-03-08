@@ -69,8 +69,8 @@ module.exports = {
 		payload.pokemon = discord.parseRaid.extract_boss(q)	// TRY BOSS
 		payload.gym = await discord.parseRaid.extract_gym(q)	// TRY GYM
 
-		if(!payload.pokemon){payload.pokemon = discord.parseRaid.extract_boss(q)}	// TRY BOSS AGAIN
 		if(!payload.time){payload.time = discord.parseRaid.extract_duration(q)}		// TRY DURATION
+		if(!payload.pokemon){payload.pokemon = discord.parseRaid.extract_boss(q)}	// TRY BOSS AGAIN
 		if(!payload.gym){payload.gym = await discord.parseRaid.extract_gym(q)}		// TRY GYM
 
 		dispatcher(payload)
