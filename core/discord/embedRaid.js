@@ -34,13 +34,13 @@ module.exports = async (raid, opt) => {
 	embed.setTitle(`**${raid.boss} Raid**`)
 	embed.setURL(`${domain}/gyms/${raid.gym.gymid}`)
 	//embed.setDescription(`Use "${prefix_help}" to see commands list.`)
-	
-	const attachment = new Discord.MessageAttachment(`./public/images/gyms/${raid.gym.gymid}.jpeg`, `${raid.gym.gymid}.jpeg`);
-	embed.attachFiles(attachment)
-	embed.setThumbnail(`attachment://${raid.gym.gymid}.jpeg`)
+
+	embed.setImage(
+		`https://images.weserv.nl/?w=150&url=${domain.split('https://')[1]}/images/gyms/${raid.gym.gymid}.jpeg`
+	)
 
 	if(raid.asset){
-		embed.setImage(`https://images.weserv.nl/?w=50&url=${raid.asset}`)
+		embed.setThumbnail(`https://images.weserv.nl/?w=50&url=${raid.asset}`)
 	}
 
 	//embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")}`)
