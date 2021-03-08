@@ -44,7 +44,10 @@ module.exports = async (raid, opt) => {
 	}
 
 	//embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")}`)
-	embed.setFooter(`Updated: ${dateFormat(new Date(), "h:MM TT")} \nUse "${prefix_help}" to see commands list.`)
+	embed.setFooter(
+		`${raid.author.username} \nUpdated: ${dateFormat(new Date(), "h:MM TT")} | Use "${prefix_help}" for help.`,
+		raid.author.avatarURL
+	)
 	if(isEgg) embed.addField('**Hatches**', dateFormat(raid.hatches, "h:MM TT"))
 	embed.addField('**Channel**', `<#${raid.channel}>`)
 	embed.addField('**Ends**', dateFormat(raid.time, "h:MM TT"))
