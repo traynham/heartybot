@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const lowdb_raids = require('@models_lowdb/raids.js')
 
 const {colors} = require(`@config`).discord
-const {detect, help, util} = require(`@core`)
+const {detect, discord, help, util} = require(`@core`)
 
 module.exports = {
 	name: 'pull',
@@ -76,6 +76,8 @@ module.exports = {
 		embed.setColor(colors.success)
 		embed.addField('**Pull time**', dateFormat(time.value, "h:MM TT"))
 		message.channel.send(embed)
+		
+		discord.embedRaid(raid, {message: message, update: true})
 
 	}
 
