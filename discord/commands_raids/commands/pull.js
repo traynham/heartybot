@@ -7,7 +7,7 @@ const {colors} = require(`@config`).discord
 const {detect, help, util} = require(`@core`)
 
 module.exports = {
-	name: 'start',
+	name: 'pull',
 	meta: help.get('commands_raids', 'pull').value,
 	execute(message, argv) {
 		

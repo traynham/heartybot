@@ -4,10 +4,10 @@ module.exports = {
 
 	// GENERAL
 	name:							'pull',
-	synopsis:					'Show/Set start time.',
-	description:				'Show or set when to start the raid.',
+	synopsis:					'Show/Set pull time.',
+	description:				'Show or set when to go into the raid lobby.',
 	syntax:						`pull ${so[0]}time/duration${so[1]}`,
-	aliases:						['pul', 'pull', 'star', 'starting'],
+	aliases:						['pul', 'pull'],
 	dm:							false,
 	usage:						[
 										['Show pull:', 'pull'],
@@ -22,8 +22,8 @@ module.exports = {
 		// SET
 		{
 			name:					'set',
-			synopsis:			'Set start time.',
-			description:		'Set when to start the raid.',
+			synopsis:			'Set pull time.',
+			description:		'Show or set when to go into the raid lobby.',
 			syntax:				`pull ${sr[0]}time/duration${sr[1]}`,
 			examples:			[
 										['Set pull with duration:', 'pull 5m'],
@@ -39,8 +39,7 @@ module.exports = {
 			description:		'Show pull.',
 			syntax:				'pull',
 			examples:			[
-										['Show pull:', 'pull'],
-										['Show pull:', 'start']
+										['Show pull:', 'pull']
 									]
 		}
 
