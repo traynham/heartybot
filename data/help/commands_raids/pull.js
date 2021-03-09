@@ -14,7 +14,7 @@ module.exports = {
 										['Set pull with duration:', 'pull 5m'],
 										['Set pull with time', 'pull 5:05']
 									],
-	revision:					'02-01-21',
+	revision:					'03-08-21',
 
 	// ACTIONS
 	actions: [
