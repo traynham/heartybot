@@ -48,8 +48,9 @@ module.exports = async (raid, opt) => {
 		`${raid.author.username} \nUpdated: ${dateFormat(new Date(), "h:MM TT")} | Use "${prefix_help}" for help.`,
 		raid.author.avatarURL
 	)
-	if(isEgg) embed.addField('**Hatches**', dateFormat(raid.hatches, "h:MM TT"))
 	embed.addField('**Channel**', `<#${raid.channel}>`)
+	if(isEgg) embed.addField('**Hatches**', dateFormat(raid.hatches, "h:MM TT"))
+	if(raid.pull){embed.addField('**Pull**', dateFormat(raid.pull, "h:MM TT"))}
 	embed.addField('**Ends**', dateFormat(raid.time, "h:MM TT"))
 
 	embed.addField(
