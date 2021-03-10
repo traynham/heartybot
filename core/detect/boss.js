@@ -79,11 +79,11 @@ module.exports = (args) => {
 		return res
 	}
 
-/*
+
 	// WHAT IS THE USE CASE FOR THE FOLLOWING TEST?
 	// IT ONLY SEEMS TO COMPLICATE THNGS AND GIVE FALSE POSITIVES.
 
-	// TEST TIER AGAIN WITH MULTIPLE WORDS.
+	// TEST TIER AGAIN WITH MULTIPLE WORDS. Example "lvl 5"
 	let detect_tier = detect.boss_tier(res.q)
 
 	if(!detect_tier.error) {
@@ -92,7 +92,7 @@ module.exports = (args) => {
 		res.matched = detect_tier.matched
 		return res
 	}
-*/
+
 
 	if(result.length == 0){
 		//res.count = 1

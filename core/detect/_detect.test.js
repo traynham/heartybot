@@ -54,11 +54,11 @@ describe('Detect', () => {
 	test('Boss: Detect "Bogus". (Will have zero count)', () => {
 		expect(boss('bogus')).toHaveProperty('count', 0)
 	})
-/*	
+	
 	test('Boss: Detect "Char". (To many results)', () => {
 		expect(boss('char')).toHaveProperty('error', true)
 	})
-*/
+
 	test('Boss: Detect "".', () => {
 		expect(boss('')).toHaveProperty('error', true)
 	})
@@ -67,6 +67,10 @@ describe('Detect', () => {
 	// BOSS_TIER
 	test('Boss Tier: returns "Tier 5"', () => {
 		expect(boss_tier('l5')).toHaveProperty('value', 'Tier 5')
+	})
+	
+	test('Boss Tier: returns "Tier 5", using "lvl 5" as q.', () => {
+		expect(boss_tier('lvl 5')).toHaveProperty('value', 'Tier 5')
 	})
 
 	test('Boss Tier: returns "Mega"', () => {

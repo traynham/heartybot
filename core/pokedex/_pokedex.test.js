@@ -36,7 +36,7 @@ describe('Pokédex', () => {
 	test('Find: Find "Pidgeot"', () => {
 		let result = find('Pidgeot')
 		expect(result).toHaveProperty('error', false)
-		expect(result).toHaveProperty('count', 3)
+		expect(result).toHaveProperty('count', 1)
 		expect(result).toHaveProperty('value.name', 'PIDGEOT')
 	})
 	

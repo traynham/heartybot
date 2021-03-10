@@ -28,7 +28,7 @@ module.exports = {
 									]
 		},
 
-		// Pokemon
+		// POKEMON
 		{
 			name:					'pokemon',
 			aliases:				['poke', 'mon'],
@@ -38,6 +38,54 @@ module.exports = {
 			examples:			[
 										["Show Pikachu card.", `${p}pokedex pikachu`],
 										["Show Aerodactyl card.", `${p}dex aer`]
+									]
+		},
+		
+		// CHARGE
+		{
+			name:					'charge',
+			aliases:				[],
+			synopsis:			"View a Pokémon's charge moves",
+			syntax:				`${p}pokedex charge ${sr[0]}pokemon${sr[1]}`,
+			description:		"This action will display a Pokémon's charge moves.",
+			examples:			[
+										["Show Pikachu charge moves.", `${p}pokedex charge pikachu`]
+									]
+		},
+		
+		// FAST
+		{
+			name:					'fast',
+			aliases:				['fas'],
+			synopsis:			"View a Pokémon's fast moves",
+			syntax:				`${p}pokedex fast ${sr[0]}pokemon${sr[1]}`,
+			description:		"This action will display a Pokémon's fast moves.",
+			examples:			[
+										["Show Pikachu fast moves.", `${p}pokedex fast pikachu`]
+									]
+		},
+		
+		// PERFECT
+		{
+			name:					'perfect',
+			aliases:				['100', '100%', 'hun', 'hundy', 'per', 'perf', 'perfects'],
+			synopsis:			"View a Pokémon's perfect CPs",
+			syntax:				`${p}pokedex fast ${sr[0]}pokemon${sr[1]}`,
+			description:		"This action will display a Pokémon's perfect CPs.",
+			examples:			[
+										["Show Pikachu perfect CPs.", `${p}pokedex perfect pikachu`]
+									]
+		},
+		
+		// PERFECT
+		{
+			name:					'type',
+			aliases:				['tp', 'typ', 'types'],
+			synopsis:			'Show Pokémon type.',
+			syntax:				`${p}pokedex type ${sr[0]}pokemon${sr[1]}`,
+			description:		'Show type or types for a Pokémon.',
+			examples:			[
+										["Show Eevee types", `${p}pokedex type eevee`]
 									]
 		}
 

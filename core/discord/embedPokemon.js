@@ -20,6 +20,7 @@
  * @todo Clean up code.
  */
 
+const {colors} = require(`@config`).discord
 
 module.exports = (embed, q, show = ['charge', 'fast', 'perfect', 'type']) => {
 
@@ -35,8 +36,8 @@ module.exports = (embed, q, show = ['charge', 'fast', 'perfect', 'type']) => {
 
 	// IF EGG/TIER
 	if(Object.keys(eggs).includes(String(q).toLowerCase()) ){
-		let egg = eggs[q.toLowerCase()]
-		let tier_bosses = bosses.tiers.find(tier => tier.name.toLowerCase() == q.toLowerCase())
+		let egg = eggs[String(q).toLowerCase()]
+		let tier_bosses = bosses.tiers.find(tier => tier.name.toLowerCase() == String(q).toLowerCase())
 		embed.setTitle(egg.name)
 		embed.setThumbnail(`https://images.weserv.nl/?w=100&fit=contain&url=${egg.asset}`)
 		embed.addField('**Possible Bosses:**', tier_bosses.value)
@@ -49,8 +50,25 @@ module.exports = (embed, q, show = ['charge', 'fast', 'perfect', 'type']) => {
 	if(pokemon.error) {
 		payload.error = true
 		payload.error_message = pokemon.error_message
+		embed.setColor(colors.error)
+		embed.setTitle('Error...')
+		embed.setDescription(payload.error_message)
 		return payload
 	}
+//console.log(pokemon)
+	if(pokemon.count > 1){
+		payload.error = true
+		payload.error_message = 'Found multiple pokemon for search.'
+		embed.setColor(colors.error)
+		embed.setTitle('Error...')
+		//embed.setDescription(payload.error_message)
+		embed.addField(
+			'**Found Multiple:**',
+			pokemon.rows.map( mon => util.titleCase(mon.name) )
+		)
+		return payload
+	}
+	
 	
 	let mon = pokemon.value
 	

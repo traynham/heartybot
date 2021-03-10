@@ -11,6 +11,7 @@ module.exports = {
 	
 		let args = argv._
 		let action = (argv.action ? argv.action : null)
+		let show = null
 
 		const embed = new Discord.MessageEmbed()
 		embed.setColor(colors.primary)
@@ -23,8 +24,12 @@ module.exports = {
 			return
 		}
 	
+		if(action && ['charge', 'fast', 'perfect', 'type'].includes(action.name)){
+			show = [action.name]
+		}
+
 		// SEND POKEMON EMBED
-		discord.embedPokemon(embed, args)
+		discord.embedPokemon(embed, args, show)
 		message.channel.send(embed)
 
 	} // EXECUTE
