@@ -47,24 +47,12 @@ module.exports = (req) => {
 	
 	let isMegaRequest = (detect.boss_tier(theMon).value === 'Mega' ? true : false)
 	
-//	if(detect_mega.value === 'Mega'){}
-//	console.log('MEGA???', isMegaRequest)
-	
-	
 	let records = pokeTrie.get(theMon)
-
-	// THIS DOESN'T WORK IN THE CASE OF THINGS LIKE MEGA CHAR.
-	// IT'S PURPOSE IS TO TRY TO FIND THE EXACT POKÉMON REQUESTED.
-	//if(req.length == 1 || typeof req === 'string'){	
-	//	records = records.filter(pokemon => pokemon.name == pokemon.pokemonId)
-	//}
-	
-	
-	// USE DETECT TO DETECT MEGAS AND TREAT RESULTS ACCORDINGLY?
-	// 	 name: 'AMPHAROS MEGA',
 	
 	// TRY TO FIND EXACT MATCH
-	let pokemon = records.find( record => record.name.toUpperCase() === theMon.toUpperCase())
+	let pokemon = records.find(
+		record => record.name.toUpperCase() === theMon.toUpperCase()
+	)
 	
 	// FILTER OUT ERRONEOUS RECORDS.
 	if(!pokemon){
@@ -75,7 +63,6 @@ module.exports = (req) => {
 			// IF RECORD.FORM IS MISSING, KEEP.
 			if(!record.form) { return true }
 		})
-		
 	}
 	
 	if(!Array.isArray(pokemon)){
@@ -85,17 +72,7 @@ module.exports = (req) => {
 	payload.value = pokemon[0]
 	payload.rows = pokemon
 	payload.count = pokemon.length
-	
-	/*
-//	console.log('POKEMON::', Array.isArray(pokemon))
-//	console.log('RECORD ZERO::', Array.isArray(records))
-	//payload.value = records[0] // I THINK THIS IS COMPOUNDING THE PROBLEM!
-	payload.value = Array.isArray(pokemon) ? pokemon[0] : pokemon
-	payload.rows = pokemon
-	//payload.count = pokemon.length
-	payload.count = Array.isArray(pokemon) ? pokemon.length : 1
-*/	
-	//if(records.length == 0){
+
 	if(pokemon.length == 0){
 		payload.error = true
 		payload.error_message = `Could not locate Pokemon using "${theMon}"`
