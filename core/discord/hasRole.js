@@ -1,5 +1,5 @@
 /**
- * Checks if the message member includes a desired role.
+ * Checks if the message member includes a desired role. Only works in text channels.
  *
  * -----
  * @module hasRole
@@ -17,5 +17,9 @@
  */
 
 module.exports = (message, desired_role) => {
-	return message.member.roles.cache.some(role => role.name.toLowerCase() === desired_role.toLowerCase())
+
+   if(message.member && message.member.roles){
+      return message.member.roles.cache.some(role => role.name.toLowerCase() === desired_role.toLowerCase())
+   }
+   
 }
