@@ -17,8 +17,6 @@ describe('Pokédex', () => {
 //    FIND
 // ==========
 
-
-
 	test('Find: Find "Foongus"', () => {
 		let result = find('Foongus')
 		expect(result).toHaveProperty('error', false)
@@ -58,6 +56,19 @@ describe('Pokédex', () => {
 		expect(result).toHaveProperty('error', false)
 		expect(result).toHaveProperty('value.name', 'PIKACHU')
 	})
+	
+	test(`Find: Find "Alolan Diglett" using "Alolan Diglett"`, () => {
+		let result = find('Alolan Diglett')
+		expect(result).toHaveProperty('error', false)
+		expect(result).toHaveProperty('value.name', 'DIGLETT ALOLA')
+	})
+	
+	test(`Find: Find "Galarian Meowth" using "Galarian Meowth"`, () => {
+		let result = find('Galarian Meowth')
+		expect(result).toHaveProperty('error', false)
+		expect(result).toHaveProperty('value.name', 'MEOWTH GALARIAN')
+	})
+
 
 // =============
 //    PERFECT

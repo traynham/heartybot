@@ -48,7 +48,7 @@ module.exports = (req) => {
 	let isMegaRequest = (detect.boss_tier(theMon).value === 'Mega' ? true : false)
 	
 	let records = pokeTrie.get(theMon)
-	
+
 	// TRY TO FIND EXACT MATCH
 	let pokemon = records.find(
 		record => record.name.toUpperCase() === theMon.toUpperCase()
@@ -58,8 +58,16 @@ module.exports = (req) => {
 	if(!pokemon){
 	
 		pokemon = records.filter(record => {
+
 			// ID IS MEGA, BUT A MEGA WAS NOT REQUESTED, FILTER OUT.
 			if(record.name.endsWith('MEGA') && !isMegaRequest) {return false}
+
+			// KEEP ALOLA RECORDS
+			if(record.name.endsWith('ALOLA') ) {return true}
+
+			// KEEP GALARIAN RECORDS
+			if(record.name.endsWith('GALARIAN') ) {return true}
+
 			// IF RECORD.FORM IS MISSING, KEEP.
 			if(!record.form) { return true }
 		})
