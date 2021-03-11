@@ -31,6 +31,9 @@ module.exports = (client, message) => {
 	)
 	
 	if (!command) return;
+	
+	// ADD RAW QUERY TO ARGV
+	argv.query = message.content.split(' ').slice(1).join(' ')
 
 	// ADD COOLDOWNS:
 	// https://discordjs.guide/command-handling/adding-features.html#cooldowns
@@ -58,6 +61,7 @@ module.exports = (client, message) => {
 
 		if(action) {
 			argv.action = action
+			
 			argv._.shift()
 		}
 		
