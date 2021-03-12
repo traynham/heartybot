@@ -77,6 +77,7 @@ process.on('unhandledRejection', error => {
 client.on('message', message => {
 
 	// SET CONTENT TO LOWERCASE.
+	message.content_original = message.content
 	message.content = message.content.toLowerCase()
 	let isRaidChannel = false
 //	let isRaidTrain = false
