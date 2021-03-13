@@ -6,10 +6,10 @@ module.exports = {
 	name:							'pokedex',
 	synopsis:					'View pokemon card',
 	description:				'View pokemon card',
-	syntax:						`${p}pokedex ${sr[0]}pokemon${sr[1]}`,
+	syntax:						`${p}pokedex ${so[0]}action${so[1]} ${sr[0]}pokemon${sr[1]}`,
 	aliases:						['pokemon', 'mon', 'dex'],
 	dm:							true,
-	revision:					'01-12-21',
+	revision:					'03-12-21',
 
 	// ACTIONS
 	actions: [
