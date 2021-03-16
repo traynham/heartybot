@@ -77,7 +77,7 @@ module.exports = {
 			description:		'Report a raid by passing boss, gym, and time. If the bot cannot interpret or verify information, it will ask for additional information via additional messages.',
 			syntax:				`${p}raid ${sr[0]}boss${sr[1]} ${sr[0]}gym${sr[1]} ${sr[0]}time${sr[1]}`,
 			examples:			[
-										["Report a Tier 5 at frog in 30 minuts.", `${p}r l5 frog 30m`]
+										["Report a Tier 5 at frog in 30 minutes.", `${p}r l5 frog 30m`]
 									],
 		},
 		
