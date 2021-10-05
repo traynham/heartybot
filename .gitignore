@@ -3,6 +3,7 @@
 .nova
 .env
 .env_dev
+package-lock.json
 /data/cache
 /data/private
 /jest
